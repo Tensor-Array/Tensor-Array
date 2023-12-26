@@ -1,0 +1,2 @@
+/usr/bin/ar qc libTensorCore.a CMakeFiles/TensorCore.dir/TensorCore.cpp.o
+/usr/bin/ranlib libTensorCore.a

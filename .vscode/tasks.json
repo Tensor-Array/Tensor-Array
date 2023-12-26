@@ -1,7 +1,7 @@
 {
     "version": "2.0.0",
     "options": {
-        "cwd": "${workspaceFolder}/build-windows"
+        "cwd": "${workspaceFolder}/build"
     },
     "tasks": [
         {
