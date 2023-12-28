@@ -77,7 +77,6 @@ namespace tensor_array
 
 		void device_CUDA_get_info()
 		{
-			std::printf("");
 			int temp;
 			cudaError cudaStatus = cudaGetDevice(&temp);
 			cudaDeviceProp prop;

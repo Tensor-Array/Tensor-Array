@@ -1885,12 +1885,11 @@ src/tensor-array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.o: ../src/tensor-a
   /usr/include/strings.h
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/convolution.cc.o: ../src/tensor-array/layers/convolution.cc \
-  ../src/Tensor-Array/layers/convolution.cc \
   /usr/include/stdc-predef.h \
-  ../src/Tensor-Array/layers/convolution.hh \
-  ../src/Tensor-Array/layers/linear.hh \
-  ../src/Tensor-Array/layers/layer_holder.hh \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/convolution.hh \
+  ../src/tensor-array/layers/linear.hh \
+  ../src/tensor-array/layers/layer_holder.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -2054,7 +2053,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/convolution.cc.o: ../src/tenso
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -2087,7 +2086,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/convolution.cc.o: ../src/tenso
   /usr/include/c++/11/stdexcept \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -2103,11 +2102,10 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/convolution.cc.o: ../src/tenso
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh \
-  ../src/Tensor-Array/layers/layer_utility.hh
+  ../src/tensor-array/core/devices.hh \
+  ../src/tensor-array/layers/layer_utility.hh
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: ../src/tensor-array/layers/layer_impl.cc \
-  ../src/Tensor-Array/layers/layer_impl.cc \
   /usr/include/stdc-predef.h \
   /usr/include/c++/11/filesystem \
   /usr/include/c++/11/bits/fs_fwd.h \
@@ -2323,7 +2321,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: ../src/tensor
   /usr/include/c++/11/bits/fs_dir.h \
   /usr/include/c++/11/bits/fs_ops.h \
   /usr/include/c++/11/iostream \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/unordered_map \
   /usr/include/c++/11/bits/hashtable.h \
   /usr/include/c++/11/bits/hashtable_policy.h \
@@ -2331,7 +2329,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: ../src/tensor
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -2350,7 +2348,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: ../src/tensor
   /usr/include/c++/11/mutex \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -2361,14 +2359,13 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: ../src/tensor
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh
+  ../src/tensor-array/core/devices.hh
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o: ../src/tensor-array/layers/layer_utility.cc \
-  ../src/Tensor-Array/layers/layer_utility.cc \
   /usr/include/stdc-predef.h \
-  ../src/Tensor-Array/layers/layer_utility.hh \
-  ../src/Tensor-Array/layers/layer_holder.hh \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/layer_utility.hh \
+  ../src/tensor-array/layers/layer_holder.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -2532,7 +2529,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o: ../src/ten
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -2565,7 +2562,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o: ../src/ten
   /usr/include/c++/11/stdexcept \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -2581,14 +2578,13 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o: ../src/ten
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh
+  ../src/tensor-array/core/devices.hh
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/linear.cc.o: ../src/tensor-array/layers/linear.cc \
-  ../src/Tensor-Array/layers/linear.cc \
   /usr/include/stdc-predef.h \
-  ../src/Tensor-Array/layers/linear.hh \
-  ../src/Tensor-Array/layers/layer_holder.hh \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/linear.hh \
+  ../src/tensor-array/layers/layer_holder.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -2752,7 +2748,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/linear.cc.o: ../src/tensor-arr
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -2785,7 +2781,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/linear.cc.o: ../src/tensor-arr
   /usr/include/c++/11/stdexcept \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -2801,14 +2797,13 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/linear.cc.o: ../src/tensor-arr
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh
+  ../src/tensor-array/core/devices.hh
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/normalization.cc.o: ../src/tensor-array/layers/normalization.cc \
-  ../src/Tensor-Array/layers/normalization.cc \
   /usr/include/stdc-predef.h \
-  ../src/Tensor-Array/layers/normalization.hh \
-  ../src/Tensor-Array/layers/layer_holder.hh \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/normalization.hh \
+  ../src/tensor-array/layers/layer_holder.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -2972,7 +2967,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/normalization.cc.o: ../src/ten
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -3005,7 +3000,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/normalization.cc.o: ../src/ten
   /usr/include/c++/11/stdexcept \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -3021,15 +3016,14 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/normalization.cc.o: ../src/ten
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh
+  ../src/tensor-array/core/devices.hh
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.o: ../src/tensor-array/layers/recurrent.cc \
-  ../src/Tensor-Array/layers/recurrent.cc \
   /usr/include/stdc-predef.h \
-  ../src/Tensor-Array/layers/recurrent.hh \
-  ../src/Tensor-Array/layers/linear.hh \
-  ../src/Tensor-Array/layers/layer_holder.hh \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/recurrent.hh \
+  ../src/tensor-array/layers/linear.hh \
+  ../src/tensor-array/layers/layer_holder.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -3193,7 +3187,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.o: ../src/tensor-
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -3226,7 +3220,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.o: ../src/tensor-
   /usr/include/c++/11/stdexcept \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -3242,15 +3236,14 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.o: ../src/tensor-
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh \
-  ../src/Tensor-Array/layers/layer_utility.hh
+  ../src/tensor-array/core/devices.hh \
+  ../src/tensor-array/layers/layer_utility.hh
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/sequential.cc.o: ../src/tensor-array/layers/sequential.cc \
-  ../src/Tensor-Array/layers/sequential.cc \
   /usr/include/stdc-predef.h \
-  ../src/Tensor-Array/layers/sequential.hh \
-  ../src/Tensor-Array/layers/layer_holder.hh \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/sequential.hh \
+  ../src/tensor-array/layers/layer_holder.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -3414,7 +3407,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/sequential.cc.o: ../src/tensor
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -3447,7 +3440,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/sequential.cc.o: ../src/tensor
   /usr/include/c++/11/stdexcept \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -3463,15 +3456,14 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/sequential.cc.o: ../src/tensor
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh
+  ../src/tensor-array/core/devices.hh
 
 src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tensor-array/layers/transformer.cc \
-  ../src/Tensor-Array/layers/transformer.cc \
   /usr/include/stdc-predef.h \
-  ../src/Tensor-Array/layers/transformer.hh \
-  ../src/Tensor-Array/layers/linear.hh \
-  ../src/Tensor-Array/layers/layer_holder.hh \
-  ../src/Tensor-Array/layers/layer_impl.hh \
+  ../src/tensor-array/layers/transformer.hh \
+  ../src/tensor-array/layers/linear.hh \
+  ../src/tensor-array/layers/layer_holder.hh \
+  ../src/tensor-array/layers/layer_impl.hh \
   /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -3635,7 +3627,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
-  ../src/Tensor-Array/core/tensor.hh \
+  ../src/tensor-array/core/tensor.hh \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -3668,7 +3660,7 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
   /usr/include/c++/11/stdexcept \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
-  ../src/Tensor-Array/core/tensorbase.hh \
+  ../src/tensor-array/core/tensorbase.hh \
   /usr/include/c++/11/typeindex \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -3684,31 +3676,29 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
   /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
-  ../src/Tensor-Array/core/devices.hh \
-  ../src/Tensor-Array/layers/sequential.hh \
-  ../src/Tensor-Array/layers/normalization.hh \
-  ../src/Tensor-Array/layers/layer_utility.hh
+  ../src/tensor-array/core/devices.hh \
+  ../src/tensor-array/layers/sequential.hh \
+  ../src/tensor-array/layers/normalization.hh \
+  ../src/tensor-array/layers/layer_utility.hh
 
 
-../src/Tensor-Array/layers/transformer.hh:
-
-../src/Tensor-Array/layers/transformer.cc:
+../src/tensor-array/layers/transformer.hh:
 
 ../src/tensor-array/layers/transformer.cc:
 
-../src/Tensor-Array/layers/sequential.hh:
-
-../src/Tensor-Array/layers/sequential.cc:
-
 ../src/tensor-array/layers/sequential.cc:
 
-../src/Tensor-Array/layers/recurrent.hh:
+../src/tensor-array/layers/recurrent.hh:
+
+../src/tensor-array/layers/recurrent.cc:
 
 ../src/tensor-array/layers/normalization.cc:
 
 ../src/tensor-array/layers/linear.cc:
 
 /usr/include/c++/11/bits/fs_ops.h:
+
+/usr/include/c++/11/bits/fs_dir.h:
 
 /usr/include/libintl.h:
 
@@ -3720,23 +3710,9 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/include/c++/11/filesystem:
 
-/usr/include/c++/11/bits/fs_dir.h:
+../src/tensor-array/layers/layer_utility.hh:
 
-../src/Tensor-Array/layers/layer_impl.cc:
-
-../src/Tensor-Array/layers/layer_utility.hh:
-
-../src/Tensor-Array/core/tensorbase.hh:
-
-../src/Tensor-Array/core/tensor.hh:
-
-../src/Tensor-Array/layers/linear.hh:
-
-../src/tensor-array/layers/recurrent.cc:
-
-../src/Tensor-Array/layers/convolution.hh:
-
-../src/Tensor-Array/layers/convolution.cc:
+../src/tensor-array/layers/convolution.hh:
 
 ../src/tensor-array/core/tensorbase.cc:
 
@@ -3854,13 +3830,15 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/include/c++/11/bits/basic_ios.h:
 
-../src/Tensor-Array/layers/normalization.hh:
-
 /usr/include/c++/11/streambuf:
+
+../src/tensor-array/layers/layer_impl.hh:
 
 /usr/include/c++/11/bits/locale_classes.tcc:
 
 /usr/include/c++/11/bits/locale_classes.h:
+
+../src/tensor-array/layers/sequential.hh:
 
 /usr/include/c++/11/bits/ios_base.h:
 
@@ -3921,8 +3899,6 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 /usr/local/cuda-12.3/targets/x86_64-linux/include/sm_60_atomic_functions.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
-
-../src/Tensor-Array/core/devices.hh:
 
 /usr/include/c++/11/math.h:
 
@@ -4006,8 +3982,6 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
-../src/Tensor-Array/layers/normalization.cc:
-
 /usr/local/cuda-12.3/targets/x86_64-linux/include/crt/device_double_functions.h:
 
 /usr/include/c++/11/backward/binders.h:
@@ -4079,8 +4053,6 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
 /usr/include/c++/11/bits/fs_path.h:
-
-../src/Tensor-Array/layers/layer_impl.hh:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
@@ -4176,8 +4148,6 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/include/endian.h:
 
-../src/Tensor-Array/layers/layer_holder.hh:
-
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
 /usr/include/c++/11/string:
@@ -4214,6 +4184,8 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
+../src/tensor-array/layers/layer_holder.hh:
+
 /usr/include/c++/11/pstl/pstl_config.h:
 
 /usr/include/c++/11/cmath:
@@ -4221,6 +4193,8 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 /usr/include/c++/11/bits/allocator.h:
 
 /usr/include/c++/11/limits:
+
+../src/tensor-array/layers/linear.hh:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
@@ -4320,8 +4294,6 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/include/c++/11/tr1/exp_integral.tcc:
 
-../src/Tensor-Array/layers/recurrent.cc:
-
 /usr/local/cuda-12.3/targets/x86_64-linux/include/vector_types.h:
 
 /usr/include/c++/11/tr1/hypergeometric.tcc:
@@ -4380,8 +4352,6 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/local/cuda-12.3/targets/x86_64-linux/include/sm_61_intrinsics.h:
 
-../src/Tensor-Array/layers/layer_utility.cc:
-
 /usr/local/cuda-12.3/targets/x86_64-linux/include/crt/sm_70_rt.h:
 
 /usr/local/cuda-12.3/targets/x86_64-linux/include/crt/sm_80_rt.hpp:
@@ -4430,6 +4400,8 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 
 /usr/include/c++/11/bits/range_access.h:
 
+../src/tensor-array/layers/normalization.hh:
+
 /usr/include/c++/11/bits/unique_lock.h:
 
 /usr/include/c++/11/bits/uses_allocator.h:
@@ -4453,8 +4425,6 @@ src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o: ../src/tenso
 /usr/include/wchar.h:
 
 /usr/include/c++/11/bits/nested_exception.h:
-
-../src/Tensor-Array/layers/linear.cc:
 
 /usr/include/c++/11/system_error:
 
