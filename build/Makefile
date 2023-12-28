@@ -146,7 +146,7 @@ TensorCore: cmake_check_build_system
 
 # fast build rule for target.
 TensorCore/fast:
-	$(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/build
+	$(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/build
 .PHONY : TensorCore/fast
 
 # Help Target

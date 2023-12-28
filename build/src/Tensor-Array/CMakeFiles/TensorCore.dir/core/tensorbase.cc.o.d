@@ -1,8 +1,8 @@
-src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.o: \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensorbase.cc \
+src/tensor-array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.o: \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensorbase.cc \
  /usr/include/stdc-predef.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/data_type_wrapper.hh \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensorbase.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/data_type_wrapper.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensorbase.hh \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -128,7 +128,7 @@ src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.o: \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
  /usr/include/c++/11/pstl/execution_defs.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/devices.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.hh \
  /usr/include/c++/11/cstdio /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \

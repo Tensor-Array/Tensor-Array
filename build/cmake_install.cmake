@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array/cmake_install.cmake")
+  include("/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/cmake_install.cmake")
 
 endif()
 

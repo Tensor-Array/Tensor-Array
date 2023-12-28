@@ -1,10 +1,19 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/TensorCore.dir/cmake_device_link.o"
   "CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.o"
   "CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.o.d"
+  "CMakeFiles/TensorCore.dir/core/devices.cu.o"
+  "CMakeFiles/TensorCore.dir/core/devices.cu.o.d"
   "CMakeFiles/TensorCore.dir/core/tensor.cc.o"
   "CMakeFiles/TensorCore.dir/core/tensor.cc.o.d"
+  "CMakeFiles/TensorCore.dir/core/tensor.cu.o"
+  "CMakeFiles/TensorCore.dir/core/tensor.cu.o.d"
+  "CMakeFiles/TensorCore.dir/core/tensor_blas.cu.o"
+  "CMakeFiles/TensorCore.dir/core/tensor_blas.cu.o.d"
   "CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o"
   "CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o.d"
+  "CMakeFiles/TensorCore.dir/core/tensor_convolution.cu.o"
+  "CMakeFiles/TensorCore.dir/core/tensor_convolution.cu.o.d"
   "CMakeFiles/TensorCore.dir/core/tensorbase.cc.o"
   "CMakeFiles/TensorCore.dir/core/tensorbase.cc.o.d"
   "CMakeFiles/TensorCore.dir/layers/convolution.cc.o"
@@ -28,6 +37,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang CUDA CXX)
   include(CMakeFiles/TensorCore.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

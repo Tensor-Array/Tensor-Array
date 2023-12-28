@@ -1,5 +1,5 @@
-src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o: \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensor_convolution.cc \
+src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o: \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cc \
  /usr/include/stdc-predef.h /usr/include/c++/11/cassert \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -12,7 +12,7 @@ src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
  /usr/include/c++/11/pstl/pstl_config.h /usr/include/assert.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensor.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.hh \
  /usr/include/c++/11/algorithm /usr/include/c++/11/utility \
  /usr/include/c++/11/bits/stl_relops.h \
  /usr/include/c++/11/bits/stl_pair.h /usr/include/c++/11/bits/move.h \
@@ -161,7 +161,7 @@ src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o: \
  /usr/include/c++/11/bits/basic_string.tcc \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensorbase.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensorbase.hh \
  /usr/include/c++/11/typeindex /usr/include/c++/11/memory \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
@@ -175,4 +175,4 @@ src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o: \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/devices.hh
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.hh

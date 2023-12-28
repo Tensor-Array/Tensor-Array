@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array
+# Install script for directory: /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

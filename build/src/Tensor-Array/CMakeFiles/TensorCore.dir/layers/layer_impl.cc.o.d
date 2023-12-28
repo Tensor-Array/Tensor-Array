@@ -1,5 +1,5 @@
-src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/layer_impl.cc \
+src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/layer_impl.cc \
  /usr/include/stdc-predef.h /usr/include/c++/11/filesystem \
  /usr/include/c++/11/bits/fs_fwd.h /usr/include/c++/11/system_error \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -170,14 +170,14 @@ src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: \
  /usr/include/c++/11/ext/aligned_buffer.h \
  /usr/include/c++/11/bits/fs_dir.h /usr/include/c++/11/bits/fs_ops.h \
  /usr/include/c++/11/iostream \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/layer_impl.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/layer_impl.hh \
  /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \
  /usr/include/c++/11/bits/hashtable_policy.h \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/node_handle.h \
  /usr/include/c++/11/bits/unordered_map.h \
  /usr/include/c++/11/bits/erase_if.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensor.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.hh \
  /usr/include/c++/11/algorithm /usr/include/c++/11/bits/stl_algo.h \
  /usr/include/c++/11/bits/algorithmfwd.h \
  /usr/include/c++/11/bits/stl_heap.h \
@@ -192,7 +192,7 @@ src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: \
  /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/mutex \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensorbase.hh \
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensorbase.hh \
  /usr/include/c++/11/typeindex /usr/include/c++/11/memory \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
@@ -201,4 +201,4 @@ src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o: \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
- /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/devices.hh
+ /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.hh

@@ -107,14 +107,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles /mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array//CMakeFiles/progress.marks
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Tensor-Array/all
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles /mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array//CMakeFiles/progress.marks
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/tensor-array/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Tensor-Array/clean
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/tensor-array/clean
 .PHONY : clean
 
 # The main clean target
@@ -123,12 +123,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Tensor-Array/preinstall
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/tensor-array/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Tensor-Array/preinstall
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/tensor-array/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -137,17 +137,17 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/Tensor-Array/CMakeFiles/TensorCore.dir/rule:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Tensor-Array/CMakeFiles/TensorCore.dir/rule
-.PHONY : src/Tensor-Array/CMakeFiles/TensorCore.dir/rule
+src/tensor-array/CMakeFiles/TensorCore.dir/rule:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/tensor-array/CMakeFiles/TensorCore.dir/rule
+.PHONY : src/tensor-array/CMakeFiles/TensorCore.dir/rule
 
 # Convenience name for target.
-TensorCore: src/Tensor-Array/CMakeFiles/TensorCore.dir/rule
+TensorCore: src/tensor-array/CMakeFiles/TensorCore.dir/rule
 .PHONY : TensorCore
 
 # fast build rule for target.
 TensorCore/fast:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/build
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/build
 .PHONY : TensorCore/fast
 
 core/data_type_wrapper.o: core/data_type_wrapper.cc.o
@@ -155,7 +155,7 @@ core/data_type_wrapper.o: core/data_type_wrapper.cc.o
 
 # target to build an object file
 core/data_type_wrapper.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.o
 .PHONY : core/data_type_wrapper.cc.o
 
 core/data_type_wrapper.i: core/data_type_wrapper.cc.i
@@ -163,7 +163,7 @@ core/data_type_wrapper.i: core/data_type_wrapper.cc.i
 
 # target to preprocess a source file
 core/data_type_wrapper.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.i
 .PHONY : core/data_type_wrapper.cc.i
 
 core/data_type_wrapper.s: core/data_type_wrapper.cc.s
@@ -171,15 +171,39 @@ core/data_type_wrapper.s: core/data_type_wrapper.cc.s
 
 # target to generate assembly for a file
 core/data_type_wrapper.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.s
 .PHONY : core/data_type_wrapper.cc.s
+
+core/devices.o: core/devices.cu.o
+.PHONY : core/devices.o
+
+# target to build an object file
+core/devices.cu.o:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/devices.cu.o
+.PHONY : core/devices.cu.o
+
+core/devices.i: core/devices.cu.i
+.PHONY : core/devices.i
+
+# target to preprocess a source file
+core/devices.cu.i:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/devices.cu.i
+.PHONY : core/devices.cu.i
+
+core/devices.s: core/devices.cu.s
+.PHONY : core/devices.s
+
+# target to generate assembly for a file
+core/devices.cu.s:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/devices.cu.s
+.PHONY : core/devices.cu.s
 
 core/tensor.o: core/tensor.cc.o
 .PHONY : core/tensor.o
 
 # target to build an object file
 core/tensor.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor.cc.o
 .PHONY : core/tensor.cc.o
 
 core/tensor.i: core/tensor.cc.i
@@ -187,7 +211,7 @@ core/tensor.i: core/tensor.cc.i
 
 # target to preprocess a source file
 core/tensor.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor.cc.i
 .PHONY : core/tensor.cc.i
 
 core/tensor.s: core/tensor.cc.s
@@ -195,15 +219,63 @@ core/tensor.s: core/tensor.cc.s
 
 # target to generate assembly for a file
 core/tensor.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor.cc.s
 .PHONY : core/tensor.cc.s
+
+core/tensor.o: core/tensor.cu.o
+.PHONY : core/tensor.o
+
+# target to build an object file
+core/tensor.cu.o:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor.cu.o
+.PHONY : core/tensor.cu.o
+
+core/tensor.i: core/tensor.cu.i
+.PHONY : core/tensor.i
+
+# target to preprocess a source file
+core/tensor.cu.i:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor.cu.i
+.PHONY : core/tensor.cu.i
+
+core/tensor.s: core/tensor.cu.s
+.PHONY : core/tensor.s
+
+# target to generate assembly for a file
+core/tensor.cu.s:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor.cu.s
+.PHONY : core/tensor.cu.s
+
+core/tensor_blas.o: core/tensor_blas.cu.o
+.PHONY : core/tensor_blas.o
+
+# target to build an object file
+core/tensor_blas.cu.o:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_blas.cu.o
+.PHONY : core/tensor_blas.cu.o
+
+core/tensor_blas.i: core/tensor_blas.cu.i
+.PHONY : core/tensor_blas.i
+
+# target to preprocess a source file
+core/tensor_blas.cu.i:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_blas.cu.i
+.PHONY : core/tensor_blas.cu.i
+
+core/tensor_blas.s: core/tensor_blas.cu.s
+.PHONY : core/tensor_blas.s
+
+# target to generate assembly for a file
+core/tensor_blas.cu.s:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_blas.cu.s
+.PHONY : core/tensor_blas.cu.s
 
 core/tensor_convolution.o: core/tensor_convolution.cc.o
 .PHONY : core/tensor_convolution.o
 
 # target to build an object file
 core/tensor_convolution.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o
 .PHONY : core/tensor_convolution.cc.o
 
 core/tensor_convolution.i: core/tensor_convolution.cc.i
@@ -211,7 +283,7 @@ core/tensor_convolution.i: core/tensor_convolution.cc.i
 
 # target to preprocess a source file
 core/tensor_convolution.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.i
 .PHONY : core/tensor_convolution.cc.i
 
 core/tensor_convolution.s: core/tensor_convolution.cc.s
@@ -219,15 +291,39 @@ core/tensor_convolution.s: core/tensor_convolution.cc.s
 
 # target to generate assembly for a file
 core/tensor_convolution.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.s
 .PHONY : core/tensor_convolution.cc.s
+
+core/tensor_convolution.o: core/tensor_convolution.cu.o
+.PHONY : core/tensor_convolution.o
+
+# target to build an object file
+core/tensor_convolution.cu.o:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cu.o
+.PHONY : core/tensor_convolution.cu.o
+
+core/tensor_convolution.i: core/tensor_convolution.cu.i
+.PHONY : core/tensor_convolution.i
+
+# target to preprocess a source file
+core/tensor_convolution.cu.i:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cu.i
+.PHONY : core/tensor_convolution.cu.i
+
+core/tensor_convolution.s: core/tensor_convolution.cu.s
+.PHONY : core/tensor_convolution.s
+
+# target to generate assembly for a file
+core/tensor_convolution.cu.s:
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensor_convolution.cu.s
+.PHONY : core/tensor_convolution.cu.s
 
 core/tensorbase.o: core/tensorbase.cc.o
 .PHONY : core/tensorbase.o
 
 # target to build an object file
 core/tensorbase.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.o
 .PHONY : core/tensorbase.cc.o
 
 core/tensorbase.i: core/tensorbase.cc.i
@@ -235,7 +331,7 @@ core/tensorbase.i: core/tensorbase.cc.i
 
 # target to preprocess a source file
 core/tensorbase.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.i
 .PHONY : core/tensorbase.cc.i
 
 core/tensorbase.s: core/tensorbase.cc.s
@@ -243,7 +339,7 @@ core/tensorbase.s: core/tensorbase.cc.s
 
 # target to generate assembly for a file
 core/tensorbase.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/core/tensorbase.cc.s
 .PHONY : core/tensorbase.cc.s
 
 layers/convolution.o: layers/convolution.cc.o
@@ -251,7 +347,7 @@ layers/convolution.o: layers/convolution.cc.o
 
 # target to build an object file
 layers/convolution.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/convolution.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/convolution.cc.o
 .PHONY : layers/convolution.cc.o
 
 layers/convolution.i: layers/convolution.cc.i
@@ -259,7 +355,7 @@ layers/convolution.i: layers/convolution.cc.i
 
 # target to preprocess a source file
 layers/convolution.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/convolution.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/convolution.cc.i
 .PHONY : layers/convolution.cc.i
 
 layers/convolution.s: layers/convolution.cc.s
@@ -267,7 +363,7 @@ layers/convolution.s: layers/convolution.cc.s
 
 # target to generate assembly for a file
 layers/convolution.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/convolution.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/convolution.cc.s
 .PHONY : layers/convolution.cc.s
 
 layers/layer_impl.o: layers/layer_impl.cc.o
@@ -275,7 +371,7 @@ layers/layer_impl.o: layers/layer_impl.cc.o
 
 # target to build an object file
 layers/layer_impl.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o
 .PHONY : layers/layer_impl.cc.o
 
 layers/layer_impl.i: layers/layer_impl.cc.i
@@ -283,7 +379,7 @@ layers/layer_impl.i: layers/layer_impl.cc.i
 
 # target to preprocess a source file
 layers/layer_impl.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.i
 .PHONY : layers/layer_impl.cc.i
 
 layers/layer_impl.s: layers/layer_impl.cc.s
@@ -291,7 +387,7 @@ layers/layer_impl.s: layers/layer_impl.cc.s
 
 # target to generate assembly for a file
 layers/layer_impl.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_impl.cc.s
 .PHONY : layers/layer_impl.cc.s
 
 layers/layer_utility.o: layers/layer_utility.cc.o
@@ -299,7 +395,7 @@ layers/layer_utility.o: layers/layer_utility.cc.o
 
 # target to build an object file
 layers/layer_utility.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o
 .PHONY : layers/layer_utility.cc.o
 
 layers/layer_utility.i: layers/layer_utility.cc.i
@@ -307,7 +403,7 @@ layers/layer_utility.i: layers/layer_utility.cc.i
 
 # target to preprocess a source file
 layers/layer_utility.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.i
 .PHONY : layers/layer_utility.cc.i
 
 layers/layer_utility.s: layers/layer_utility.cc.s
@@ -315,7 +411,7 @@ layers/layer_utility.s: layers/layer_utility.cc.s
 
 # target to generate assembly for a file
 layers/layer_utility.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/layer_utility.cc.s
 .PHONY : layers/layer_utility.cc.s
 
 layers/linear.o: layers/linear.cc.o
@@ -323,7 +419,7 @@ layers/linear.o: layers/linear.cc.o
 
 # target to build an object file
 layers/linear.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/linear.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/linear.cc.o
 .PHONY : layers/linear.cc.o
 
 layers/linear.i: layers/linear.cc.i
@@ -331,7 +427,7 @@ layers/linear.i: layers/linear.cc.i
 
 # target to preprocess a source file
 layers/linear.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/linear.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/linear.cc.i
 .PHONY : layers/linear.cc.i
 
 layers/linear.s: layers/linear.cc.s
@@ -339,7 +435,7 @@ layers/linear.s: layers/linear.cc.s
 
 # target to generate assembly for a file
 layers/linear.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/linear.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/linear.cc.s
 .PHONY : layers/linear.cc.s
 
 layers/normalization.o: layers/normalization.cc.o
@@ -347,7 +443,7 @@ layers/normalization.o: layers/normalization.cc.o
 
 # target to build an object file
 layers/normalization.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/normalization.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/normalization.cc.o
 .PHONY : layers/normalization.cc.o
 
 layers/normalization.i: layers/normalization.cc.i
@@ -355,7 +451,7 @@ layers/normalization.i: layers/normalization.cc.i
 
 # target to preprocess a source file
 layers/normalization.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/normalization.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/normalization.cc.i
 .PHONY : layers/normalization.cc.i
 
 layers/normalization.s: layers/normalization.cc.s
@@ -363,7 +459,7 @@ layers/normalization.s: layers/normalization.cc.s
 
 # target to generate assembly for a file
 layers/normalization.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/normalization.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/normalization.cc.s
 .PHONY : layers/normalization.cc.s
 
 layers/recurrent.o: layers/recurrent.cc.o
@@ -371,7 +467,7 @@ layers/recurrent.o: layers/recurrent.cc.o
 
 # target to build an object file
 layers/recurrent.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.o
 .PHONY : layers/recurrent.cc.o
 
 layers/recurrent.i: layers/recurrent.cc.i
@@ -379,7 +475,7 @@ layers/recurrent.i: layers/recurrent.cc.i
 
 # target to preprocess a source file
 layers/recurrent.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.i
 .PHONY : layers/recurrent.cc.i
 
 layers/recurrent.s: layers/recurrent.cc.s
@@ -387,7 +483,7 @@ layers/recurrent.s: layers/recurrent.cc.s
 
 # target to generate assembly for a file
 layers/recurrent.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/recurrent.cc.s
 .PHONY : layers/recurrent.cc.s
 
 layers/sequential.o: layers/sequential.cc.o
@@ -395,7 +491,7 @@ layers/sequential.o: layers/sequential.cc.o
 
 # target to build an object file
 layers/sequential.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/sequential.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/sequential.cc.o
 .PHONY : layers/sequential.cc.o
 
 layers/sequential.i: layers/sequential.cc.i
@@ -403,7 +499,7 @@ layers/sequential.i: layers/sequential.cc.i
 
 # target to preprocess a source file
 layers/sequential.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/sequential.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/sequential.cc.i
 .PHONY : layers/sequential.cc.i
 
 layers/sequential.s: layers/sequential.cc.s
@@ -411,7 +507,7 @@ layers/sequential.s: layers/sequential.cc.s
 
 # target to generate assembly for a file
 layers/sequential.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/sequential.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/sequential.cc.s
 .PHONY : layers/sequential.cc.s
 
 layers/transformer.o: layers/transformer.cc.o
@@ -419,7 +515,7 @@ layers/transformer.o: layers/transformer.cc.o
 
 # target to build an object file
 layers/transformer.cc.o:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.o
 .PHONY : layers/transformer.cc.o
 
 layers/transformer.i: layers/transformer.cc.i
@@ -427,7 +523,7 @@ layers/transformer.i: layers/transformer.cc.i
 
 # target to preprocess a source file
 layers/transformer.cc.i:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/transformer.cc.i
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.i
 .PHONY : layers/transformer.cc.i
 
 layers/transformer.s: layers/transformer.cc.s
@@ -435,7 +531,7 @@ layers/transformer.s: layers/transformer.cc.s
 
 # target to generate assembly for a file
 layers/transformer.cc.s:
-	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/layers/transformer.cc.s
+	cd /mnt/d/C++_ver2/TensorMain_wsl2/build && $(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/layers/transformer.cc.s
 .PHONY : layers/transformer.cc.s
 
 # Help Target
@@ -452,9 +548,21 @@ help:
 	@echo "... core/data_type_wrapper.o"
 	@echo "... core/data_type_wrapper.i"
 	@echo "... core/data_type_wrapper.s"
+	@echo "... core/devices.o"
+	@echo "... core/devices.i"
+	@echo "... core/devices.s"
 	@echo "... core/tensor.o"
 	@echo "... core/tensor.i"
 	@echo "... core/tensor.s"
+	@echo "... core/tensor.o"
+	@echo "... core/tensor.i"
+	@echo "... core/tensor.s"
+	@echo "... core/tensor_blas.o"
+	@echo "... core/tensor_blas.i"
+	@echo "... core/tensor_blas.s"
+	@echo "... core/tensor_convolution.o"
+	@echo "... core/tensor_convolution.i"
+	@echo "... core/tensor_convolution.s"
 	@echo "... core/tensor_convolution.o"
 	@echo "... core/tensor_convolution.i"
 	@echo "... core/tensor_convolution.s"

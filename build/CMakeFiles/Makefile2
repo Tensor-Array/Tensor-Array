@@ -63,57 +63,57 @@ CMAKE_BINARY_DIR = /mnt/d/C++_ver2/TensorMain_wsl2/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: src/Tensor-Array/all
+all: src/tensor-array/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: src/Tensor-Array/preinstall
+preinstall: src/tensor-array/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: src/Tensor-Array/clean
+clean: src/tensor-array/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory src/Tensor-Array
+# Directory level rules for directory src/tensor-array
 
 # Recursive "all" directory target.
-src/Tensor-Array/all: src/Tensor-Array/CMakeFiles/TensorCore.dir/all
-.PHONY : src/Tensor-Array/all
+src/tensor-array/all: src/tensor-array/CMakeFiles/TensorCore.dir/all
+.PHONY : src/tensor-array/all
 
 # Recursive "preinstall" directory target.
-src/Tensor-Array/preinstall:
-.PHONY : src/Tensor-Array/preinstall
+src/tensor-array/preinstall:
+.PHONY : src/tensor-array/preinstall
 
 # Recursive "clean" directory target.
-src/Tensor-Array/clean: src/Tensor-Array/CMakeFiles/TensorCore.dir/clean
-.PHONY : src/Tensor-Array/clean
+src/tensor-array/clean: src/tensor-array/CMakeFiles/TensorCore.dir/clean
+.PHONY : src/tensor-array/clean
 
 #=============================================================================
-# Target rules for target src/Tensor-Array/CMakeFiles/TensorCore.dir
+# Target rules for target src/tensor-array/CMakeFiles/TensorCore.dir
 
 # All Build rule for target.
-src/Tensor-Array/CMakeFiles/TensorCore.dir/all:
-	$(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/depend
-	$(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target TensorCore"
-.PHONY : src/Tensor-Array/CMakeFiles/TensorCore.dir/all
+src/tensor-array/CMakeFiles/TensorCore.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target TensorCore"
+.PHONY : src/tensor-array/CMakeFiles/TensorCore.dir/all
 
 # Build rule for subdir invocation for target.
-src/Tensor-Array/CMakeFiles/TensorCore.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles 13
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/Tensor-Array/CMakeFiles/TensorCore.dir/all
+src/tensor-array/CMakeFiles/TensorCore.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles 18
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/tensor-array/CMakeFiles/TensorCore.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles 0
-.PHONY : src/Tensor-Array/CMakeFiles/TensorCore.dir/rule
+.PHONY : src/tensor-array/CMakeFiles/TensorCore.dir/rule
 
 # Convenience name for target.
-TensorCore: src/Tensor-Array/CMakeFiles/TensorCore.dir/rule
+TensorCore: src/tensor-array/CMakeFiles/TensorCore.dir/rule
 .PHONY : TensorCore
 
 # clean rule for target.
-src/Tensor-Array/CMakeFiles/TensorCore.dir/clean:
-	$(MAKE) $(MAKESILENT) -f src/Tensor-Array/CMakeFiles/TensorCore.dir/build.make src/Tensor-Array/CMakeFiles/TensorCore.dir/clean
-.PHONY : src/Tensor-Array/CMakeFiles/TensorCore.dir/clean
+src/tensor-array/CMakeFiles/TensorCore.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/tensor-array/CMakeFiles/TensorCore.dir/build.make src/tensor-array/CMakeFiles/TensorCore.dir/clean
+.PHONY : src/tensor-array/CMakeFiles/TensorCore.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

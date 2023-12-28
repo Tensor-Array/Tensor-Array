@@ -1,6 +1,6 @@
 #include <string>
 #include <unordered_map>
-#include "core/tensor.hh"
+#include "tensor-array/core/tensor.hh"
 #include <utility>
 #pragma once
 

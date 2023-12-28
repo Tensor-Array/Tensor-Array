@@ -1,62 +1,82 @@
 [
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/data_type_wrapper.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/data_type_wrapper.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/core/data_type_wrapper.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/data_type_wrapper.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/data_type_wrapper.cc"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/core/tensor.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensor.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensor.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.cu -o CMakeFiles/TensorCore.dir/core/devices.cu.o",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.cu"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensor_convolution.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensor_convolution.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/core/tensor.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.cc"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/core/tensorbase.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensorbase.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/core/tensorbase.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.cu -o CMakeFiles/TensorCore.dir/core/tensor.cu.o",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.cu"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/convolution.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/convolution.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/convolution.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_blas.cu -o CMakeFiles/TensorCore.dir/core/tensor_blas.cu.o",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_blas.cu"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/layer_impl.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/layer_impl.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/core/tensor_convolution.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cc"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/layer_utility.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/layer_utility.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cu -o CMakeFiles/TensorCore.dir/core/tensor_convolution.cu.o",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cu"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/linear.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/linear.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/linear.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/core/tensorbase.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensorbase.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensorbase.cc"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/normalization.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/normalization.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/normalization.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/convolution.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/convolution.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/convolution.cc"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/recurrent.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/recurrent.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/recurrent.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/layer_impl.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/layer_impl.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/layer_impl.cc"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/sequential.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/sequential.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/sequential.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/layer_utility.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/layer_utility.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/layer_utility.cc"
 },
 {
-  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array",
-  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array -g -fPIC -o CMakeFiles/TensorCore.dir/layers/transformer.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/transformer.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/Tensor-Array/layers/transformer.cc"
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/linear.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/linear.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/linear.cc"
+},
+{
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/normalization.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/normalization.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/normalization.cc"
+},
+{
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/recurrent.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/recurrent.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/recurrent.cc"
+},
+{
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/sequential.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/sequential.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/sequential.cc"
+},
+{
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array",
+  "command": "/usr/bin/c++ -DTensorCore_EXPORTS -I/mnt/d/C++_ver2/TensorMain_wsl2/src -g -fPIC -o CMakeFiles/TensorCore.dir/layers/transformer.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/transformer.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers/transformer.cc"
 }
 ]
