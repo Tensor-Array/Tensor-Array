@@ -164,7 +164,7 @@
 			"path" : "/usr/share/cmake-3.22/Templates/CPackConfig.cmake.in"
 		},
 		{
-			"path" : "src/CMakeLists.txt"
+			"path" : "src/Tensor-Array/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

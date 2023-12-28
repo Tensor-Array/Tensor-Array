@@ -8,7 +8,7 @@
 	"installers" : [],
 	"paths" : 
 	{
-		"build" : "src",
-		"source" : "src"
+		"build" : "src/Tensor-Array",
+		"source" : "src/Tensor-Array"
 	}
 }

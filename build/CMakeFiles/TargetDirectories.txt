@@ -2,8 +2,8 @@
 /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles/package_source.dir
 /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles/edit_cache.dir
 /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles/rebuild_cache.dir
-/mnt/d/C++_ver2/TensorMain_wsl2/build/src/CMakeFiles/TensorCore.dir
-/mnt/d/C++_ver2/TensorMain_wsl2/build/src/CMakeFiles/package.dir
-/mnt/d/C++_ver2/TensorMain_wsl2/build/src/CMakeFiles/package_source.dir
-/mnt/d/C++_ver2/TensorMain_wsl2/build/src/CMakeFiles/edit_cache.dir
-/mnt/d/C++_ver2/TensorMain_wsl2/build/src/CMakeFiles/rebuild_cache.dir
+/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array/CMakeFiles/TensorCore.dir
+/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array/CMakeFiles/package.dir
+/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array/CMakeFiles/package_source.dir
+/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array/CMakeFiles/edit_cache.dir
+/mnt/d/C++_ver2/TensorMain_wsl2/build/src/Tensor-Array/CMakeFiles/rebuild_cache.dir
