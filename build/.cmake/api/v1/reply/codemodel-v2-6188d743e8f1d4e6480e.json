@@ -19,15 +19,15 @@
 					"source" : "."
 				},
 				{
-					"build" : "src",
-					"jsonFile" : "directory-src-Debug-b6cf2213fc5053b67c22.json",
+					"build" : "src/Tensor-Array",
+					"jsonFile" : "directory-src.Tensor-Array-Debug-1262f15af0ac58541e77.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0.0"
 					},
 					"parentIndex" : 0,
 					"projectIndex" : 0,
-					"source" : "src",
+					"source" : "src/Tensor-Array",
 					"targetIndexes" : 
 					[
 						0
@@ -54,8 +54,8 @@
 			[
 				{
 					"directoryIndex" : 1,
-					"id" : "TensorCore::@145eef247bfb46b6828c",
-					"jsonFile" : "target-TensorCore-Debug-7e1fd361cde51958f55d.json",
+					"id" : "TensorCore::@45f4369e3b270d203177",
+					"jsonFile" : "target-TensorCore-Debug-0aa12a3bd4cf77ac4dcc.json",
 					"name" : "TensorCore",
 					"projectIndex" : 0
 				}

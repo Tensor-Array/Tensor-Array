@@ -7,7 +7,7 @@ set(CMAKE_CUDA_ARCHITECTURES 52 75)
 set(CMAKE_CUDA_SEPARABLE_COMPILATION TRUE)
 set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "-g -G")  # enable cuda-gdb
 
-add_subdirectory(src)
+add_subdirectory("src/Tensor-Array")
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
