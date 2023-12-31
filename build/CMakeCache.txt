@@ -351,6 +351,9 @@ TensorCore_Core_BINARY_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tens
 //Value Computed by CMake
 TensorCore_Core_IS_TOP_LEVEL:STATIC=OFF
 
+//Dependencies for the target
+TensorCore_Core_LIB_DEPENDS:STATIC=general;cublas;
+
 //Value Computed by CMake
 TensorCore_Core_SOURCE_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core
 
@@ -364,7 +367,7 @@ TensorCore_Layers_BINARY_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/build/src/te
 TensorCore_Layers_IS_TOP_LEVEL:STATIC=OFF
 
 //Dependencies for the target
-TensorCore_Layers_LIB_DEPENDS:STATIC=general;TensorCore_Core;
+TensorCore_Layers_LIB_DEPENDS:STATIC=general;-lTensorCore_Core;
 
 //Value Computed by CMake
 TensorCore_Layers_SOURCE_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers

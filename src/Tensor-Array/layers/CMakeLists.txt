@@ -1,16 +1,13 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.8.0)
 
-project(TensorCore_Layers VERSION 0.1.0 LANGUAGES C CXX)
+enable_language(C CXX)
 
 file(GLOB tensor_core_src "*.hh" "*.cc")
 
-get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-get_filename_component(PARENT_PARENT_DIR ${PARENT_DIR} DIRECTORY)
-
-
 add_library(TensorCore_Layers SHARED ${tensor_core_src})
 
-target_include_directories(TensorCore_Layers PRIVATE ${PARENT_PARENT_DIR})
-target_link_libraries(TensorCore_Layers TensorCore_Core)
+target_include_directories(TensorCore_Layers PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_link_directories(TensorCore_Layers PRIVATE ${PROJECT_SOURCE_DIR}/lib)
+target_link_libraries(TensorCore_Layers -lTensorCore_Core)
 
 install(TARGETS TensorCore_Layers LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)

@@ -137,7 +137,7 @@ src/tensor-array/core/CMakeFiles/TensorCore_Core.dir/clean:
 # Target rules for target src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir
 
 # All Build rule for target.
-src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/all: src/tensor-array/core/CMakeFiles/TensorCore_Core.dir/all
+src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/build.make src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/build.make src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles --progress-num=11,12,13,14,15,16,17,18,19,20 "Built target TensorCore_Layers"
@@ -145,7 +145,7 @@ src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/all: src/tensor-array/c
 
 # Build rule for subdir invocation for target.
 src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/C++_ver2/TensorMain_wsl2/build/CMakeFiles 0
 .PHONY : src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/rule
