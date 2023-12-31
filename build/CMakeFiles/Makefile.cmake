@@ -12,7 +12,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.22.1/CMakeCUDACompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
-  "../src/tensor-array/CMakeLists.txt"
+  "../src/tensor-array/core/CMakeLists.txt"
+  "../src/tensor-array/layers/CMakeLists.txt"
   "/usr/share/cmake-3.22/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCUDAInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake"
@@ -45,13 +46,15 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "CMakeFiles/CMakeDirectoryInformation.cmake"
   "CPackConfig.cmake"
   "CPackSourceConfig.cmake"
-  "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "src/tensor-array/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/tensor-array/core/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/tensor-array/layers/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "src/tensor-array/CMakeFiles/TensorCore.dir/DependInfo.cmake"
+  "src/tensor-array/core/CMakeFiles/TensorCore_Core.dir/DependInfo.cmake"
+  "src/tensor-array/layers/CMakeFiles/TensorCore_Layers.dir/DependInfo.cmake"
   )

@@ -23,6 +23,10 @@ CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
+//For backwards compatibility, what version of CMake commands and
+// syntax should this version of CMake try to support.
+CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
+
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
@@ -308,8 +312,14 @@ CTEST_SUBMIT_RETRY_DELAY:STRING=5
 //Maximum time allowed before CTest will kill the test.
 DART_TESTING_TIMEOUT:STRING=1500
 
+//Single output directory for building all executables.
+EXECUTABLE_OUTPUT_PATH:PATH=
+
 //Path to a program.
 GITCOMMAND:FILEPATH=/usr/bin/git
+
+//Single output directory for building all libraries.
+LIBRARY_OUTPUT_PATH:PATH=
 
 //Command to build the project
 MAKECOMMAND:STRING=/usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
@@ -320,6 +330,15 @@ MEMORYCHECK_COMMAND:FILEPATH=/usr/local/cuda-12.3/bin/compute-sanitizer
 //File that contains suppressions for the memory checker
 MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 
+//Value Computed by CMake
+Project_BINARY_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/build
+
+//Value Computed by CMake
+Project_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Project_SOURCE_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2
+
 //Name of the computer/site where compile is being run
 SITE:STRING=Computer
 
@@ -327,7 +346,28 @@ SITE:STRING=Computer
 TensorCore_BINARY_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/build
 
 //Value Computed by CMake
+TensorCore_Core_BINARY_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core
+
+//Value Computed by CMake
+TensorCore_Core_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+TensorCore_Core_SOURCE_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core
+
+//Value Computed by CMake
 TensorCore_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+TensorCore_Layers_BINARY_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/layers
+
+//Value Computed by CMake
+TensorCore_Layers_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+TensorCore_Layers_LIB_DEPENDS:STATIC=general;TensorCore_Core;
+
+//Value Computed by CMake
+TensorCore_Layers_SOURCE_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/layers
 
 //Value Computed by CMake
 TensorCore_SOURCE_DIR:STATIC=/mnt/d/C++_ver2/TensorMain_wsl2
@@ -447,7 +487,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
