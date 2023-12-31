@@ -12,3 +12,5 @@ add_library(TensorCore_Layers SHARED ${tensor_core_src})
 
 target_include_directories(TensorCore_Layers PRIVATE ${PARENT_PARENT_DIR})
 target_link_libraries(TensorCore_Layers TensorCore_Core)
+
+install(TARGETS TensorCore_Layers LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)

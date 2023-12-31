@@ -14,3 +14,5 @@ add_library(TensorCore_Core SHARED ${tensor_core_src})
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+install(TARGETS TensorCore_Core LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
