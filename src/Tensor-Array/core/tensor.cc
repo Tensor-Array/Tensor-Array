@@ -11,7 +11,7 @@
 #endif // !TENSOR_CONTENT
 #include <unordered_set>
 
-#define USING_DATA_TYPE(temp) (char)(int)(unsigned)(float)(double)
+#define USING_DATA_TYPE (char)(int)(unsigned)(float)(double)
 
 #define LOOP(seq) END(A seq)
 #define BODY(x) ADD_CODE(x)
@@ -210,7 +210,7 @@ namespace tensor_array
 #define ADD_CODE(TEMP)\
 if (temp.first.get_buffer().type() == typeid(TEMP) && temp_tensor.get_buffer().type() == typeid(TEMP))\
 temp_check_data_type = TEMP(temp.first) > TEMP(temp_tensor);
-                LOOP(USING_DATA_TYPE());
+                LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
                 if (temp_check_data_type || (!temp_tensor.has_tensor() && !temp_dim.has_tensor()))
                 {
@@ -256,7 +256,7 @@ temp_check_data_type = TEMP(temp.first) > TEMP(temp_tensor);
 #define ADD_CODE(TEMP)\
 if (temp.first.get_buffer().type() == typeid(TEMP) && temp_tensor.get_buffer().type() == typeid(TEMP))\
 temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
-                LOOP(USING_DATA_TYPE());
+                LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
                 if (temp_check_data_type || (!temp_tensor.has_tensor() && !temp_dim.has_tensor()))
                 {
@@ -368,7 +368,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             }
             const Slice slice_begin = this->correct_slice(slice_arr.begin()[0]);
             std::vector<Tensor> temp_tensors;
-            for (int i = slice_begin.begin; slice_begin.strides < 0 ? i >= slice_begin.end : i <= slice_begin.end; i += slice_begin.strides)
+            for (int i = slice_begin.begin; slice_begin.strides < 0 ? i > slice_begin.end : i < slice_begin.end; i += slice_begin.strides)
             {
                 Tensor temp_tensor = this->operator[](i);
                 temp_tensor = temp_tensor.slice(std::initializer_list(slice_arr.begin() + 1, slice_arr.end()), false);
@@ -424,7 +424,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
         int Tensor::real_index(int index) const
         {
             const unsigned int& temp_dim_0 = *this->get_buffer().shape().begin();
-            return index < 0 ? ((index % temp_dim_0) + (index % temp_dim_0 ? temp_dim_0 : 0)) : index % temp_dim_0;
+            return index < 0 ? index + temp_dim_0 : index;
         }
 
         Tensor::Slice Tensor::correct_slice(const Slice& input_value) const
@@ -813,7 +813,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
 #define ADD_CODE(TEMP)\
 if (tensor_out.get_buffer().type() == typeid(TEMP))\
 out_stream << static_cast<TEMP>(tensor_out);
-                LOOP(USING_DATA_TYPE());
+                LOOP((bool)USING_DATA_TYPE);
 #undef ADD_CODE
             }
             return out_stream;
