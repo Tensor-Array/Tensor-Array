@@ -801,11 +801,21 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
 
         std::ostream& operator<<(std::ostream& out_stream, const Tensor& tensor_out)
         {
+            std::string enter;
             if (tensor_out.get_buffer().shape().size())
             {
-                out_stream << std::endl << '{' << ' ';
+                out_stream << '{';
                 for (Tensor it : tensor_out)
-                    out_stream << it << ',' << ' ';
+                {
+                    out_stream << enter << it;
+                    if (enter.size() == 0)
+                    {
+                        if (tensor_out.get_buffer().shape().size() == 1)
+                            enter = ", ";
+                        else
+                            enter = ", \n";
+                    }
+                }
                 out_stream << '}';
             }
             else
