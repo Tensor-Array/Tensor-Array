@@ -14,8 +14,10 @@
 #define CUDA_ML_API
 #endif
 
-
-#define USING_DATA_TYPE(temp) (char)(int)(unsigned char)(unsigned int)(float)(double)
+#define USING_DATA_TYPE_FLOAT (float)(double)
+#define USING_DATA_TYPE_SINT (int8_t)(int16_t)(int32_t)(int64_t)
+#define USING_DATA_TYPE_UINT (uint8_t)(uint16_t)(uint32_t)(uint64_t)
+#define USING_DATA_TYPE USING_DATA_TYPE_SINT USING_DATA_TYPE_UINT USING_DATA_TYPE_FLOAT
 
 #define LOOP(seq) END(A seq)
 #define BODY(x) ADD_CODE(x)
@@ -138,7 +140,7 @@ namespace tensor_array
                 int end = -1;
                 int strides = 1;
             };
-            Tensor new_grad_copy() const;
+            Tensor clone() const;
             void save(const char*) const;
             int real_index(int) const;
             Slice correct_slice(const Slice&) const;
@@ -337,7 +339,7 @@ namespace tensor_array
         CUDA_ML_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
         CUDA_ML_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
 #define ADD_CODE(TYPE) CUDA_ML_API Tensor values(const std::initializer_list<unsigned int>&, TYPE);
-        LOOP(USING_DATA_TYPE());
+        LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
 #ifndef TENSOR_CONTENT
         CUDA_ML_API Tensor add_dim(const std::vector<Tensor>&);
@@ -405,5 +407,8 @@ struct std::equal_to<tensor_array::value::Tensor>
 #undef END_
 
 #undef USING_DATA_TYPE
+#undef USING_DATA_TYPE_FLOAT
+#undef USING_DATA_TYPE_SINT
+#undef USING_DATA_TYPE_UINT
 
 #undef CUDA_ML_API

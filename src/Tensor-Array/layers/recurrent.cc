@@ -35,7 +35,7 @@ namespace tensor_array
         {
             this->hidden = hidden_value;
             if (this->copy_after_calculate)
-                this->hidden = this->hidden.new_grad_copy();
+                this->hidden = this->hidden.clone();
         }
 
         void RecurrentImpl::set_copy_after_calculate(bool copy_after_calculate)
@@ -71,14 +71,14 @@ namespace tensor_array
         {
             value::Tensor temp_copy = hidden_value;
             if (hidden_value.has_tensor() && this->copy_after_calculate)
-                temp_copy = temp_copy.new_grad_copy();
+                temp_copy = temp_copy.clone();
             this->gate_forget.get()->hidden = temp_copy;
             this->gate_in.get()->hidden = temp_copy;
             this->gate_cell.get()->hidden = temp_copy;
             this->gate_out.get()->hidden = temp_copy;
             this->lstm_cell = cell_value;
             if (cell_value.has_tensor() && this->copy_after_calculate)
-                this->lstm_cell = this->lstm_cell.new_grad_copy();
+                this->lstm_cell = this->lstm_cell.clone();
         }
 
         void LSTM_Impl::set_copy_after_calculate(bool copy_after_calculate)

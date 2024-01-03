@@ -18,8 +18,8 @@ namespace tensor_array
                 this->moving_mean = value::values(temp, 0).tensor_cast(type);
             if (!this->moving_variance.has_tensor())
                 this->moving_variance = value::values(temp, 1).tensor_cast(type);
-            this->moving_mean = this->moving_mean.new_grad_copy();
-            this->moving_variance = this->moving_variance.new_grad_copy();
+            this->moving_mean = this->moving_mean.clone();
+            this->moving_variance = this->moving_variance.clone();
         }
         value::Tensor NormalizationImpl::calculate(const value::Tensor& input)
         {
@@ -31,13 +31,13 @@ namespace tensor_array
                 normal = (input - temp_mean) / power(add(temp_variance, value::values(input.get_buffer().shape(), this->eps)), value::values(input.get_buffer().shape(), .5f));
                 this->moving_mean *= value::values(this->moving_mean.get_buffer().shape(), 1.f - momentum);
                 this->moving_mean += (value::values(temp_mean.get_buffer().shape(), momentum) * temp_mean);
-                this->moving_mean = this->moving_mean.new_grad_copy();
+                this->moving_mean = this->moving_mean.clone();
                 this->moving_variance *= value::values(this->moving_variance.get_buffer().shape(), 1.f - momentum);
                 this->moving_variance += (value::values(temp_variance.get_buffer().shape(), momentum) * temp_variance);
-                this->moving_variance = this->moving_variance.new_grad_copy();
+                this->moving_variance = this->moving_variance.clone();
             }
             else
-                normal = (input - this->moving_mean) / power(add(this->moving_variance, value::values(input.get_buffer().shape(), this->eps)), value::values(input.get_buffer().shape(), .5f)).new_grad_copy();
+                normal = (input - this->moving_mean) / power(add(this->moving_variance, value::values(input.get_buffer().shape(), this->eps)), value::values(input.get_buffer().shape(), .5f)).clone();
             return gamma * normal + beta;
         }
         NormalizationImpl::NormalizationImpl(const std::initializer_list<unsigned char>& dims_mean, float eps, float momentum) :

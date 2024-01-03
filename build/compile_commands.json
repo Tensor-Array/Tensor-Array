@@ -1,13 +1,18 @@
 [
 {
   "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core",
-  "command": "/usr/bin/c++ -DTensorCore_Core_EXPORTS  -g -fPIC -o CMakeFiles/TensorCore_Core.dir/data_type_wrapper.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/data_type_wrapper.cc",
-  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/data_type_wrapper.cc"
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] --generate-code=arch=compute_89,code=[compute_89,sm_89] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/data_type_wrapper.cu -o CMakeFiles/TensorCore_Core.dir/data_type_wrapper.cu.o",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/data_type_wrapper.cu"
 },
 {
   "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core",
-  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.cu -o CMakeFiles/TensorCore_Core.dir/devices.cu.o",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] --generate-code=arch=compute_89,code=[compute_89,sm_89] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.cu -o CMakeFiles/TensorCore_Core.dir/devices.cu.o",
   "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/devices.cu"
+},
+{
+  "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core",
+  "command": "/usr/bin/c++ -DTensorCore_Core_EXPORTS  -g -fPIC -o CMakeFiles/TensorCore_Core.dir/extern_type_map.cc.o -c /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/extern_type_map.cc",
+  "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/extern_type_map.cc"
 },
 {
   "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core",
@@ -16,12 +21,12 @@
 },
 {
   "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core",
-  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.cu -o CMakeFiles/TensorCore_Core.dir/tensor.cu.o",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] --generate-code=arch=compute_89,code=[compute_89,sm_89] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.cu -o CMakeFiles/TensorCore_Core.dir/tensor.cu.o",
   "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor.cu"
 },
 {
   "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core",
-  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_blas.cu -o CMakeFiles/TensorCore_Core.dir/tensor_blas.cu.o",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] --generate-code=arch=compute_89,code=[compute_89,sm_89] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_blas.cu -o CMakeFiles/TensorCore_Core.dir/tensor_blas.cu.o",
   "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_blas.cu"
 },
 {
@@ -31,7 +36,7 @@
 },
 {
   "directory": "/mnt/d/C++_ver2/TensorMain_wsl2/build/src/tensor-array/core",
-  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cu -o CMakeFiles/TensorCore_Core.dir/tensor_convolution.cu.o",
+  "command": "nvcc -forward-unknown-to-host-compiler -DTensorCore_Core_EXPORTS  -g -G -g --generate-code=arch=compute_52,code=[compute_52,sm_52] --generate-code=arch=compute_75,code=[compute_75,sm_75] --generate-code=arch=compute_89,code=[compute_89,sm_89] -Xcompiler=-fPIC -x cu -dc /mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cu -o CMakeFiles/TensorCore_Core.dir/tensor_convolution.cu.o",
   "file": "/mnt/d/C++_ver2/TensorMain_wsl2/src/tensor-array/core/tensor_convolution.cu"
 },
 {

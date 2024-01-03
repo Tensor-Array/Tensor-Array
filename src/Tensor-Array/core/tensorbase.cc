@@ -7,7 +7,10 @@
 #include <cstdio>
 #include <cstring>
 
-#define USING_DATA_TYPE (bool)(char)(int)(unsigned char)(unsigned int)(float)(double)
+#define USING_DATA_TYPE_FLOAT (float)(double)
+#define USING_DATA_TYPE_SINT (int8_t)(int16_t)(int32_t)(int64_t)
+#define USING_DATA_TYPE_UINT (uint8_t)(uint16_t)(uint32_t)(uint64_t)
+#define USING_DATA_TYPE USING_DATA_TYPE_SINT USING_DATA_TYPE_UINT USING_DATA_TYPE_FLOAT
 
 #define LOOP(seq) END(A seq)
 #define BODY(x) ADD_CODE(x)
@@ -23,14 +26,6 @@ namespace tensor_array
 {
 	namespace value
 	{
-        std::unordered_map<std::type_index, std::size_t> dynamic_type_size
-        {
-            {typeid(bool), sizeof(bool)},
-            {typeid(int), sizeof(int)},
-            {typeid(unsigned int), sizeof(unsigned int)},
-            {typeid(float), sizeof(float)}
-        };
-
         class TensorBuf final : public TensorBase::TensorStorage
         {
         public:

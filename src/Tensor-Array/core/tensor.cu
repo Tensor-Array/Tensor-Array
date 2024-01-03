@@ -6,13 +6,21 @@
 #include <cstdio>
 #include <cassert>
 #include <exception>
+#include <cuda_fp8.h>
+#include <cuda_fp16.h>
+#include <cuda_bf16.h>
 #ifndef TENSOR_CONTENT
 #define TENSOR_CONTENT
 #include "tensor.hh"
 #undef TENSOR_CONTENT
 #endif // !TENSOR_CONTENT
 
-#define USING_DATA_TYPE (char)(int)(unsigned char)(unsigned int)(float)(double)
+#define USING_DATA_TYPE_NVIDIA_FLOAT_8 (__nv_fp8_e5m2)(__nv_fp8_e4m3)
+#define USING_DATA_TYPE_NVIDIA_FLOAT (__half)(__nv_bfloat16)
+#define USING_DATA_TYPE_FLOAT (float)(double)
+#define USING_DATA_TYPE_SINT (int8_t)(int16_t)(int32_t)(int64_t)
+#define USING_DATA_TYPE_UINT (uint8_t)(uint16_t)(uint32_t)(uint64_t)
+#define USING_DATA_TYPE USING_DATA_TYPE_SINT USING_DATA_TYPE_UINT USING_DATA_TYPE_FLOAT USING_DATA_TYPE_NVIDIA_FLOAT
 
 #define LOOP(seq) END(A seq)
 #define BODY(x) ADD_CODE(x)
@@ -344,6 +352,9 @@ type_casting<<<grid_dim, block_dim>>>(out_ptr, static_cast<const TYPE*>(base_of_
 			{
 				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
 			}
+			std::type_index test = typeid(T);
+			if (dynamic_type_size.find(test) == dynamic_type_size.end())
+				dynamic_type_size.insert(std::make_pair(test, sizeof(T)));
 			TensorBase other_buf(typeid(T), base_of_this.shape(), out_ptr, this_cuda);
 			cuda_status = cudaFree(out_ptr);
 			return Tensor(std::move(other_buf), std::move(temp));
@@ -570,8 +581,8 @@ arr_less_than<<<grid_dim, block_dim>>>(c_ptr, static_cast<const TYPE*>(base_a.da
 			std::vector<std::pair<Tensor, Derivation>> temp;
 			if (is_derive)
 			{
-				temp.push_back(std::make_pair(a, Derivation(b.new_grad_copy(), multiply)));
-				temp.push_back(std::make_pair(b, Derivation(a.new_grad_copy(), multiply)));
+				temp.push_back(std::make_pair(a, Derivation(b.clone(), multiply)));
+				temp.push_back(std::make_pair(b, Derivation(a.clone(), multiply)));
 			}
 			cudaError cuda_status;
 			TensorBase other_buf;

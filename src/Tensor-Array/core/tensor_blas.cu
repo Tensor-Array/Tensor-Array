@@ -3,6 +3,7 @@
 #include <complex>
 #include <cassert>
 #include <cstring>
+#include <cuda_fp8.h>
 #ifndef TENSOR_CONTENT
 #define TENSOR_CONTENT
 #include "tensor.hh"
@@ -23,28 +24,29 @@ namespace tensor_array
 		{
 			if (type == typeid(float)) return CUDA_R_32F;
 			if (type == typeid(double)) return CUDA_R_64F;
-			if (type == typeid(half)) return CUDA_R_16F;
-			if (type == typeid(signed char)) return CUDA_R_8I;
+			if (type == typeid(__half)) return CUDA_R_16F;
+			if (type == typeid(std::int8_t)) return CUDA_R_8I;
 			if (type == typeid(std::complex<float>) || type == typeid(cuFloatComplex)) return CUDA_C_32F;
 			if (type == typeid(std::complex<double>) || type == typeid(cuDoubleComplex)) return CUDA_C_64F;
-			if (type == typeid(half2)) return CUDA_C_16F;
-			if (type == typeid(std::complex<signed char>)) return CUDA_C_8I;
-			if (type == typeid(unsigned char)) return CUDA_R_8U;
-			if (type == typeid(std::complex<unsigned char>)) return CUDA_C_8U;
-			if (type == typeid(long)) return CUDA_R_32I;
-			if (type == typeid(std::complex<signed long>)) return CUDA_C_32I;
-			if (type == typeid(unsigned long)) return CUDA_R_32U;
-			if (type == typeid(std::complex<unsigned long>)) return CUDA_C_32U;
-			if (type == typeid(nv_bfloat16)) return CUDA_R_16BF;
-			if (type == typeid(nv_bfloat162)) return CUDA_C_16BF;
-			if (type == typeid(signed short)) return CUDA_R_16I;
-			if (type == typeid(std::complex<signed short>)) return CUDA_C_16I;
-			if (type == typeid(unsigned short)) return CUDA_R_16U;
-			if (type == typeid(std::complex<unsigned short>)) return CUDA_C_16U;
-			if (type == typeid(signed long long)) return CUDA_R_64I;
-			if (type == typeid(std::complex<signed long long>)) return CUDA_C_64I;
-			if (type == typeid(unsigned long long)) return CUDA_R_64U;
-			if (type == typeid(std::complex<unsigned long long>)) return CUDA_C_64U;
+			if (type == typeid(__half2)) return CUDA_C_16F;
+			if (type == typeid(std::complex<std::int8_t>)) return CUDA_C_8I;
+			if (type == typeid(std::uint8_t)) return CUDA_R_8U;
+			if (type == typeid(std::complex<std::uint8_t>)) return CUDA_C_8U;
+			if (type == typeid(std::int32_t)) return CUDA_R_32I;
+			if (type == typeid(std::complex<std::int32_t>)) return CUDA_C_32I;
+			if (type == typeid(std::uint32_t)) return CUDA_R_32U;
+			if (type == typeid(std::complex<std::uint32_t>)) return CUDA_C_32U;
+			if (type == typeid(__nv_bfloat16)) return CUDA_R_16BF;
+			if (type == typeid(__nv_bfloat162)) return CUDA_C_16BF;
+			if (type == typeid(std::int16_t)) return CUDA_R_16I;
+			if (type == typeid(std::complex<std::int16_t>)) return CUDA_C_16I;
+			if (type == typeid(std::uint16_t)) return CUDA_R_16U;
+			if (type == typeid(std::complex<std::uint16_t>)) return CUDA_C_16U;
+			if (type == typeid(std::int64_t)) return CUDA_R_64I;
+			if (type == typeid(std::complex<std::int64_t>)) return CUDA_C_64I;
+			if (type == typeid(std::uint64_t)) return CUDA_R_64U;
+			if (type == typeid(__nv_fp8_e4m3)) return CUDA_R_8F_E4M3;
+			if (type == typeid(__nv_fp8_e5m2)) return CUDA_R_8F_E5M2;
 			throw std::exception();
 		}
 

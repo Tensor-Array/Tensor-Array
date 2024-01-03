@@ -18,7 +18,7 @@ namespace tensor_array
                 if (temp_grad.has_tensor())
                 {
                     *it.second -= multiply(value::values(temp.shape(), eta).tensor_cast(temp.type()), temp_grad);
-                    *it.second = it.second->new_grad_copy();
+                    *it.second = it.second->clone();
                 }
             }
         }

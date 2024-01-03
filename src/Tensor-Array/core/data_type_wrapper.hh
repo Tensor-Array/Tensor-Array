@@ -1,3 +1,4 @@
+#include <typeinfo>
 #pragma once
 
 namespace tensor_array
@@ -6,23 +7,22 @@ namespace tensor_array
 	{
 		enum DataType : unsigned char
 		{
-			s_bool = 0,
-			s_char = 1,
-			s_short = 2,
-			s_int = 3,
-			s_long = 4,
-			s_float = 5,
-			s_double = 6,
-			s_long_long = 8,
-			u_bool = 128,
-			u_char = 129,
-			u_short = 130,
-			u_int = 131,
-			u_long = 132,
-			u_long_long = 136,
+			BOOL_DTYPE = 0,
+			S_INT_8 = 1,
+			S_INT_16 = 2,
+			BF16_DTYPE = 3,
+			S_INT_32 = 4,
+			FLOAT_DTYPE = 5,
+			DOUBLE_DTYPE = 6,
+			HALF_DTYPE = 7,
+			S_INT_64 = 8,
+			U_INT_8 = 129,
+			U_INT_16 = 130,
+			U_INT_32 = 132,
+			U_INT_64 = 136,
 		};
 
-		const std::type_info& warp_type(const DataType&);
+		const std::type_info& warp_type(DataType);
 		DataType warp_type(const std::type_info&);
 	}
 }

@@ -11,7 +11,10 @@
 #endif // !TENSOR_CONTENT
 #include <unordered_set>
 
-#define USING_DATA_TYPE (char)(int)(unsigned)(float)(double)
+#define USING_DATA_TYPE_FLOAT (float)(double)
+#define USING_DATA_TYPE_SINT (int8_t)(int16_t)(int32_t)(int64_t)
+#define USING_DATA_TYPE_UINT (uint8_t)(uint16_t)(uint32_t)(uint64_t)
+#define USING_DATA_TYPE USING_DATA_TYPE_SINT USING_DATA_TYPE_UINT USING_DATA_TYPE_FLOAT
 
 #define LOOP(seq) END(A seq)
 #define BODY(x) ADD_CODE(x)
@@ -346,7 +349,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
                 );
                 index += slice_begin.strides;
             }
-            return add_dim(temp_tensors).new_grad_copy();
+            return add_dim(temp_tensors).clone();
         }
 
         Tensor derive_slice(const Tensor& in_value, const Tensor& out_shape, bool, const DataBuffer& dat)
@@ -410,7 +413,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
         {
         }
 
-        Tensor Tensor::new_grad_copy() const
+        Tensor Tensor::clone() const
         {
             return Tensor(this->get_buffer());
         }
