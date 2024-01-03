@@ -75,6 +75,40 @@ namespace tensor_array
 			}
 		}
 
+		void device_memset(void* dst, Device dst_dev, int value, size_t count)
+		{
+			int temp;
+			if (dst_dev.dev_t == CPU)
+				std::memset(dst, value, count);
+			else if (dst_dev.dev_t == CUDA)
+			{
+				cudaError cudaStatus = cudaGetDevice(&temp);
+				cudaStatus = cudaSetDevice(dst_dev.index);
+				cudaStatus = cudaMemset(dst, value, count);
+				cudaStatus = cudaSetDevice(temp);
+			}
+			else
+			{
+			}
+		}
+
+		void device_memset(void* dst, Device dst_dev, int value, size_t count, void* stream)
+		{
+			int temp;
+			if (dst_dev.dev_t == CPU)
+				std::memset(dst, value, count);
+			else if (dst_dev.dev_t == CUDA)
+			{
+				cudaError cudaStatus = cudaGetDevice(&temp);
+				cudaStatus = cudaSetDevice(dst_dev.index);
+				cudaStatus = cudaMemsetAsync(dst, value, count, static_cast<cudaStream_t>(stream));
+				cudaStatus = cudaSetDevice(temp);
+			}
+			else
+			{
+			}
+		}
+
 		void device_CUDA_get_info()
 		{
 			int temp;

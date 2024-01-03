@@ -134,7 +134,7 @@ namespace tensor_array
 			cudaStat = cudaMalloc(&c_ptr, shape_a.begin()[0] * shape_b.end()[-1] * get_sizeof_type(c_type));
 			cudaStat = cudaMemset(c_ptr, 0, shape_a.begin()[0] * shape_b.end()[-1] * get_sizeof_type(c_type));
 			TensorBase alpha = values({}, 1).tensor_cast(c_type, false).get_buffer().change_device(this_cuda);
-			TensorBase beta = values({}, 0).tensor_cast(c_type, false).get_buffer().change_device(this_cuda);
+			TensorBase beta = zeros<uint32_t>({}).tensor_cast(c_type, false).get_buffer().change_device(this_cuda);
 			blasStat = cublasGemmEx(blasHandle, CUBLAS_OP_N, CUBLAS_OP_N,
 				shape_a.begin()[0], shape_b.end()[-1], shape_a.end()[-1],
 				alpha.data(),
@@ -181,7 +181,7 @@ namespace tensor_array
 			cudaStat = cudaMalloc(&c_ptr, batch_size * shape_a.end()[-2] * shape_b.end()[-1] * get_sizeof_type(c_type));
 			cudaStat = cudaMemset(c_ptr, 0, batch_size * shape_a.end()[-2] * shape_b.end()[-1] * get_sizeof_type(c_type));
 			TensorBase alpha = values({}, 1).tensor_cast(c_type, false).get_buffer().change_device(this_cuda);
-			TensorBase beta = values({}, 0).tensor_cast(c_type, false).get_buffer().change_device(this_cuda);
+			TensorBase beta = zeros<uint32_t>({}).tensor_cast(c_type, false).get_buffer().change_device(this_cuda);
 			blasStat = cublasGemmStridedBatchedEx(blasHandle, CUBLAS_OP_N, CUBLAS_OP_N,
 				shape_a.end()[-2], shape_b.end()[-1], shape_a.end()[-1],
 				alpha.data(),

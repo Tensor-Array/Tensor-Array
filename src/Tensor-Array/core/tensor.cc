@@ -125,13 +125,13 @@ namespace tensor_array
         void Tensor::TensorContent::reset_grad()
         {
             std::lock_guard<std::mutex> tensor_lock(this->tensor_mutex);
-            this->grad = values(this->buf.shape(), 0).tensor_cast(this->buf.type()).get_buffer();
+            this->grad = zeros<int>(this->buf.shape()).tensor_cast(this->buf.type()).get_buffer();
         }
 
         void Tensor::TensorContent::calc_grad_thread(Tensor grad, const std::pair<const Tensor, std::vector<Derivation>>* data_ptr)
         {
             auto& [child, derive_data] = *data_ptr;
-            Tensor temp_sum = values(child.get_buffer().shape(), 0).tensor_cast(child.get_buffer().type(), false);
+            Tensor temp_sum = zeros<int>(child.get_buffer().shape()).tensor_cast(child.get_buffer().type(), false);
             for (auto& it : derive_data)
                 temp_sum = add(temp_sum, it.calc_grad_temp(grad), false);
             child.tensor_data->forward_back.erase(this);
@@ -335,7 +335,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             temp_shape_arr.erase(temp_shape_arr.begin());
             std::vector<Tensor> temp_tensors(shape_arr.begin()[0]);
             const Slice slice_begin = this->correct_slice(slice_arr.begin()[0]);
-            Tensor temp_zeros = values(temp_shape_arr, 0).tensor_cast(this->get_buffer().type());
+            Tensor temp_zeros = zeros<int>(temp_shape_arr).tensor_cast(this->get_buffer().type());
             for (auto& it : temp_tensors)
                 it = temp_zeros;
             unsigned int index = (slice_begin.strides < 0 ? shape_arr.begin()[0] : 0U) + slice_begin.begin;
@@ -367,7 +367,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             if (is_derive)
             {
                 std::initializer_list<unsigned int> derive_shape = this->get_buffer().shape();
-                temp.push_back(std::make_pair(*this, Derivation(values(std::initializer_list<unsigned int>(derive_shape.begin(), derive_shape.begin() + slice_arr.size()), 0).tensor_cast(this->get_buffer().type()), derive_slice, false, slice_arr)));
+                temp.push_back(std::make_pair(*this, Derivation(zeros<int>(std::initializer_list<unsigned int>(derive_shape.begin(), derive_shape.begin() + slice_arr.size())).tensor_cast(this->get_buffer().type()), derive_slice, false, slice_arr)));
             }
             const Slice slice_begin = this->correct_slice(slice_arr.begin()[0]);
             std::vector<Tensor> temp_tensors;
@@ -514,7 +514,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             Tensor temp_tensor = this->reshape(resize);
             for (Tensor temp1: temp_tensor)
             {
-                Tensor temp_loop = values(std::initializer_list(temp1.get_buffer().shape().begin() + 1U, temp1.get_buffer().shape().end()), 0).tensor_cast(temp1.get_buffer().type());
+                Tensor temp_loop = zeros<int>(std::initializer_list(temp1.get_buffer().shape().begin() + 1U, temp1.get_buffer().shape().end())).tensor_cast(temp1.get_buffer().type());
                 for (Tensor temp2 : temp1)
                     temp_loop = add(temp_loop, temp2);
                 temp_loop /= values(temp_loop.get_buffer().shape(), float(this->get_buffer().shape().begin()[dim])).tensor_cast(temp_loop.get_buffer().type());
@@ -649,7 +649,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             const unsigned int(*index1)[2] = static_cast<const unsigned int(*)[2]>(dat.get_data());
             std::vector<unsigned int> temp_dim = in_value.get_buffer().shape();
             temp_dim.insert(temp_dim.begin(), (*index1)[0]);
-            Tensor tensor_temp = values(temp_dim, 0.f);
+            Tensor tensor_temp = zeros<int>(temp_dim);
             void* temp_ptr = reinterpret_cast<void*>(reinterpret_cast<unsigned long long int>(tensor_temp.get_buffer().data()) + (*index1)[1] * in_value.get_buffer().data_size());
             devices::device_memcpy(temp_ptr, tensor_temp.get_buffer().get_device(), in_value.get_buffer().data(), in_value.get_buffer().get_device(), in_value.get_buffer().data_size());
             return tensor_temp;

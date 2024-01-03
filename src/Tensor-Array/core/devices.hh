@@ -34,6 +34,10 @@ namespace tensor_array
 
 		void device_memcpy(void*, Device, const void*, Device, size_t, void*);
 
+		void device_memset(void*, Device, int, size_t);
+
+		void device_memset(void*, Device, int, size_t, void*);
+
 		CUDA_ML_API void device_CUDA_get_info();
 	}
 }

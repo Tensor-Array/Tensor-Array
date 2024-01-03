@@ -626,7 +626,7 @@ other_buf = TensorBase(typeid(TYPE), a.get_buffer().shape(), c_ptr, this_cuda); 
 			if (is_derive)
 			{
 				Tensor value_ones = values(bool_value.get_buffer().shape(), 1).tensor_cast(true_value.get_buffer().type(), false);
-				Tensor value_zeros = values(bool_value.get_buffer().shape(), 0).tensor_cast(false_value.get_buffer().type(), false);
+				Tensor value_zeros = zeros<uint32_t>(bool_value.get_buffer().shape()).tensor_cast(false_value.get_buffer().type(), false);
 				temp.push_back(std::make_pair(true_value, Derivation(condition(bool_value, value_ones, value_zeros, false), multiply)));
 				temp.push_back(std::make_pair(false_value, Derivation(condition(bool_value, value_zeros, value_ones, false), multiply)));
 			}

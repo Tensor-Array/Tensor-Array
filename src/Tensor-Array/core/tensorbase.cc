@@ -154,7 +154,10 @@ namespace tensor_array
 		void* create_data_1(size_t other_data_size, const void* other_data, const devices::Device& dev_other, const devices::Device& dev_this)
 		{
 			void* temp_sizes = operator new(other_data_size, dev_this);
-            devices::device_memcpy(temp_sizes, dev_this, other_data, dev_other, other_data_size);
+            if (other_data)
+                devices::device_memcpy(temp_sizes, dev_this, other_data, dev_other, other_data_size);
+            else
+                devices::device_memset(temp_sizes, dev_this, 0, other_data_size);
 			return temp_sizes;
 		}
 

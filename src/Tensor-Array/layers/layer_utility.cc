@@ -37,7 +37,7 @@ namespace tensor_array
         }
         value::Tensor ReLU(const value::Tensor& input)
         {
-            value::Tensor temp_zeros = value::values(input.get_buffer().shape(), 0.f);
+            value::Tensor temp_zeros = value::zeros<float>(input.get_buffer().shape());
             return condition(input > temp_zeros, input, temp_zeros);
         }
 
