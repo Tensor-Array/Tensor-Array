@@ -1,5 +1,4 @@
-build/.cmake/
-build/src/
-build/Testing/
+.vscode/
+build/
 lib/
 bin/
