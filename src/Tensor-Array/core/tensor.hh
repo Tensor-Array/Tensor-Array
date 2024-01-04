@@ -259,14 +259,6 @@ namespace tensor_array
             friend Tensor convolution_padding(const Tensor&, const Tensor&, bool, const DataBuffer&);
             friend Tensor convolution_col2im(const Tensor&, const Tensor&, bool, const DataBuffer&);
             friend Tensor convolution_im2col(const Tensor&, const Tensor&, bool, const DataBuffer&);
-
-            /**
-             * \brief Matrix multiplication 2 matrices.
-             * \param a - Matrix that has size m*k.
-             * \param b - Matrix that has size k*n.
-             * \return Tensor - Matrix that has size m*n.
-             * \exception a.col != b.row
-             */
             friend Tensor matmul(const Tensor&, const Tensor&, bool, const DataBuffer&);
             friend Tensor batchedmatmul(const Tensor& a, const Tensor& b, bool is_derive, const DataBuffer&);
 
@@ -349,8 +341,25 @@ namespace tensor_array
         CUDA_ML_API Tensor multiply(const Tensor&, const Tensor&);
         CUDA_ML_API Tensor divide(const Tensor&, const Tensor&);
         CUDA_ML_API Tensor dot(const Tensor&, const Tensor&);
+        /**
+         * \brief Matrix multiplication 2 matrices.
+         * \param a - Matrix/Tensor that has size (batch*)m*k.
+         * \param b - Matrix/Tensor that has size (batch*)k*n.
+         * \return Tensor - Matrix that has size (batch*)m*n.
+         * \exception a.col != b.row 
+         */
         CUDA_ML_API Tensor matmul(const Tensor&, const Tensor&);
         CUDA_ML_API Tensor condition(const Tensor&, const Tensor&, const Tensor&);
+        /**
+         * \brief Convolution
+         * \brief Only suport 1D, 2D, 3D convolution
+         * \param input - Tensor (N, C, ...).
+         * \param kernel - Tensor (C, ..., K).
+         * \param strides - dimension.
+         * \param dilation - dimension.
+         * \return
+         * Tensor (N, K, ...)
+         */
         CUDA_ML_API Tensor convolution(const Tensor&, const Tensor&, const dimension& = value::dimension(), const dimension& = value::dimension());
         CUDA_ML_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
         CUDA_ML_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
