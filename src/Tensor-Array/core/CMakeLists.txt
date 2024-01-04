@@ -9,7 +9,7 @@ set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "-g -G")  # enable cuda-gdb
 
 file(GLOB tensor_core_src "*.hh" "*.cc" "*.cu")
 
-add_library(TensorCore_Core SHARED ${tensor_core_src})
-target_link_libraries(TensorCore_Core cublas)
+add_library(TensorArray_Core SHARED ${tensor_core_src})
+target_link_libraries(TensorArray_Core cublas)
 
-install(TARGETS TensorCore_Core LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+install(TARGETS TensorArray_Core LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
