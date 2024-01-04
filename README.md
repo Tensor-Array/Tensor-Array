@@ -12,7 +12,7 @@ Build your own neural network models with this library.
 We created a template struct that named `TensorArray`. That struct is a multi-dimensional array wrapper.
 
 ```C++
-#include "tensor-array/core/tensorbase.hh"
+#include "tensor_array/core/tensorbase.hh"
 
 int main()
 {
@@ -49,7 +49,7 @@ int main()
 The `Tensor` class is a storage that store value and calculate the tensor.
 
 ```C++
-#include "tensor-array/core/tensor.hh"
+#include "tensor_array/core/tensor.hh"
 
 int main()
 {
