@@ -14,8 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <cstddef>
-#include <array>
 #include <typeinfo>
 
 namespace tensor_array
@@ -38,12 +36,12 @@ namespace tensor_array
             using pointer = TensorArray<T, sz...>*;
             using reference = TensorArray<T, sz...>&;
             value_type data[sz0];
-            reference operator[](size_t index)
+            reference operator[](unsigned int index)
             {
                 return data[index];
             }
 
-            constexpr const reference operator[](size_t index) const
+            constexpr const reference operator[](unsigned int index) const
             {
                 return const_cast<const reference>(data[index]);
             }
