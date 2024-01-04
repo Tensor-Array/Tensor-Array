@@ -20,6 +20,7 @@ limitations under the License.
 #include <memory>
 #include "devices.hh"
 #include "extern_type_map.hh"
+#include "initializer_wrapper.hh"
 #pragma once
 
 #ifdef __WIN32__
@@ -86,7 +87,7 @@ namespace tensor_array
 
                 inline std::initializer_list<unsigned int> dim_sizes() const override
                 {
-                    return std::initializer_list<unsigned int>(dim_size_array.data(), dim_size_array.data() + sizeof...(sz) + 1ULL);
+                    return wrapper::initializer_wrapper<unsigned int>(dim_size_array.data(), dim_size_array.data() + sizeof...(sz) + 1ULL);
                 }
 
                 inline const void* data() const override

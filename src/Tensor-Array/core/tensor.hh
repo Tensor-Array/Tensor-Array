@@ -390,17 +390,7 @@ namespace tensor_array
         template<typename T>
         inline Tensor values(const std::vector<unsigned int>& shape_vector, T value)
         {
-#ifdef __GNUC__
-            struct
-            {
-                const unsigned int* it;
-                std::size_t sz;
-            } test;
-            test.it = shape_vector.data();
-            test.sz = shape_vector.size();
-            std::initializer_list<unsigned int>& shape_value = reinterpret_cast<std::initializer_list<Tensor::Slice>&>(test);
-#endif
-            return values(shape_value, value);
+            return values(wrapper::initializer_wrapper<unsigned int>(shape_vector.begin().operator->(), shape_vector.end().operator->()), value);
         }
 
         template<typename T>
@@ -412,17 +402,7 @@ namespace tensor_array
         template<typename T>
         inline Tensor zeros(const std::vector<unsigned int>& shape_vector)
         {
-#ifdef __GNUC__
-            struct
-            {
-                const unsigned int* it;
-                std::size_t sz;
-            } test;
-            test.it = shape_vector.data();
-            test.sz = shape_vector.size();
-            std::initializer_list<unsigned int>& shape_value = reinterpret_cast<std::initializer_list<Tensor::Slice>&>(test);
-#endif
-            return zeros<T>(shape_value);
+            return zeros<T>(wrapper::initializer_wrapper<unsigned int>(shape_vector.begin().operator->(), shape_vector.end().operator->()));
         }
 }
 }

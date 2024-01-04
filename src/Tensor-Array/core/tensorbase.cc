@@ -69,7 +69,7 @@ namespace tensor_array
         }
 
         TensorBase::TensorBase(const std::type_info& dtype, const std::vector<unsigned int>& shape_vec, const void* dat, const devices::Device& dev_other, const devices::Device& dev_this):
-            TensorBase(dtype, std::initializer_list<unsigned int>(shape_vec.begin().operator->(), shape_vec.end().operator->()), dat, dev_other, dev_this)
+            TensorBase(dtype, wrapper::initializer_wrapper<unsigned int>(shape_vec.begin().operator->(), shape_vec.end().operator->()), dat, dev_other, dev_this)
         {
         }
 
@@ -223,7 +223,7 @@ namespace tensor_array
 
         std::initializer_list<unsigned int> TensorBuf::dim_sizes() const
         {
-            return std::initializer_list<unsigned int>(this->sizes, this->sizes + this->dim);
+            return wrapper::initializer_wrapper<unsigned int>(this->sizes, this->sizes + this->dim);
         }
 
         const void* TensorBuf::data() const

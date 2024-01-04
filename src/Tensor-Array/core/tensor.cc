@@ -360,8 +360,8 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
                 if (index < 0U || index > shape_arr.begin()[0]) break;
                 temp_tensors[index] = it.unslice
                 (
-                    std::initializer_list(shape_arr.begin() + 1, shape_arr.end()),
-                    std::initializer_list(slice_arr.begin() + 1, slice_arr.end())
+                    wrapper::initializer_wrapper(shape_arr.begin() + 1, shape_arr.end()),
+                    wrapper::initializer_wrapper(slice_arr.begin() + 1, slice_arr.end())
                 );
                 index += slice_begin.strides;
             }
@@ -372,7 +372,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
         {
             auto start = static_cast<const Tensor::Slice*>(dat.get_data());
             auto end = static_cast<const Tensor::Slice*>(dat.get_data()) + (dat.get_data_size() / sizeof(Tensor::Slice));
-            return in_value.unslice(out_shape.get_buffer().shape(), std::initializer_list(start, end));
+            return in_value.unslice(out_shape.get_buffer().shape(), wrapper::initializer_wrapper(start, end));
         }
 
         Tensor Tensor::slice(const std::initializer_list<Slice>& slice_arr, bool is_derive) const
@@ -383,14 +383,14 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             if (is_derive)
             {
                 std::initializer_list<unsigned int> derive_shape = this->get_buffer().shape();
-                temp.push_back(std::make_pair(*this, Derivation(zeros<int>(std::initializer_list<unsigned int>(derive_shape.begin(), derive_shape.begin() + slice_arr.size())).tensor_cast(this->get_buffer().type()), derive_slice, false, slice_arr)));
+                temp.push_back(std::make_pair(*this, Derivation(zeros<int>(wrapper::initializer_wrapper(derive_shape.begin(), derive_shape.begin() + slice_arr.size())).tensor_cast(this->get_buffer().type()), derive_slice, false, slice_arr)));
             }
             const Slice slice_begin = this->correct_slice(slice_arr.begin()[0]);
             std::vector<Tensor> temp_tensors;
             for (int i = slice_begin.begin; slice_begin.strides < 0 ? i > slice_begin.end : i < slice_begin.end; i += slice_begin.strides)
             {
                 Tensor temp_tensor = this->operator[](i);
-                temp_tensor = temp_tensor.slice(std::initializer_list(slice_arr.begin() + 1, slice_arr.end()), false);
+                temp_tensor = temp_tensor.slice(wrapper::initializer_wrapper(slice_arr.begin() + 1, slice_arr.end()), false);
                 temp_tensors.push_back(temp_tensor);
             }
             return Tensor(add_dim(temp_tensors).get_buffer(), temp);
@@ -487,18 +487,18 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
                 tranpose_shape[3] *= a[i];
             Tensor temp_tensor = *this;
             if (dim0 == dim1) return temp_tensor;
-            temp_tensor = derive_transpose(temp_tensor.reshape(std::initializer_list<unsigned int>(std::begin(tranpose_shape), std::end(tranpose_shape)), is_derive), Tensor(), is_derive, nullptr);
+            temp_tensor = derive_transpose(temp_tensor.reshape(wrapper::initializer_wrapper(std::begin(tranpose_shape), std::end(tranpose_shape)), is_derive), Tensor(), is_derive, nullptr);
             if (dim1 - dim0 > 1)
             {
                 tranpose_shape[0] *= a[dim1];
                 tranpose_shape[2] = tranpose_shape[1] / a[dim0];
                 tranpose_shape[1] = a[dim0];
-                temp_tensor = derive_transpose(temp_tensor.reshape(std::initializer_list<unsigned int>(std::begin(tranpose_shape), std::end(tranpose_shape)), is_derive), Tensor(), is_derive, nullptr);
+                temp_tensor = derive_transpose(temp_tensor.reshape(wrapper::initializer_wrapper(std::begin(tranpose_shape), std::end(tranpose_shape)), is_derive), Tensor(), is_derive, nullptr);
             }
             unsigned int temp1 = a[dim0];
             a[dim0] = a[dim1];
             a[dim1] = temp1;
-            return temp_tensor.reshape(std::initializer_list(a.begin().operator->(), a.end().operator->()), is_derive);
+            return temp_tensor.reshape(wrapper::initializer_wrapper(a.begin().operator->(), a.end().operator->()), is_derive);
         }
 
         bool Tensor::has_tensor() const
@@ -530,7 +530,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             Tensor temp_tensor = this->reshape(resize);
             for (Tensor temp1: temp_tensor)
             {
-                Tensor temp_loop = zeros<int>(std::initializer_list(temp1.get_buffer().shape().begin() + 1U, temp1.get_buffer().shape().end())).tensor_cast(temp1.get_buffer().type());
+                Tensor temp_loop = zeros<int>(wrapper::initializer_wrapper(temp1.get_buffer().shape().begin() + 1U, temp1.get_buffer().shape().end())).tensor_cast(temp1.get_buffer().type());
                 for (Tensor temp2 : temp1)
                     temp_loop = add(temp_loop, temp2);
                 temp_loop /= values(temp_loop.get_buffer().shape(), float(this->get_buffer().shape().begin()[dim])).tensor_cast(temp_loop.get_buffer().type());
@@ -564,12 +564,12 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
 
         Tensor Tensor::mean(const std::vector<unsigned char>& list_dims) const
         {
-            return this->mean(std::initializer_list<unsigned char>(list_dims.begin().operator->(), list_dims.end().operator->()));
+            return this->mean(wrapper::initializer_wrapper<unsigned char>(list_dims.begin().operator->(), list_dims.end().operator->()));
         }
 
         Tensor Tensor::variance(const std::vector<unsigned char>& list_dims) const
         {
-            return this->variance(std::initializer_list<unsigned char>(list_dims.begin().operator->(), list_dims.end().operator->()));
+            return this->variance(wrapper::initializer_wrapper(list_dims.begin().operator->(), list_dims.end().operator->()));
         }
 
         Tensor Tensor::value_scalar() const
@@ -657,7 +657,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
 
         Tensor Tensor::reshape(const std::vector<unsigned int>& dim_sizes) const
         {
-            return this->reshape(std::initializer_list<unsigned int>(dim_sizes.begin().operator->(), dim_sizes.end().operator->()));
+            return this->reshape(wrapper::initializer_wrapper(dim_sizes.begin().operator->(), dim_sizes.end().operator->()));
         }
 
         Tensor derive_index(const Tensor& in_value, const Tensor&, bool, const DataBuffer& dat)
@@ -810,7 +810,7 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
                 void* temp_data = operator new(total_dim_size * get_sizeof_type(dtype));
                 temp_read = std::fread(temp_data, 1, get_sizeof_type(dtype) * total_dim_size, tensor_file);
                 std::fclose(tensor_file);
-                TensorBase t_base(dtype, std::initializer_list<unsigned int>(temp_shape, temp_shape + shape_size), temp_data, devices::DEVICE_CPU_0);
+                TensorBase t_base(dtype, wrapper::initializer_wrapper(temp_shape, temp_shape + shape_size), temp_data, devices::DEVICE_CPU_0);
                 operator delete(temp_data);
                 delete[] temp_shape;
                 return t_base;
@@ -911,7 +911,7 @@ out_stream << static_cast<TEMP>(tensor_out);
 
         Tensor tensor_rand(const std::vector<unsigned int>& shape_vector, unsigned int seed)
         {
-            return tensor_rand(std::initializer_list<unsigned int>(shape_vector.begin().operator->(), shape_vector.end().operator->()), seed);
+            return tensor_rand(wrapper::initializer_wrapper(shape_vector.begin().operator->(), shape_vector.end().operator->()), seed);
         }
 
         Tensor::Iterator::Iterator(reference_left ref, unsigned int index):
