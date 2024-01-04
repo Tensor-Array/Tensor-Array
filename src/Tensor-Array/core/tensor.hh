@@ -205,7 +205,7 @@ namespace tensor_array
             /**
              * \brief Array Operator.
              * You can chain tensor array operator to a scalar.
-             * \param pos - Position of this tensor.
+             * \param pos Position of this tensor.
              * \return
              * Tensor
              */
@@ -314,7 +314,7 @@ namespace tensor_array
 
         /**
          * \brief Plus 2 n-d tensors.
-         * \param other - The tensor that plus with this.
+         * \param other The tensor that plus with this.
          * \return
          * Tensor
          */
@@ -324,7 +324,7 @@ namespace tensor_array
 
         /**
          * \brief Multiply 2 n-d tensors.
-         * \param other - The tensor that multiply with this.
+         * \param other The tensor that multiply with this.
          * \return
          * Tensor
          */
@@ -343,8 +343,8 @@ namespace tensor_array
         CUDA_ML_API Tensor dot(const Tensor&, const Tensor&);
         /**
          * \brief Matrix multiplication 2 matrices.
-         * \param a - Matrix/Tensor that has size (batch*)m*k.
-         * \param b - Matrix/Tensor that has size (batch*)k*n.
+         * \param a Matrix/Tensor that has size (batch*)m*k.
+         * \param b Matrix/Tensor that has size (batch*)k*n.
          * \return Tensor - Matrix that has size (batch*)m*n.
          * \exception a.col != b.row 
          */
@@ -353,10 +353,10 @@ namespace tensor_array
         /**
          * \brief Convolution
          * \brief Only suport 1D, 2D, 3D convolution
-         * \param input - Tensor (N, C, ...).
-         * \param kernel - Tensor (C, ..., K).
-         * \param strides - dimension.
-         * \param dilation - dimension.
+         * \param input Tensor (N, C, ...).
+         * \param kernel Tensor (C, ..., K).
+         * \param strides dimension.
+         * \param dilation dimension.
          * \return
          * Tensor (N, K, ...)
          */
