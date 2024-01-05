@@ -171,7 +171,7 @@ TensorArray_Core: cmake_check_build_system
 
 # fast build rule for target.
 TensorArray_Core/fast:
-	$(MAKE) $(MAKESILENT) -f src/tensor-array/core/CMakeFiles/TensorArray_Core.dir/build.make src/tensor-array/core/CMakeFiles/TensorArray_Core.dir/build
+	$(MAKE) $(MAKESILENT) -f src/tensor_array/core/CMakeFiles/TensorArray_Core.dir/build.make src/tensor_array/core/CMakeFiles/TensorArray_Core.dir/build
 .PHONY : TensorArray_Core/fast
 
 #=============================================================================
@@ -184,7 +184,7 @@ TensorArray_Layers: cmake_check_build_system
 
 # fast build rule for target.
 TensorArray_Layers/fast:
-	$(MAKE) $(MAKESILENT) -f src/tensor-array/layers/CMakeFiles/TensorArray_Layers.dir/build.make src/tensor-array/layers/CMakeFiles/TensorArray_Layers.dir/build
+	$(MAKE) $(MAKESILENT) -f src/tensor_array/layers/CMakeFiles/TensorArray_Layers.dir/build.make src/tensor_array/layers/CMakeFiles/TensorArray_Layers.dir/build
 .PHONY : TensorArray_Layers/fast
 
 # Help Target
