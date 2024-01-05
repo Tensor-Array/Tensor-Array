@@ -38,8 +38,7 @@ namespace tensor_array
         using TransformerEncoder = LayerHolder<TransformerEncoderImpl>;
 
         class CUDA_ML_API TransformerDecoderImpl final :
-            public LayerImpl,
-            public CalculateStruct<value::Tensor, const value::Tensor&, const value::Tensor&, const value::Tensor&>
+            public LayerImpl
         {
         private:
             MultiHeadAttention masked_multihead_attn, multihead_attn;
@@ -50,14 +49,13 @@ namespace tensor_array
                 layer_norm_3 = Normalization(std::initializer_list<unsigned char>{1});
         public:
             TransformerDecoderImpl(unsigned int, unsigned int, unsigned int);
-            value::Tensor calculate(const value::Tensor&, const value::Tensor&, const value::Tensor&) override;
+            value::Tensor calculate(const value::Tensor&, const value::Tensor&, const value::Tensor&);
         };
 
         using TransformerDecoder = LayerHolder<TransformerDecoderImpl>;
 
         class TransformerImpl final :
-            public LayerImpl,
-            public CalculateStruct<value::Tensor, const value::Tensor&, const value::Tensor&, const value::Tensor&>
+            public LayerImpl
         {
         private:
             Sequential encoder_blocks;
@@ -65,7 +63,7 @@ namespace tensor_array
             Linear fc;
         public:
             TransformerImpl(unsigned int, unsigned int, unsigned int, unsigned int);
-            value::Tensor calculate(const value::Tensor&, const value::Tensor&, const value::Tensor&) override;
+            value::Tensor calculate(const value::Tensor&, const value::Tensor&, const value::Tensor&);
         };
 
         using Transformer = LayerHolder<TransformerImpl>;

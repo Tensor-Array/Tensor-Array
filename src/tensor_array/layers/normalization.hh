@@ -31,7 +31,7 @@ namespace tensor_array
         public:
             NormalizationImpl(const std::initializer_list<unsigned char>&, float = 1e-5f, float = .1f);
             ~NormalizationImpl();
-            void init_value(const value::Tensor&) override;
+            void layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&&) override;
             value::Tensor calculate(const value::Tensor&) override;
         };
 

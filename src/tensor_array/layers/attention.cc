@@ -36,7 +36,7 @@ namespace tensor_array
 			this->map_layer.insert(std::make_pair("linear_0", w_o.get_shared()));
 		}
 
-		void MultiHeadAttentionImpl::init_value(const value::Tensor&, const value::Tensor&, const value::Tensor&, const value::Tensor&)
+		void MultiHeadAttentionImpl::layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape)
 		{
 		}
 
@@ -58,7 +58,7 @@ namespace tensor_array
 			temp_k = temp_k.reshape({ temp_k.get_buffer().shape().begin()[0], temp_k.get_buffer().shape().begin()[1], this->n_head, this->d_model / this->n_head }).transpose(1, 2);
 			temp_v = temp_v.reshape({ temp_v.get_buffer().shape().begin()[0], temp_v.get_buffer().shape().begin()[1], this->n_head, this->d_model / this->n_head }).transpose(1, 2);
 
-			auto attention_output = scaled_dot_product_attention(temp_q, temp_k, temp_v, mask);
+			value::Tensor attention_output = scaled_dot_product_attention(temp_q, temp_k, temp_v, mask);
 
 			attention_output = attention_output.transpose(1, 2);
 			attention_output = attention_output.reshape({ attention_output.get_buffer().shape().begin()[0], attention_output.get_buffer().shape().begin()[1], this->d_model });

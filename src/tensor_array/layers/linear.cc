@@ -28,11 +28,11 @@ namespace tensor_array
             this->map_tensor.insert(std::make_pair("weight", &weight));
         }
 
-        void LinearImpl::init_value(const value::Tensor& input)
+        void LinearImpl::layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape)
         {
-            auto& buf = input.get_buffer();
+            auto& buf = vector_shape[0].first;
             if (!weight.has_tensor())
-                weight = value::values({ buf.shape().end()[-1], bias.get_buffer().shape().begin()[0] }, 1.f / buf.shape().end()[-1]).tensor_cast(buf.type());
+                weight = value::values({ buf.end()[-1], bias.get_buffer().shape().begin()[0] }, 1.f / buf.end()[-1]).tensor_cast(vector_shape[0].second).clone();
         }
 
         value::Tensor LinearImpl::calculate(const value::Tensor& input)

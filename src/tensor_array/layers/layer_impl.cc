@@ -22,6 +22,10 @@ namespace tensor_array
 {
     namespace layers
     {
+        void LayerImpl::layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape)
+        {
+        }
+        
         void LayerImpl::update_weight(float eta)
         {
             for (auto& it : this->map_layer)

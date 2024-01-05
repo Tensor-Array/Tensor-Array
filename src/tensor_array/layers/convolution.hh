@@ -44,7 +44,7 @@ namespace tensor_array
         {
         public:
             Conv1D_Impl(const value::dimension&, unsigned int, const value::dimension & = value::dimension(), const value::dimension& = value::dimension());
-            void init_value(const value::Tensor&) override;
+            void layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape) override;
         };
 
         using Conv1D = LayerHolder<Conv1D_Impl>;
@@ -54,7 +54,7 @@ namespace tensor_array
         {
         public:
             Conv2D_Impl(const value::dimension&, unsigned int, const value::dimension & = value::dimension(), const value::dimension& = value::dimension());
-            void init_value(const value::Tensor&) override;
+            void layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape) override;
         };
 
         using Conv2D = LayerHolder<Conv2D_Impl>;
@@ -64,7 +64,7 @@ namespace tensor_array
         {
         public:
             Conv3D_Impl(const value::dimension&, unsigned int, const value::dimension & = value::dimension(), const value::dimension& = value::dimension());
-            void init_value(const value::Tensor&) override;
+            void layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape) override;
         };
 
         using Conv3D = LayerHolder<Conv3D_Impl>;

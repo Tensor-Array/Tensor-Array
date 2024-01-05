@@ -46,7 +46,7 @@ namespace tensor_array
 			const std::shared_ptr<T>& get_shared() const;
 
 			template <typename ... Args>
-			auto operator()(Args...);
+			auto operator()(Args&& ...);
 
 			T& operator*();
 			T* operator->() const;
@@ -77,12 +77,21 @@ namespace tensor_array
 
 		template<class T>
 		template<typename ...Args>
-		inline auto LayerHolder<T>::operator()(Args ... args)
+		inline auto LayerHolder<T>::operator()(Args&& ... args)
 		{
 			if (!this->layer_ptr->is_running)
-				this->layer_ptr->init_value(args...);
+			{
+				std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>> vector_shape;
+				([&]
+				{
+					if constexpr (std::is_same_v<Args, value::Tensor>)
+						vector_shape.push_back(std::make_pair(args.get_buffer().shape(), std::cref(args.get_buffer().type())));
+				}
+				(), ...);
+				this->layer_ptr->layer_init(std::move(vector_shape));
+			}
 			this->layer_ptr->is_running = true;
-			return this->layer_ptr->calculate(args...);
+			return this->layer_ptr->calculate(std::forward<Args>(args)...);
 		}
 
 		template<class T>

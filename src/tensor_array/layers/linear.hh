@@ -28,7 +28,7 @@ namespace tensor_array
             value::Tensor weight;
             value::Tensor bias;
         public:
-            void init_value(const value::Tensor& input) override;
+            void layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&&) override;
             value::Tensor calculate(const value::Tensor&) override;
             LinearImpl(unsigned int);
         };

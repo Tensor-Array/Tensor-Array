@@ -20,10 +20,10 @@ namespace tensor_array
 {
 	namespace layers
 	{
-        void NormalizationImpl::init_value(const value::Tensor& input)
+        void NormalizationImpl::layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& shape_input)
         {
-            std::vector<unsigned int> temp = input.get_buffer().shape();
-            const std::type_info& type = input.get_buffer().type();
+            std::vector<unsigned int> temp = shape_input[0].first;
+            const std::type_info& type = shape_input[0].second;
             for (auto& it : dims_mean)
                 temp[it] = 1U;
             if (!this->gamma.has_tensor())

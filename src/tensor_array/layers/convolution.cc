@@ -62,26 +62,26 @@ namespace tensor_array
         {
         }
 
-        void Conv1D_Impl::init_value(const value::Tensor& input)
+        void Conv1D_Impl::layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape)
         {
             if (!this->kernel.has_tensor())
-                this->kernel = value::values({ input.get_buffer().shape().begin()[1], this->kernel_size.x, this->filter }, 1.f / (input.get_buffer().shape().begin()[1] * this->kernel_size.x));
+                this->kernel = value::values({ vector_shape[0].first.begin()[1], this->kernel_size.x, this->filter }, 1.f / (vector_shape[0].first.begin()[1] * this->kernel_size.x));
         }
         Conv2D_Impl::Conv2D_Impl(const value::dimension& kernel_size, unsigned int filter, const value::dimension& strides, const value::dimension& dilation) :
             ConvolutionLayerImpl(2, kernel_size, filter, strides, dilation)
         {
         }
-        void Conv2D_Impl::init_value(const value::Tensor& input)
+        void Conv2D_Impl::layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape)
         {
             if (!this->kernel.has_tensor())
                 this->kernel = value::values
                 (
                     {
-                        input.get_buffer().shape().begin()[1],
+                        vector_shape[0].first.begin()[1],
                         this->kernel_size.x,
                         this->kernel_size.y,
                         this->filter
-                    }, 1.f / (input.get_buffer().shape().begin()[1] * this->kernel_size.x * this->kernel_size.y)
+                    }, 1.f / (vector_shape[0].first.begin()[1] * this->kernel_size.x * this->kernel_size.y)
                 );
         }
 
@@ -90,18 +90,18 @@ namespace tensor_array
         {
         }
 
-        void Conv3D_Impl::init_value(const value::Tensor& input)
+        void Conv3D_Impl::layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&& vector_shape)
         {
             if (!this->kernel.has_tensor())
                 this->kernel = value::values
                 (
                     {
-                        input.get_buffer().shape().begin()[1],
+                        vector_shape[0].first.begin()[1],
                         this->kernel_size.x,
                         this->kernel_size.y,
                         this->kernel_size.z,
                         this->filter
-                    }, 1.f / (input.get_buffer().shape().begin()[1] * this->kernel_size.x * this->kernel_size.y * this->kernel_size.z)
+                    }, 1.f / (vector_shape[0].first.begin()[1] * this->kernel_size.x * this->kernel_size.y * this->kernel_size.z)
                 );
         }
     }

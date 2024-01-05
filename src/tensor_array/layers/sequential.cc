@@ -33,8 +33,8 @@ namespace tensor_array
         void SequentialImpl::insert(const LayerInSequential& layer)
         {
             auto index = this->function_list.size();
-            this->function_list.push_back(layer);
             this->map_layer.insert(std::make_pair("layer" + std::to_string(index), layer.get_shared()));
+            this->function_list.push_back(layer);
         }
 
         void SequentialImpl::insert(LayerInSequential&& layer_ptr)
@@ -44,7 +44,7 @@ namespace tensor_array
             this->function_list.push_back(std::forward<LayerInSequential>(layer_ptr));
         }
 
-        LayerHolder<TensorCalculateLayerImpl>& SequentialImpl::get(std::size_t index)
+        LayerInSequential& SequentialImpl::get(std::size_t index)
         {
             return this->function_list[index];
         }

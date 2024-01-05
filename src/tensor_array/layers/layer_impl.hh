@@ -49,25 +49,22 @@ namespace tensor_array
             virtual void load_data(const std::string&) final;
             virtual void save_data(const std::string&) const final;
             inline LayerImpl() = default;
+            virtual void layer_init(std::vector<std::pair<std::initializer_list<unsigned int>, const std::type_info&>>&&);
             constexpr LayerImpl(const LayerImpl&) = delete;
             constexpr LayerImpl(LayerImpl&&) = delete;
             inline LayerImpl operator=(const LayerImpl&) = delete;
             inline LayerImpl operator=(LayerImpl&&) = delete;
         };
 
-        template <typename Return, typename ... Args>
         struct CalculateStruct
         {
-            template <class T>
-            friend class LayerHolder;
             virtual ~CalculateStruct() = default;
-            virtual void init_value(Args ...) {}
-            virtual Return calculate(Args ...) = 0;
+            virtual value::Tensor calculate(const value::Tensor&) = 0;
         };
 
         struct TensorCalculateLayerImpl :
             public LayerImpl,
-            public CalculateStruct<value::Tensor, const value::Tensor&>
+            public CalculateStruct
         {};
     }
 }
