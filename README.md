@@ -9,6 +9,7 @@ Build your own neural network models with this library.
 
 
 ## Why this repository named `Tensor-Array`
+
 We created a template struct that named `TensorArray`. That struct is a multi-dimensional array wrapper.
 
 ```C++
@@ -46,8 +47,11 @@ int main()
 ```
 
 ## The `Tensor` class.
+
 The `Tensor` class is a storage that store value and calculate the tensor.
+
 The `Tensor::calc_grad()` method can do automatic differentiation.
+
 The `Tensor::get_grad()` method can get the gradient after call `Tensor::calc_grad()`.
 
 
