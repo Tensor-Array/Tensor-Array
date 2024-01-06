@@ -960,7 +960,7 @@ out_stream << static_cast<TEMP>(tensor_out);
                 return a;
             if (typeinfo_is_floating_point(b))
                 return b;
-            return typeid(void);
+            throw std::exception();
         }
 
         TensorContentDerivation::TensorContentDerivation(const TensorBase& buf, const std::vector<std::pair<Tensor, Derivation>>& derive_data):
