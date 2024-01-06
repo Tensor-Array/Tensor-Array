@@ -47,8 +47,12 @@ int main()
 
 ## The `Tensor` class.
 The `Tensor` class is a storage that store value and calculate the tensor.
+The `Tensor::calc_grad()` method can do automatic differentiation.
+The `Tensor::get_grad()` method can get the gradient after call `Tensor::calc_grad()`.
+
 
 ```C++
+#include <iostream>
 #include "tensor_array/core/tensor.hh"
 
 int main()
@@ -64,6 +68,10 @@ int main()
   tensor_array::value::Tensor example_tensor_1(example_tensor_array);
   tensor_array::value::Tensor example_tensor_2(example_tensor_array_scalar);
   tensor_array::value::Tensor example_tensor_sum = example_tensor_1 + example_tensor_2;
+  std::cout << example_tensor_sum << std::endl;
+  example_tensor_sum.calc_grad();
+  std::cout << example_tensor_1.get_grad() << std::endl;
+  std::cout << example_tensor_2.get_grad() << std::endl;
   return 0;
 }
 
