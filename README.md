@@ -15,9 +15,11 @@ We created a template struct that named `TensorArray`. That struct is a multi-di
 ```C++
 #include "tensor_array/core/tensorbase.hh"
 
+using tensor_array::value;
+
 int main()
 {
-  tensor_array::value::TensorArray<float, 4, 4> example_tensor_array =
+  TensorArray<float, 4, 4> example_tensor_array =
   {{
     {{ 1, 2, 3, 4 }},
     {{ 5, 6, 7, 8 }},
@@ -59,6 +61,8 @@ The `Tensor::get_grad()` method can get the gradient after call `Tensor::calc_gr
 #include <iostream>
 #include "tensor_array/core/tensor.hh"
 
+using tensor_array::value;
+
 int main()
 {
   tensor_array::value::TensorArray<float, 4, 4> example_tensor_array =
@@ -68,10 +72,10 @@ int main()
     {{ 9, 10, 11, 12 }},
     {{ 13, 14, 15, 16 }},
   }};
-  tensor_array::value::TensorArray<float> example_tensor_array_scalar = {100};
-  tensor_array::value::Tensor example_tensor_1(example_tensor_array);
-  tensor_array::value::Tensor example_tensor_2(example_tensor_array_scalar);
-  tensor_array::value::Tensor example_tensor_sum = example_tensor_1 + example_tensor_2;
+  TensorArray<float> example_tensor_array_scalar = {100};
+  Tensor example_tensor_1(example_tensor_array);
+  Tensor example_tensor_2(example_tensor_array_scalar);
+  Tensor example_tensor_sum = example_tensor_1 + example_tensor_2;
   std::cout << example_tensor_sum << std::endl;
   example_tensor_sum.calc_grad();
   std::cout << example_tensor_1.get_grad() << std::endl;
