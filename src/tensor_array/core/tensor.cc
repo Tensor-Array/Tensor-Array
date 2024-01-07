@@ -198,7 +198,7 @@ namespace tensor_array
             }
             last_sizes.insert(last_sizes.begin(), list.size());
             TensorBase other_buf(list[0].get_buffer().type(), last_sizes, content);
-            operator delete(content);
+            operator delete(content, devices::local_device());
             return Tensor(std::move(other_buf), std::move(derive_list));
         }
 

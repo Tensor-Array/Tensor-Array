@@ -38,7 +38,6 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'c-cpp' ]
-        apt-get: [ 'cuda-toolkit' ]
         # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
         # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
         # Use only 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
@@ -70,7 +69,7 @@ jobs:
       id: package-cache
       with:
         path: "${{ runner.temp }}/package-cache"
-        key: ${{ secrets.APT_CACHE_KEY }}
+        key: codeql-${{ secrets.APT_CACHE_KEY }}
 
     - name: Load package from cache
       if: steps.package-cache.outputs.cache-hit == 'true'
@@ -81,15 +80,20 @@ jobs:
       run: |
         sudo apt-get update
     
-    - name: Install CUDA
-      if: steps.package-cache.outputs.cache-hit != 'true'
+    - name: Install from apt
+      env:
+        REQUIRED_PKG: ${{ vars.INSTALL_BUILD_PACKAGES }}
       run: |
-        sudo apt-get -y install ${{ matrix.apt-get }}
+        echo Checking for $REQUIRED_PKG: $(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+        if [ "" = "$PKG_OK" ]; then
+          echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+          sudo apt-get --yes install $REQUIRED_PKG
+        fi
     
     - name: Save package to cache
       run: |
         mkdir -p ${{ runner.temp }}/package-cache
-        sudo dpkg -L ${{ matrix.apt-get }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
+        sudo dpkg -L ${{ vars.INSTALL_BUILD_PACKAGES }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
       
     - name: Add CUDA to path
       run: |

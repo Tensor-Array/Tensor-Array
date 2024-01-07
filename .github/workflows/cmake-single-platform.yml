@@ -18,10 +18,6 @@ jobs:
     # You can convert this to a matrix build if you need cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        apt-get: [ 'cuda-toolkit' ]
     
     steps:
     - uses: actions/checkout@v3
@@ -36,7 +32,7 @@ jobs:
       id: package-cache
       with:
         path: "${{ runner.temp }}/package-cache"
-        key: ${{ secrets.APT_CACHE_KEY }}
+        key: cmake-build-${{ secrets.APT_CACHE_KEY }}
 
     - name: Load package from cache
       if: steps.package-cache.outputs.cache-hit == 'true'
@@ -47,15 +43,20 @@ jobs:
       run: |
         sudo apt-get update
     
-    - name: Install CUDA
-      if: steps.package-cache.outputs.cache-hit != 'true'
+    - name: Install from apt
+      env:
+        REQUIRED_PKG: ${{ vars.INSTALL_BUILD_PACKAGES }}
       run: |
-        sudo apt-get -y install ${{ matrix.apt-get }}
+        echo Checking for $REQUIRED_PKG: $(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+        if [ "" = "$PKG_OK" ]; then
+          echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+          sudo apt-get --yes install $REQUIRED_PKG
+        fi
     
     - name: Save package to cache
       run: |
         mkdir -p ${{ runner.temp }}/package-cache
-        sudo dpkg -L ${{ matrix.apt-get }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
+        sudo dpkg -L ${{ vars.INSTALL_BUILD_PACKAGES }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
 
     - name: Add CUDA to path
       run: |
