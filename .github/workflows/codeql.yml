@@ -84,9 +84,8 @@ jobs:
       env:
         REQUIRED_PKG: ${{ vars.INSTALL_BUILD_PACKAGES }}
       run: |
-        PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
-        echo Checking for $REQUIRED_PKG: $PKG_OK
-        if [ "" = "$PKG_OK" ]; then
+        if [ $(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed") -eq 0 ];
+        then
           echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
           sudo apt-get --yes install $REQUIRED_PKG
         fi
