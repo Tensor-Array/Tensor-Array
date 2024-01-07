@@ -19,19 +19,43 @@ jobs:
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        apt-get: [ 'cuda-toolkit' ]
+    
     steps:
     - uses: actions/checkout@v3
-    
 
     - name: CUDA keyring
       run: |
         wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
         sudo dpkg -i cuda-keyring_1.1-1_all.deb
         
-    - name: Install CUDA
+    - name: Load cache
+      uses: actions/cache@v2
+      id: package-cache
+      with:
+        path: "${{ runner.temp }}/package-cache"
+        key: ${{ secrets.APT_CACHE_KEY }}
+
+    - name: Load package from cache
+      if: steps.package-cache.outputs.cache-hit == 'true'
+      run: |
+        sudo cp --verbose --force --recursive ${{ runner.temp }}/package-cache/* /
+    
+    - name: apt-get update
       run: |
         sudo apt-get update
-        sudo apt-get -y install cuda-toolkit
+    
+    - name: Install CUDA
+      if: steps.package-cache.outputs.cache-hit != 'true'
+      run: |
+        sudo apt-get -y install ${{ matrix.apt-get }}
+    
+    - name: Save package to cache
+      run: |
+        mkdir -p ${{ runner.temp }}/package-cache
+        sudo dpkg -L ${{ matrix.apt-get }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
 
     - name: Add CUDA to path
       run: |
