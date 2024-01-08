@@ -38,6 +38,7 @@ jobs:
         sudo cp --verbose --force --recursive ${{ runner.temp }}/package-cache/cuda-${{ matrix.cuda-version }}/* /
     
     - name: Run CUDA bash shell
+      if: steps.package-cache.outputs.cache-hit != 'true'
       env:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
@@ -45,6 +46,13 @@ jobs:
         chmod +x ./scripts/actions/install-cuda-ubuntu.sh
         ./scripts/actions/install-cuda-ubuntu.sh
       shell: bash
+
+    - name: Add to github PATH
+      run: |
+        echo "Adding CUDA to CUDA_PATH, PATH and LD_LIBRARY_PATH"
+        echo "${CUDA_PATH}/bin" >> $GITHUB_PATH
+        echo "LD_LIBRARY_PATH=${CUDA_PATH}/lib:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
+        echo "LD_LIBRARY_PATH=${CUDA_PATH}/lib64:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
