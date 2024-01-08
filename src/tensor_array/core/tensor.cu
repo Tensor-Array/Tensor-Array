@@ -339,54 +339,6 @@ namespace tensor_array
 		}
 
 		Tensor derive_reshape_cast(const Tensor& dat, const Tensor& new_shape, bool, const DataBuffer&);
-
-		template <typename T>
-		Tensor Tensor::cast(bool is_derive) const
-		{
-			std::vector<std::pair<Tensor, Derivation>> temp;
-			if (is_derive)
-				temp.push_back(std::make_pair(*this, Derivation(*this, derive_reshape_cast)));
-			cudaError cuda_status;
-			T* out_ptr;
-			devices::Device this_cuda{ devices::CUDA };
-			cuda_status = cudaGetDevice(&this_cuda.index);
-			cudaDeviceProp cu_dev_prop;
-			cuda_status = cudaGetDeviceProperties(&cu_dev_prop, this_cuda.index);
-			TensorBase base_of_this = this->get_buffer().change_device(this_cuda);
-			std::size_t total_size = base_of_this.data_size() / get_sizeof_type(base_of_this.type());
-			cuda_status = cudaMalloc(&out_ptr, total_size * sizeof(T));
-			dim3 block_dim(cu_dev_prop.maxThreadsDim[0]);
-			dim3 grid_dim(total_size / block_dim.x + (total_size % block_dim.x ? 1U : 0U));
-#define ADD_CODE(TYPE) \
-if(this->get_buffer().type() == typeid(TYPE)) \
-type_casting<<<grid_dim, block_dim>>>(out_ptr, static_cast<const TYPE*>(base_of_this.data()), total_size);
-			LOOP(USING_DATA_TYPE);
-#undef ADD_CODE
-			cuda_status = cudaDeviceSynchronize();
-			cuda_status = cudaGetLastError();
-			if (cuda_status != cudaSuccess)
-			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
-			}
-			std::type_index test = typeid(T);
-			if (dynamic_type_size.find(test) == dynamic_type_size.end())
-				dynamic_type_size.insert(std::make_pair(test, sizeof(T)));
-			TensorBase other_buf(typeid(T), base_of_this.shape(), out_ptr, this_cuda);
-			cuda_status = cudaFree(out_ptr);
-			return Tensor(std::move(other_buf), std::move(temp));
-		}
-
-		Tensor Tensor::tensor_cast(const std::type_info& dtype, bool is_derive) const
-		{
-			if (this->get_buffer().type() == dtype)
-				return *this;
-#define ADD_CODE(TYPE) \
-if(dtype == typeid(TYPE)) \
-return this->cast<TYPE>(is_derive);
-			LOOP((bool) USING_DATA_TYPE);
-#undef ADD_CODE
-			throw std::exception();
-		}
 		
 		template<typename T>
 		Tensor values0(const std::initializer_list<unsigned int>& list_dim, T value)
