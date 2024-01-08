@@ -104,22 +104,12 @@ wget ${KEYRING_PACKAGE_URL} && ${USE_SUDO} dpkg -i ${KERYRING_PACKAGE_FILENAME} 
 $USE_SUDO add-apt-repository "deb ${REPO_URL} /"
 $USE_SUDO apt-get update
 
-REQUIRED_PKG=${CUDA_PACKAGES}
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
-echo Checking for $REQUIRED_PKG: $PKG_OK
-if [ "" = "$PKG_OK" ];
-then
-echo "Installing CUDA packages $REQUIRED_PKG"
-$USE_SUDO apt-get -y install $REQUIRED_PKG
-fi
+$USE_SUDO apt-get -y install ${CUDA_PACKAGES}
 
 if [[ $? -ne 0 ]]; then
     echo "CUDA Installation Error."
     exit 1
 fi
-
-mkdir -p ${LOCATION_TEMP}/package-cache/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
-$USE_SUDO dpkg -L ${CUDA_PACKAGES} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${LOCATION_TEMP}/package-cache/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
 
 CUDA_PATH=/usr/local/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
 echo "CUDA_PATH=${CUDA_PATH}"
