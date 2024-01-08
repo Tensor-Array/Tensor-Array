@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include <cuda_runtime.h>
+#include <device_launch_parameters.h>
 #include <cuda_fp8.h>
 #include <cuda_fp16.h>
 #include <cuda_bf16.h>
@@ -57,6 +59,16 @@ namespace tensor_array
 {
     namespace value
     {
+        template <typename T_O, typename T_I>
+		__global__ void type_casting(T_O* output, const T_I* input, unsigned int c_size)
+		{
+			unsigned int thread_x = blockIdx.x * blockDim.x + threadIdx.x;
+			if (thread_x < c_size)
+				output[thread_x] = static_cast<T_O>(input[thread_x]);
+		}
+        
+        Tensor derive_reshape_cast(const Tensor& dat, const Tensor& new_shape, bool, const DataBuffer&);
+
         template <typename T>
 		Tensor Tensor::cast(bool is_derive) const
 		{

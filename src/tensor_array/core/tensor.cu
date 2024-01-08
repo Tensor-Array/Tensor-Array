@@ -272,14 +272,6 @@ namespace tensor_array
 				out_value[thread_x] = bool_value[thread_x] ? true_value[thread_x] : false_value[thread_x];
 		}
 
-		template <typename T_O, typename T_I>
-		__global__ void type_casting(T_O* output, const T_I* input, unsigned int c_size)
-		{
-			unsigned int thread_x = blockIdx.x * blockDim.x + threadIdx.x;
-			if (thread_x < c_size)
-				output[thread_x] = static_cast<T_O>(input[thread_x]);
-		}
-
 		__global__ void kernel_transpose(void* output, const void* input, unsigned int c_size, unsigned int dim_1_size, unsigned int dim_2_size , size_t child_size)
 		{
 			unsigned int thread_x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -337,8 +329,6 @@ namespace tensor_array
 			cudaStat = cudaFree(c_ptr);
 			return Tensor(std::move(value_buf), std::move(temp));
 		}
-
-		Tensor derive_reshape_cast(const Tensor& dat, const Tensor& new_shape, bool, const DataBuffer&);
 		
 		template<typename T>
 		Tensor values0(const std::initializer_list<unsigned int>& list_dim, T value)
