@@ -130,7 +130,7 @@ namespace tensor_array
 			int temp;
 			cudaError cudaStatus = cudaGetDevice(&temp);
 			cudaDeviceProp prop;
-			cudaGetDeviceProperties_v2(&prop, 0);
+			cudaGetDeviceProperties(&prop, 0);
 			printf("Device name: %s\n", prop.name);
 			printf("Memory Clock Rate (KHz): %d\n",
 				prop.memoryClockRate);
