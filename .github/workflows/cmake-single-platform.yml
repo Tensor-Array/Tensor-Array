@@ -34,13 +34,6 @@ jobs:
         ./scripts/actions/install-cuda-ubuntu.sh
       shell: bash
 
-    - name: Add to github PATH
-      run: |
-        echo "Adding CUDA to CUDA_PATH, PATH and LD_LIBRARY_PATH"
-        echo "${CUDA_PATH}/bin" >> $GITHUB_PATH
-        echo "LD_LIBRARY_PATH=${CUDA_PATH}/lib:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
-        echo "LD_LIBRARY_PATH=${CUDA_PATH}/lib64:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
-
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
