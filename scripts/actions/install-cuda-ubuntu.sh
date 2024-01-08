@@ -78,6 +78,25 @@ KERYRING_PACKAGE_FILENAME="cuda-keyring_1.0-1_all.deb"
 KEYRING_PACKAGE_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/${KERYRING_PACKAGE_FILENAME}"
 REPO_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/"
 
+is_root=false
+if (( $EUID == 0)); then
+   is_root=true
+fi
+# Find if sudo is available
+has_sudo=false
+if command -v sudo &> /dev/null ; then
+    has_sudo=true
+fi
+# Decide if we can proceed or not (root or sudo is required) and if so store whether sudo should be used or not. 
+if [ "$is_root" = false ] && [ "$has_sudo" = false ]; then 
+    echo "Root or sudo is required. Aborting."
+    exit 1
+elif [ "$is_root" = false ] ; then
+    USE_SUDO=sudo
+else
+    USE_SUDO=
+fi
+
 echo "Adding CUDA Repository"
 wget ${PIN_URL}
 $USE_SUDO mv ${PIN_FILENAME} /etc/apt/preferences.d/cuda-repository-pin-600
