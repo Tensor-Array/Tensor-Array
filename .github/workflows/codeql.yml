@@ -38,6 +38,7 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'c-cpp' ]
+        cuda-version: [ 12.3, 12.0, 11.8 ]
         # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
         # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
         # Use only 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
@@ -59,58 +60,24 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    - name: CUDA keyring
-      run: |
-        wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
-        sudo dpkg -i cuda-keyring_1.1-1_all.deb
-
     - name: Load cache
       uses: actions/cache@v2
       id: package-cache
       with:
-        path: "${{ runner.temp }}/package-cache"
-        key: codeql-${{ secrets.APT_CACHE_KEY }}
+        path: "${{ runner.temp }}/package-cache/cuda-${{ matrix.cuda-version }}"
+        key: codeql-cuda-${{ secrets.APT_CACHE_KEY }}
 
     - name: Load package from cache
       if: steps.package-cache.outputs.cache-hit == 'true'
       run: |
-        sudo cp --verbose --force --recursive ${{ runner.temp }}/package-cache/* /
+        sudo cp --verbose --force --recursive ${{ runner.temp }}/package-cache/cuda-${{ matrix.cuda-version }}/* /
     
-    - name: apt-get update
-      run: |
-        sudo apt-get update
-    
-    - name: Install from apt
+    - name: Run CUDA bash shell
       env:
-        REQUIRED_PKG: ${{ vars.INSTALL_BUILD_PACKAGES }}
-      run: |
-        if [ $(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep -c "install ok installed") -eq 0 ]; then
-          echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
-          sudo apt-get --yes install $REQUIRED_PKG
-        fi
-
-    - name: Add CUDA to path
-      run: |
-        sudo apt-get update
-        echo "PATH=/usr/local/cuda/bin${PATH:+:${PATH}}" >> "$GITHUB_ENV"
-        echo "LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> "$GITHUB_ENV"
-        echo "LD_LIBRARY_PATH=/usr/local/cuda/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> "$GITHUB_ENV"
-    
-    - name: Save CUDA to cache
-      run: |
-        CUDA_VERSION=$(nvcc --version | egrep -o "V[0-9]+-[0-9]+" | cut -c2-)
-        CUDA_PACKAGE=cuda-toolkit-${CUDA_VERSION//./-}
-        if [ $(dpkg-query -W --showformat='${Status}\n' $CUDA_PACKAGE|grep -c "install ok installed") -eq 0 ]; then
-          sudo apt-get --yes install $CUDA_PACKAGE
-        fi
-        if [ $(dpkg-query -W --showformat='${Status}\n' $CUDA_PACKAGE|grep -c "install ok installed") -eq 1 ]; then
-          sudo dpkg -L $CUDA_PACKAGE| while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
-        fi
-    
-    - name: Save package to cache
-      run: |
-        mkdir -p ${{ runner.temp }}/package-cache
-        sudo dpkg -L ${{ vars.INSTALL_BUILD_PACKAGES }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
+        temp: ${{ runner.temp }}
+        cuda: ${{ matrix.cuda-version }}
+      run: ./scripts/actions/install-cuda-ubuntu.sh
+      shell: bash
 
     # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
     # If this step fails, then you should remove it and run the build manually (see below)
