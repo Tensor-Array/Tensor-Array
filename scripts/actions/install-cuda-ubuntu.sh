@@ -9,6 +9,27 @@ CUDA_PACKAGES_IN=(
     "cuda-cccl"
 )
 
+function version_ge() {
+    [ "$#" != "2" ] && echo "${FUNCNAME[0]} requires exactly 2 arguments." && exit 1
+    [ "$(printf '%s\n' "$@" | sort -V | head -n 1)" == "$2" ]
+}
+# returns 0 (true) if a > b
+function version_gt() {
+    [ "$#" != "2" ] && echo "${FUNCNAME[0]} requires exactly 2 arguments." && exit 1
+    [ "$1" = "$2" ] && return 1 || version_ge $1 $2
+}
+# returns 0 (true) if a <= b
+function version_le() {
+    [ "$#" != "2" ] && echo "${FUNCNAME[0]} requires exactly 2 arguments." && exit 1
+    [ "$(printf '%s\n' "$@" | sort -V | head -n 1)" == "$1" ]
+}
+# returns 0 (true) if a < b
+function version_lt() {
+    [ "$#" != "2" ] && echo "${FUNCNAME[0]} requires exactly 2 arguments." && exit 1
+    [ "$1" = "$2" ] && return 1 || version_le $1 $2
+}
+
+
 LINUX_ID=$(lsb_release -sr)
 LINUX_ID="${LINUX_ID}" | tr '[:upper:]' '[:lower:]'
 
