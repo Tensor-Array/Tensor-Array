@@ -104,10 +104,13 @@ wget ${KEYRING_PACKAGE_URL} && ${USE_SUDO} dpkg -i ${KERYRING_PACKAGE_FILENAME} 
 $USE_SUDO add-apt-repository "deb ${REPO_URL} /"
 $USE_SUDO apt-get update
 
-if [ $(dpkg-query -W --showformat='${Status}\n' ${CUDA_PACKAGES} | grep -c "install ok installed") -eq 0 ];
+REQUIRED_PKG=${CUDA_PACKAGES}
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+echo Checking for $REQUIRED_PKG: $PKG_OK
+if [ "" = "$PKG_OK" ];
 then
-echo "Installing CUDA packages ${CUDA_PACKAGES}"
-$USE_SUDO apt-get -y install ${ CUDA_PACKAGES }
+echo "Installing CUDA packages $REQUIRED_PKG"
+$USE_SUDO apt-get -y install $REQUIRED_PKG
 fi
 
 if [[ $? -ne 0 ]]; then
