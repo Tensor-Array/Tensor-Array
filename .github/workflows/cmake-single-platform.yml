@@ -41,7 +41,9 @@ jobs:
       env:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
-      run: ./scripts/actions/install-cuda-ubuntu.sh
+      run: |
+        chmod +x ./scripts/actions/install-cuda-ubuntu.sh
+        ./scripts/actions/install-cuda-ubuntu.sh
       shell: bash
 
     - name: Configure CMake
