@@ -118,8 +118,8 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
-mkdir -p ${ LOCATION_TEMP }/package-cache/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
-$USE_SUDO dpkg -L ${ CUDA_PACKAGES } | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${ LOCATION_TEMP }/package-cache/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
+mkdir -p ${LOCATION_TEMP}/package-cache/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
+$USE_SUDO dpkg -L ${CUDA_PACKAGES} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${LOCATION_TEMP}/package-cache/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
 
 CUDA_PATH=/usr/local/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
 echo "CUDA_PATH=${CUDA_PATH}"
