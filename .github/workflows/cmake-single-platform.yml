@@ -50,11 +50,6 @@ jobs:
         if [ $(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep -c "install ok installed") -eq 0 ]; then
           sudo apt-get --yes install $REQUIRED_PKG
         fi
-    
-    - name: Save package to cache
-      run: |
-        mkdir -p ${{ runner.temp }}/package-cache
-        sudo dpkg -L ${{ vars.INSTALL_BUILD_PACKAGES }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
 
     - name: Add CUDA to path
       run: |
@@ -62,6 +57,22 @@ jobs:
         echo "PATH=/usr/local/cuda/bin${PATH:+:${PATH}}" >> "$GITHUB_ENV"
         echo "LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> "$GITHUB_ENV"
         echo "LD_LIBRARY_PATH=/usr/local/cuda/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> "$GITHUB_ENV"
+    
+    - name: Save CUDA to cache
+      run: |
+        CUDA_VERSION=$(nvcc --version | egrep -o "V[0-9]+-[0-9]+" | cut -c2-)
+        CUDA_PACKAGE=cuda-toolkit-${CUDA_VERSION//./-}
+        if [ $(dpkg-query -W --showformat='${Status}\n' CUDA_PACKAGE|grep -c "install ok installed") -eq 0 ]; then
+          sudo apt-get --yes install CUDA_PACKAGE
+        fi
+        if [ $(dpkg-query -W --showformat='${Status}\n' CUDA_PACKAGE|grep -c "install ok installed") -eq 1 ]; then
+          sudo dpkg -L CUDA_PACKAGE| while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
+        fi
+    
+    - name: Save package to cache
+      run: |
+        mkdir -p ${{ runner.temp }}/package-cache
+        sudo dpkg -L ${{ vars.INSTALL_BUILD_PACKAGES }} | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ${{ runner.temp }}/package-cache
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
