@@ -30,7 +30,7 @@ function version_lt() {
 }
 
 
-LINUX_ID=$(lsb_release -sr)
+LINUX_ID=$(lsb_release -si)
 LINUX_ID="${LINUX_ID}" | tr '[:upper:]' '[:lower:]'
 
 LINUX_VERSION=$(lsb_release -sr)
