@@ -12,8 +12,19 @@
             ]
         },
         {
+            "label": "cpack",
+            "command": "cpack",
+            "args": [
+                "-C",
+                "CPackConfig.cmake"
+            ]
+        },
+        {
             "label": "make",
-            "command": "make"
+            "command": "make",
+            "args": [
+                "install"
+            ]
         },
         {
             "label": "cmake build",
