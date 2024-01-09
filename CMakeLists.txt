@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.8.0)
 
 project(Tensor-Array)
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build-temp/archive)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build-temp/library)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build-temp/runtime)
+set(CMAKE_OUTPUT ${CMAKE_CURRENT_LIST_DIR}/build-temp/bin)
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
 add_subdirectory("src/tensor_array/core")
