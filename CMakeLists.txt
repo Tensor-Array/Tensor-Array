@@ -5,19 +5,6 @@ project(Tensor-Array)
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
 add_subdirectory("src/tensor_array/core")
-
-# Create a custom target for installation
-add_custom_target(install_target
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target install
-    COMMENT "Installing before build"
-    VERBATIM
-)
-
-# Add the custom installation target as a dependency for the default build target
-add_custom_target(build_all
-    DEPENDS install_target
-)
-
 add_subdirectory("src/tensor_array/layers")
 
 set(CPACK_PACKAGE_NAME "Tensor-Array")

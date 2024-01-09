@@ -13,7 +13,7 @@ install(
 add_library(TensorArray_Layers SHARED ${TensorArray_src})
 
 target_include_directories(TensorArray_Layers PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_directories(TensorArray_Layers PRIVATE ${PROJECT_SOURCE_DIR}/lib)
+target_link_directories(TensorArray_Layers PRIVATE "${PROJECT_SOURCE_DIR}/build/src/tensor_array/core")
 target_link_libraries(TensorArray_Layers -lTensorArray_Core)
 
 install(
