@@ -13,9 +13,10 @@ file(GLOB TensorArray_inc "*.hh")
 
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
-install(FILES ${TensorArray_inc}
-DESTINATION include/tensor_array/core
-COMPONENT headers)
+install(
+    FILES ${TensorArray_inc}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor_array/core
+    COMPONENT headers)
 
 add_library(tensorarray_core SHARED ${TensorArray_src})
 add_library(TensorArray::Core ALIAS tensorarray_core)
@@ -23,7 +24,8 @@ target_link_libraries(tensorarray_core PRIVATE cublas)
 
 install(
     TARGETS tensorarray_core
-    LIBRARY DESTINATION lib
+    EXPORT TensorArrayTargets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     COMPONENT libraries
-    ARCHIVE DESTINATION lib
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     COMPONENT libraries)
