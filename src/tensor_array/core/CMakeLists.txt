@@ -17,11 +17,12 @@ install(FILES ${TensorArray_inc}
 DESTINATION include/tensor_array/core
 COMPONENT headers)
 
-add_library(TensorArray_Core SHARED ${TensorArray_src})
-target_link_libraries(TensorArray_Core cublas)
+add_library(tensorarray_core SHARED ${TensorArray_src})
+add_library(TensorArray::Core ALIAS tensorarray_core)
+target_link_libraries(tensorarray_core PRIVATE cublas)
 
 install(
-    TARGETS TensorArray_Core
+    TARGETS tensorarray_core
     LIBRARY DESTINATION lib
     COMPONENT libraries
     ARCHIVE DESTINATION lib
