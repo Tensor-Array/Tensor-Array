@@ -74,7 +74,7 @@ echo "CUDA_PACKAGES ${CUDA_PACKAGES}"
 CPU_ARCH="x86_64"
 PIN_FILENAME="cuda-${LINUX_ID}${LINUX_VERSION}.pin"
 PIN_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/${PIN_FILENAME}"
-KERYRING_PACKAGE_FILENAME="cuda-keyring_1.0-1_all.deb"
+KERYRING_PACKAGE_FILENAME="cuda-keyring_1.1-1_all.deb"
 KEYRING_PACKAGE_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/${KERYRING_PACKAGE_FILENAME}"
 REPO_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/"
 
