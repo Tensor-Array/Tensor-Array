@@ -3,3 +3,5 @@ lib/
 bin/
 include/
 build-temp/
+.git/
+.vscode/

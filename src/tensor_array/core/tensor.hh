@@ -243,6 +243,12 @@ namespace tensor_array
 #ifdef TENSOR_CONTENT
             friend Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int);
 
+            friend Tensor reduce_sum(const Tensor&);
+
+            friend Tensor reduce_max(const Tensor&);
+
+            friend Tensor reduce_min(const Tensor&);
+            
             friend Tensor add(const Tensor&, const Tensor&, bool);
 
             friend Tensor power(const Tensor&, const Tensor&, bool);
