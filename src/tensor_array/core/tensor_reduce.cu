@@ -51,244 +51,208 @@ namespace tensor_array
     namespace value
     {
         using namespace devices;
-        template <typename T, unsigned int blockSize>
-        __device__ void warp_reduce_sum(volatile T *sdata, unsigned int tid)
+
+        template <typename T, unsigned int BatchBlockSize, unsigned int DimBlockSize, unsigned int ContentBlockSize>
+        __device__ void warp_reduce_sum(T (*sdata)[BatchBlockSize][DimBlockSize][ContentBlockSize], unsigned int value)
         {
-            if constexpr (blockSize >= 1024)
-                sdata[tid] += sdata[tid + 512];
-            if constexpr (blockSize >= 512)
-                sdata[tid] += sdata[tid + 256];
-            if constexpr (blockSize >= 256)
-                sdata[tid] += sdata[tid + 128];
-            if constexpr (blockSize >= 128)
-                sdata[tid] += sdata[tid + 64];
-            if constexpr (blockSize >= 64)
-                sdata[tid] += sdata[tid + 32];
-            if constexpr (blockSize >= 32)
-                sdata[tid] += sdata[tid + 16];
-            if constexpr (blockSize >= 16)
-                sdata[tid] += sdata[tid + 8];
-            if constexpr (blockSize >= 8)
-                sdata[tid] += sdata[tid + 4];
-            if constexpr (blockSize >= 4)
-                sdata[tid] += sdata[tid + 2];
-            if constexpr (blockSize >= 2)
-                sdata[tid] += sdata[tid + 1];
+            (*sdata)[threadIdx.x][threadIdx.z][threadIdx.y] += (*sdata)[threadIdx.x][threadIdx.z + value][threadIdx.y];
         }
 
-        template <typename T, unsigned int blockSize>
-        __device__ void warp_reduce_max(volatile T *sdata, volatile unsigned int *sindex, unsigned int tid)
+        template <typename T, unsigned int BatchBlockSize, unsigned int DimBlockSize, unsigned int ContentBlockSize, typename ... Args>
+        __device__ void warp_reduce_functions
+        (
+            void(*func)(T (*)[BatchBlockSize][DimBlockSize][ContentBlockSize], unsigned int),
+            T (*sdata)[BatchBlockSize][DimBlockSize][ContentBlockSize],
+            Args ... args
+        )
         {
-            if constexpr (blockSize >= 1024)
-                if (sdata[tid] < sdata[tid + 512])
-                {
-                    sdata[tid] = sdata[tid + 512];
-                    sindex[tid] = sindex[tid + 512];
-                }
-            if constexpr (blockSize >= 512)
-                if (sdata[tid] < sdata[tid + 256])
-                {
-                    sdata[tid] = sdata[tid + 256];
-                    sindex[tid] = sindex[tid + 256];
-                }
-            if constexpr (blockSize >= 256)
-                if (sdata[tid] < sdata[tid + 128])
-                {
-                    sdata[tid] = sdata[tid + 128];
-                    sindex[tid] = sindex[tid + 128];
-                }
-            if constexpr (blockSize >= 128)
-                if (sdata[tid] < sdata[tid + 64])
-                {
-                    sdata[tid] = sdata[tid + 64];
-                    sindex[tid] = sindex[tid + 64];
-                }
-            if constexpr (blockSize >= 64)
-                if (sdata[tid] < sdata[tid + 32])
-                {
-                    sdata[tid] = sdata[tid + 32];
-                    sindex[tid] = sindex[tid + 32];
-                }
-            if constexpr (blockSize >= 32)
-                if (sdata[tid] < sdata[tid + 16])
-                {
-                    sdata[tid] = sdata[tid + 16];
-                    sindex[tid] = sindex[tid + 16];
-                }
-            if constexpr (blockSize >= 16)
-                if (sdata[tid] < sdata[tid + 8])
-                {
-                    sdata[tid] = sdata[tid + 8];
-                    sindex[tid] = sindex[tid + 8];
-                }
-            if constexpr (blockSize >= 8)
-                if (sdata[tid] < sdata[tid + 4])
-                {
-                    sdata[tid] = sdata[tid + 4];
-                    sindex[tid] = sindex[tid + 4];
-                }
-            if constexpr (blockSize >= 4)
-                if (sdata[tid] < sdata[tid + 2])
-                {
-                    sdata[tid] = sdata[tid + 2];
-                    sindex[tid] = sindex[tid + 2];
-                }
-            if constexpr (blockSize >= 2)
-                if (sdata[tid] < sdata[tid + 1])
-                {
-                    sdata[tid] = sdata[tid + 1];
-                    sindex[tid] = sindex[tid + 1];
-                }
+            if constexpr (DimBlockSize >= 1024) if (threadIdx.z < 512) func(sdata, 512, args...);
+            if constexpr (DimBlockSize >= 512) if (threadIdx.z < 256) func(sdata, 256, args...);
+            if constexpr (DimBlockSize >= 256) if (threadIdx.z < 128) func(sdata, 128, args...);
+            if constexpr (DimBlockSize >= 128) if (threadIdx.z < 64) func(sdata, 64, args...);
+            if constexpr (DimBlockSize >= 64) if (threadIdx.z < 32) func(sdata, 32, args...);
+            if constexpr (DimBlockSize >= 32) if (threadIdx.z < 16) func(sdata, 16, args...);
+            if constexpr (DimBlockSize >= 16) if (threadIdx.z < 8) func(sdata, 8, args...);
+            if constexpr (DimBlockSize >= 8) if (threadIdx.z < 4) func(sdata, 4, args...);
+            if constexpr (DimBlockSize >= 4) if (threadIdx.z < 2) func(sdata, 2, args...);
+            if constexpr (DimBlockSize >= 2) if (threadIdx.z < 1) func(sdata, 1, args...);
         }
 
-        template <typename T, unsigned int blockSize>
-        __device__ void warp_reduce_min(volatile T *sdata, volatile unsigned int *sindex, unsigned int tid)
+        template <typename T, unsigned int BatchBlockSize, unsigned int DimBlockSize, unsigned int ContentBlockSize>
+        __device__ void warp_reduce_max(T (*sdata)[BatchBlockSize][DimBlockSize][ContentBlockSize], unsigned int value, unsigned int (*sindex)[BatchBlockSize][DimBlockSize][ContentBlockSize])
         {
-            if constexpr (blockSize >= 1024)
-                if (sdata[tid] > sdata[tid + 512])
-                {
-                    sdata[tid] = sdata[tid + 512];
-                    sindex[tid] = sindex[tid + 512];
-                }
-            if constexpr (blockSize >= 512)
-                if (sdata[tid] > sdata[tid + 256])
-                {
-                    sdata[tid] = sdata[tid + 256];
-                    sindex[tid] = sindex[tid + 256];
-                }
-            if constexpr (blockSize >= 256)
-                if (sdata[tid] > sdata[tid + 128])
-                {
-                    sdata[tid] = sdata[tid + 128];
-                    sindex[tid] = sindex[tid + 128];
-                }
-            if constexpr (blockSize >= 128)
-                if (sdata[tid] > sdata[tid + 64])
-                {
-                    sdata[tid] = sdata[tid + 64];
-                    sindex[tid] = sindex[tid + 64];
-                }
-            if constexpr (blockSize >= 64)
-                if (sdata[tid] > sdata[tid + 32])
-                {
-                    sdata[tid] = sdata[tid + 32];
-                    sindex[tid] = sindex[tid + 32];
-                }
-            if constexpr (blockSize >= 32)
-                if (sdata[tid] > sdata[tid + 16])
-                {
-                    sdata[tid] = sdata[tid + 16];
-                    sindex[tid] = sindex[tid + 16];
-                }
-            if constexpr (blockSize >= 16)
-                if (sdata[tid] > sdata[tid + 8])
-                {
-                    sdata[tid] = sdata[tid + 8];
-                    sindex[tid] = sindex[tid + 8];
-                }
-            if constexpr (blockSize >= 8)
-                if (sdata[tid] > sdata[tid + 4])
-                {
-                    sdata[tid] = sdata[tid + 4];
-                    sindex[tid] = sindex[tid + 4];
-                }
-            if constexpr (blockSize >= 4)
-                if (sdata[tid] > sdata[tid + 2])
-                {
-                    sdata[tid] = sdata[tid + 2];
-                    sindex[tid] = sindex[tid + 2];
-                }
-            if constexpr (blockSize >= 2)
-                if (sdata[tid] > sdata[tid + 1])
-                {
-                    sdata[tid] = sdata[tid + 1];
-                    sindex[tid] = sindex[tid + 1];
-                }
-        }
-
-        template <typename T, unsigned int blockSize>
-        __global__ void array_reduce_sum(T *g_odata, const T *g_idata, unsigned int n)
-        {
-            __shared__ T sdata[blockSize];
-            unsigned int tid = threadIdx.x;
-            unsigned int gridSize = blockDim.x * gridDim.x;
-            sdata[tid] = 0;
-            if (blockIdx.x * blockDim.x + tid < n)
-                sdata[tid] += g_idata[blockIdx.x * blockDim.x + tid];
-            __syncthreads();
-            if (tid < 512)
-                warp_reduce_sum<T, blockSize>(sdata, tid);
-            if (tid == 0) g_odata[blockIdx.x] = sdata[0];
-        }
-
-        template <typename T, unsigned int blockSize>
-        __global__ void array_reduce_max(T *g_odata, unsigned int *g_oindex, const T *g_idata, unsigned int n)
-        {
-            __shared__ T sdata[blockSize];
-            __shared__ unsigned int sindex[blockSize];
-            unsigned int tid = threadIdx.x;
-            unsigned int gridSize = blockDim.x * gridDim.x;
-            sdata[tid] = std::numeric_limits<T>::min();
-            if (blockIdx.x * blockDim.x + tid < n)
-                sdata[tid] = g_idata[blockIdx.x * blockDim.x + tid];
-            __syncthreads();
-            if (tid < 512)
-                warp_reduce_max<T, blockSize>(sdata, sindex, tid);
-            if (tid == 0)
+            if (sdata[threadIdx.x][threadIdx.z][threadIdx.y] < sdata[threadIdx.x][threadIdx.z + value][threadIdx.y])
             {
-                g_odata[blockIdx.x] = sdata[0];
-                g_oindex[blockIdx.x] = sindex[0];
+                sdata[threadIdx.x][threadIdx.z + value][threadIdx.y] = sdata[threadIdx.x][threadIdx.z + value][threadIdx.y];
+                sindex[threadIdx.x][threadIdx.z + value][threadIdx.y] = sindex[threadIdx.x][threadIdx.z + value][threadIdx.y];
             }
         }
 
-        template <typename T, unsigned int blockSize>
-        __global__ void array_reduce_min(T *g_odata, unsigned int *g_oindex, const T *g_idata, unsigned int n)
+        template <typename T, unsigned int BatchBlockSize, unsigned int DimBlockSize, unsigned int ContentBlockSize>
+        __device__ void warp_reduce_min(T (*sdata)[BatchBlockSize][DimBlockSize][ContentBlockSize], unsigned int value, unsigned int (*sindex)[BatchBlockSize][DimBlockSize][ContentBlockSize])
         {
-            __shared__ T sdata[blockSize];
-            __shared__ unsigned int sindex[blockSize];
-            unsigned int tid = threadIdx.x;
-            unsigned int gridSize = blockDim.x * gridDim.x;
-            sdata[tid] = std::numeric_limits<T>::max();
-            if (blockIdx.x * blockDim.x + tid < n)
-                sdata[tid] = g_idata[blockIdx.x * blockDim.x + tid];
+            if (sdata[threadIdx.x][threadIdx.z][threadIdx.y] > sdata[threadIdx.x][threadIdx.z + value][threadIdx.y])
+            {
+                sdata[threadIdx.x][threadIdx.z][threadIdx.y] = sdata[threadIdx.x][threadIdx.z + value][threadIdx.y];
+                sindex[threadIdx.x][threadIdx.z][threadIdx.y] = sindex[threadIdx.x][threadIdx.z + value][threadIdx.y];
+            }
+        }
+
+        template <typename T, unsigned int BatchBlockSize, unsigned int BlockSize, unsigned int ContentBlockSize>
+        __global__ void array_reduce_sum(T *g_odata, const T *g_idata, unsigned int batch_size, unsigned int n, unsigned int content_size)
+        {
+            __shared__ T sdata[BatchBlockSize][BlockSize][ContentBlockSize];
+            unsigned int batch_id = blockIdx.x * blockDim.x + threadIdx.x;
+            unsigned int content_id = blockIdx.y * blockDim.y + threadIdx.y;
+            unsigned int tid = threadIdx.z;
+            unsigned int gridSize = blockDim.z * gridDim.z;
+            sdata[threadIdx.x][threadIdx.z][threadIdx.y] = 0;
+            if (batch_id < batch_size && blockIdx.z * blockDim.z + tid < n && content_id < content_size)
+                sdata[threadIdx.x][threadIdx.z][threadIdx.y] +=
+                g_idata
+                [
+                    batch_id * n * content_size +
+                    tid * content_size +
+                    content_id
+                ];
             __syncthreads();
             if (tid < 512)
-                warp_reduce_min<T, blockSize>(sdata, sindex, tid);
+                warp_reduce_functions(&warp_reduce_sum, &sdata);
+            if (tid == 0)
+                g_odata[
+                    batch_id * blockDim.z * content_size +
+                    tid * content_size +
+                    content_id
+                ] = sdata[threadIdx.x][threadIdx.z][threadIdx.y];
+        }
+
+        template <typename T, unsigned int BatchBlockSize, unsigned int BlockSize, unsigned int ContentBlockSize>
+        __global__ void array_reduce_max(T *g_odata, unsigned int *g_oindex, const T *g_idata, unsigned int batch_size, unsigned int n, unsigned int content_size)
+        {
+            __shared__ T sdata[BatchBlockSize][BlockSize][ContentBlockSize];
+            __shared__ unsigned int sindex[BatchBlockSize][BlockSize][ContentBlockSize];
+            unsigned int batch_id = blockIdx.x * blockDim.x + threadIdx.x;
+            unsigned int content_id = blockIdx.y * blockDim.y + threadIdx.y;
+            unsigned int tid = threadIdx.z;
+            unsigned int gridSize = blockDim.z * gridDim.z;
+            sdata[threadIdx.x][threadIdx.z][threadIdx.y] = -std::numeric_limits<T>::infinity();
+            sindex[threadIdx.x][threadIdx.z][threadIdx.y] = threadIdx.z;
+            if (batch_id < batch_size && blockIdx.z * blockDim.z + tid < n && content_id < content_size)
+                sdata[threadIdx.x][threadIdx.z][threadIdx.y] =
+                g_idata
+                [
+                    batch_id * n * content_size +
+                    tid * content_size +
+                    content_id
+                ];
+            __syncthreads();
+            if (tid < 512)
+                warp_reduce_functions(&warp_reduce_max, &sdata, &sindex);
             if (tid == 0)
             {
-                g_odata[blockIdx.x] = sdata[0];
-                g_oindex[blockIdx.x] = sindex[0];
+                g_odata[
+                    batch_id * blockDim.z * content_size +
+                    blockIdx.z * content_size +
+                    content_id
+                ] = sdata[threadIdx.x][threadIdx.z][threadIdx.y];
+                g_oindex[
+                    batch_id * blockDim.z * content_size +
+                    blockIdx.z * content_size +
+                    content_id
+                ] = sindex[threadIdx.x][threadIdx.z][threadIdx.y];
+            }
+        }
+
+        template <typename T, unsigned int BatchBlockSize, unsigned int BlockSize, unsigned int ContentBlockSize>
+        __global__ void array_reduce_min(T *g_odata, unsigned int *g_oindex, const T *g_idata, unsigned int batch_size, unsigned int n, unsigned int content_size)
+        {
+            __shared__ T sdata[BatchBlockSize][BlockSize][ContentBlockSize];
+            __shared__ unsigned int sindex[BatchBlockSize][BlockSize][ContentBlockSize];
+            unsigned int batch_id = blockIdx.x * blockDim.x + threadIdx.x;
+            unsigned int content_id = blockIdx.y * blockDim.y + threadIdx.y;
+            unsigned int tid = threadIdx.z;
+            unsigned int gridSize = blockDim.z * gridDim.z;
+            sdata[threadIdx.x][threadIdx.z][threadIdx.y] = std::numeric_limits<T>::infinity();
+            sindex[threadIdx.x][threadIdx.z][threadIdx.y] = threadIdx.z;
+            if (batch_id < batch_size && blockIdx.z * blockDim.z + tid < n && content_id < content_size)
+                sdata[threadIdx.x][threadIdx.z][threadIdx.y] =
+                g_idata
+                [
+                    batch_id * n * content_size +
+                    tid * content_size +
+                    content_id
+                ];
+            __syncthreads();
+            if (tid < 512)
+                warp_reduce_functions(&warp_reduce_min, &sdata, &sindex);
+            if (tid == 0)
+            {
+                g_odata[
+                    batch_id * blockDim.z * content_size +
+                    blockIdx.z * content_size +
+                    content_id
+                ] = sdata[threadIdx.x][threadIdx.z][threadIdx.y];
+                g_oindex[
+                    batch_id * blockDim.z * content_size +
+                    blockIdx.z * content_size +
+                    content_id
+                ] = sindex[threadIdx.x][threadIdx.z][threadIdx.y];
             }
         }
 
         bool equal_dim_size(const TensorBase&, const TensorBase&);
-        Tensor multiply(const Tensor&, const Tensor&, bool, const DataBuffer&);
+        Tensor derive_reduce_sum(const Tensor& a, const Tensor& b, bool is_derive, const DataBuffer& databuf)
+        {
+            return multiply(a, b, is_derive, databuf);
+        }
 
-        Tensor reduce_sum(const Tensor& a)
+        Tensor Tensor::reduce_sum(unsigned char dim) const
 		{
+            std::vector<unsigned int> shape_c = this->get_buffer().shape();
+            assert(dim < shape_c.size());
 			std::vector<std::pair<Tensor, Derivation>> temp;
-			temp.push_back(std::make_pair(a, Derivation(values(a.get_buffer().shape(), 1).tensor_cast(a.get_buffer().type(), false), multiply)));
+			temp.push_back(std::make_pair(*this, Derivation(values(shape_c, 1).tensor_cast(this->get_buffer().type(), false), derive_reduce_sum)));
 			cudaError_t cuda_status;
 			TensorBase other_buf;
+
 			void* c_ptr;
 			devices::Device this_cuda{ devices::CUDA };
 			cuda_status = cudaGetDevice(&this_cuda.index);
 			cudaDeviceProp cu_dev_prop;
 			cuda_status = cudaGetDeviceProperties(&cu_dev_prop, this_cuda.index);
-			const TensorBase& base_a = a.get_buffer();
+			const TensorBase& base_a = this->get_buffer();
 			cuda_status = cudaMalloc(&c_ptr, base_a.data_size());
             device_memcpy(&c_ptr, this_cuda, base_a.data(), base_a.get_device(), base_a.data_size());
-            std::vector<unsigned int> shape_c = a.get_buffer().shape();
-            std::size_t c_size = a.get_buffer().data_size() / get_sizeof_type(base_a.type());
-            constexpr unsigned int thread_value = 1024U;
-			dim3 block_dim(shape_c[shape_c.size() - 1]);
-			dim3 grid_dim(c_size / block_dim.x);
+
+            unsigned int dim_x = 1;
+            for (unsigned char i = 0; i < dim; i++)
+                dim_x *= shape_c[i];
+
+            unsigned int dim_y = 1;
+            for (unsigned char i = dim+1; i < shape_c.size(); i++)
+                dim_y *= shape_c[i];
+            
+            constexpr unsigned int thread_value_x = 8U;
+            constexpr unsigned int thread_value_y = 16U;
+            constexpr unsigned int thread_value_z = 8U;
+			dim3 block_dim(thread_value_x, thread_value_y, thread_value_z);
+			dim3 grid_dim
+            (
+                dim_x / block_dim.x + (dim_x % block_dim.x  ? 1U : 0U),
+                dim_y / block_dim.y + (dim_y % block_dim.y ? 1U : 0U),
+                shape_c[dim] / block_dim.z + (shape_c[dim] % block_dim.z ? 1U : 0U)
+            );
 #define ADD_CODE(TYPE) \
-if(a.get_buffer().type() == typeid(TYPE)) \
+if(base_a.type() == typeid(TYPE)) \
 { \
-array_reduce_sum<TYPE, thread_value><<<grid_dim, block_dim>>>(static_cast<TYPE*>(c_ptr), static_cast<const TYPE*>(c_ptr), c_size); \
+while (shape_c[dim] > 1) \
+{ \
+array_reduce_sum<TYPE, thread_value_x, thread_value_z, thread_value_y><<<grid_dim, block_dim>>>(static_cast<TYPE*>(c_ptr), static_cast<const TYPE*>(c_ptr), dim_x, shape_c[dim], dim_y); \
 cuda_status = cudaDeviceSynchronize(); \
-other_buf = TensorBase(typeid(TYPE), a.get_buffer().shape(), c_ptr, this_cuda); \
+shape_c[dim] = grid_dim.z; \
+grid_dim.z = grid_dim.z / block_dim.z  + (grid_dim.z % block_dim.z ? 1U : 0U); \
+} \
+other_buf = TensorBase(typeid(TYPE), shape_c, c_ptr, this_cuda); \
 }
 			LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
@@ -296,10 +260,10 @@ other_buf = TensorBase(typeid(TYPE), a.get_buffer().shape(), c_ptr, this_cuda); 
 			return Tensor(std::move(other_buf));
 		}
 
-        Tensor reduce_max(const Tensor& a)
+        Tensor Tensor::reduce_max(unsigned char dim) const
 		{
-			std::vector<std::pair<Tensor, Derivation>> temp;
-			temp.push_back(std::make_pair(a, Derivation(values(a.get_buffer().shape(), 1).tensor_cast(a.get_buffer().type(), false), multiply)));
+            std::vector<unsigned int> shape_c = this->get_buffer().shape();
+            assert(dim < shape_c.size());
 			cudaError_t cuda_status;
 			TensorBase other_buf;
 			void* c_ptr;
@@ -307,31 +271,52 @@ other_buf = TensorBase(typeid(TYPE), a.get_buffer().shape(), c_ptr, this_cuda); 
 			cuda_status = cudaGetDevice(&this_cuda.index);
 			cudaDeviceProp cu_dev_prop;
 			cuda_status = cudaGetDeviceProperties(&cu_dev_prop, this_cuda.index);
-			const TensorBase& base_a = a.get_buffer();
+			const TensorBase& base_a = this->get_buffer();
 			cuda_status = cudaMalloc(&c_ptr, base_a.data_size());
             device_memcpy(&c_ptr, this_cuda, base_a.data(), base_a.get_device(), base_a.data_size());
-            std::vector<unsigned int> shape_c = a.get_buffer().shape();
-            std::size_t c_size = a.get_buffer().data_size() / get_sizeof_type(base_a.type());
-            constexpr unsigned int thread_value = 1024U;
-			dim3 block_dim(shape_c[shape_c.size() - 1]);
-			dim3 grid_dim(c_size / block_dim.x);
+
+            unsigned int dim_x = 1;
+            for (unsigned char i = 0; i < dim; i++)
+                dim_x *= shape_c[i];
+
+            unsigned int dim_y = 1;
+            for (unsigned char i = dim+1; i < shape_c.size(); i++)
+                dim_y *= shape_c[i];
+            
+            constexpr unsigned int thread_value_x = 8U;
+            constexpr unsigned int thread_value_y = 16U;
+            constexpr unsigned int thread_value_z = 8U;
+			dim3 block_dim(thread_value_x, thread_value_y, thread_value_z);
+			dim3 grid_dim
+            (
+                dim_x / block_dim.x + (dim_x % block_dim.x  ? 1U : 0U),
+                dim_y / block_dim.y + (dim_y % block_dim.y ? 1U : 0U),
+                shape_c[dim] / block_dim.z + (shape_c[dim] % block_dim.z ? 1U : 0U)
+            );
 #define ADD_CODE(TYPE) \
-if(a.get_buffer().type() == typeid(TYPE)) \
+if(base_a.type() == typeid(TYPE)) \
 { \
-array_reduce_sum<TYPE, thread_value><<<grid_dim, block_dim>>>(static_cast<TYPE*>(c_ptr), static_cast<const TYPE*>(c_ptr), c_size); \
+while (shape_c[dim] > 1) \
+{ \
+array_reduce_sum<TYPE, thread_value_x, thread_value_z, thread_value_y><<<grid_dim, block_dim>>>(static_cast<TYPE*>(c_ptr), static_cast<const TYPE*>(c_ptr), dim_x, shape_c[dim], dim_y); \
 cuda_status = cudaDeviceSynchronize(); \
-other_buf = TensorBase(typeid(TYPE), a.get_buffer().shape(), c_ptr, this_cuda); \
+shape_c[dim] = grid_dim.z; \
+grid_dim.z = grid_dim.z / block_dim.z  + (grid_dim.z % block_dim.z ? 1U : 0U); \
+} \
+other_buf = TensorBase(typeid(TYPE), base_a.shape(), c_ptr, this_cuda); \
 }
 			LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
+            std::vector<std::pair<Tensor, Derivation>> temp;
+			temp.push_back(std::make_pair(*this, Derivation(values(this->get_buffer().shape(), 1).tensor_cast(this->get_buffer().type(), false), derive_reduce_sum)));
 			cuda_status = cudaFree(c_ptr);
 			return Tensor(std::move(other_buf));
 		}
 
-        Tensor reduce_min(const Tensor& a)
+        Tensor Tensor::reduce_min(unsigned char dim) const
 		{
-			std::vector<std::pair<Tensor, Derivation>> temp;
-            temp.push_back(std::make_pair(a, Derivation(values(a.get_buffer().shape(), 1).tensor_cast(a.get_buffer().type(), false), multiply)));
+            std::vector<unsigned int> shape_c = this->get_buffer().shape();
+            assert(dim < shape_c.size());
 			cudaError_t cuda_status;
 			TensorBase other_buf;
 			void* c_ptr;
@@ -339,23 +324,43 @@ other_buf = TensorBase(typeid(TYPE), a.get_buffer().shape(), c_ptr, this_cuda); 
 			cuda_status = cudaGetDevice(&this_cuda.index);
 			cudaDeviceProp cu_dev_prop;
 			cuda_status = cudaGetDeviceProperties(&cu_dev_prop, this_cuda.index);
-			const TensorBase& base_a = a.get_buffer();
+			const TensorBase& base_a = this->get_buffer();
 			cuda_status = cudaMalloc(&c_ptr, base_a.data_size());
             device_memcpy(&c_ptr, this_cuda, base_a.data(), base_a.get_device(), base_a.data_size());
-            std::vector<unsigned int> shape_c = a.get_buffer().shape();
-            std::size_t c_size = a.get_buffer().data_size() / get_sizeof_type(base_a.type());
-            constexpr unsigned int thread_value = 1024U;
-			dim3 block_dim(shape_c[shape_c.size() - 1]);
-			dim3 grid_dim(c_size / block_dim.x);
+            unsigned int dim_x = 1;
+            for (unsigned char i = 0; i < dim; i++)
+                dim_x *= shape_c[i];
+
+            unsigned int dim_y = 1;
+            for (unsigned char i = dim+1; i < shape_c.size(); i++)
+                dim_y *= shape_c[i];
+            
+            constexpr unsigned int thread_value_x = 8U;
+            constexpr unsigned int thread_value_y = 16U;
+            constexpr unsigned int thread_value_z = 8U;
+			dim3 block_dim(thread_value_x, thread_value_y, thread_value_z);
+			dim3 grid_dim
+            (
+                dim_x / block_dim.x + (dim_x % block_dim.x  ? 1U : 0U),
+                dim_y / block_dim.y + (dim_y % block_dim.y ? 1U : 0U),
+                shape_c[dim] / block_dim.z + (shape_c[dim] % block_dim.z ? 1U : 0U)
+            );
 #define ADD_CODE(TYPE) \
-if(a.get_buffer().type() == typeid(TYPE)) \
+if(base_a.type() == typeid(TYPE)) \
 { \
-array_reduce_sum<TYPE, thread_value><<<grid_dim, block_dim>>>(static_cast<TYPE*>(c_ptr), static_cast<const TYPE*>(c_ptr), c_size); \
+while (shape_c[dim] > 1) \
+{ \
+array_reduce_sum<TYPE, thread_value_x, thread_value_z, thread_value_y><<<grid_dim, block_dim>>>(static_cast<TYPE*>(c_ptr), static_cast<const TYPE*>(c_ptr), dim_x, shape_c[dim], dim_y); \
 cuda_status = cudaDeviceSynchronize(); \
-other_buf = TensorBase(typeid(TYPE), a.get_buffer().shape(), c_ptr, this_cuda); \
+shape_c[dim] = grid_dim.z; \
+grid_dim.z = grid_dim.z / block_dim.z  + (grid_dim.z % block_dim.z ? 1U : 0U); \
+} \
+other_buf = TensorBase(typeid(TYPE), base_a.shape(), c_ptr, this_cuda); \
 }
 			LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
+            std::vector<std::pair<Tensor, Derivation>> temp;
+            temp.push_back(std::make_pair(*this, Derivation(values(this->get_buffer().shape(), 1).tensor_cast(this->get_buffer().type(), false), derive_reduce_sum)));
 			cuda_status = cudaFree(c_ptr);
 			return Tensor(std::move(other_buf));
 		}

@@ -11,10 +11,9 @@ find_package(CUDAToolkit)
 if(CUDAToolkit_FOUND)
 enable_language(CUDA C CXX)
 
-set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
 set(CMAKE_CUDA_SEPARABLE_COMPILATION TRUE)
-set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "-g -G")  # enable cuda-gdb
+set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "--default-stream per-thread")
 
 file(GLOB TensorArray_src "*.cc" "*.cu")
 

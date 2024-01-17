@@ -33,7 +33,7 @@ namespace tensor_array
 		enum DeviceType
 		{
 			CPU,
-			CUDA
+			CUDA,
 		};
 
 		struct Device

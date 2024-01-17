@@ -238,16 +238,13 @@ namespace tensor_array
             Tensor cosh() const;
             Tensor tanh() const;
             Tensor sigmoid() const;
+            Tensor reduce_sum(unsigned char) const;
+            Tensor reduce_max(unsigned char) const;
+            Tensor reduce_min(unsigned char) const;
 
             Tensor log() const;
 #ifdef TENSOR_CONTENT
             friend Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int);
-
-            friend Tensor reduce_sum(const Tensor&);
-
-            friend Tensor reduce_max(const Tensor&);
-
-            friend Tensor reduce_min(const Tensor&);
             
             friend Tensor add(const Tensor&, const Tensor&, bool);
 

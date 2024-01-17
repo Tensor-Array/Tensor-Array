@@ -140,7 +140,7 @@ namespace tensor_array
 
         void Tensor::TensorContent::reset_grad()
         {
-            std::lock_guard<std::mutex> tensor_lock(this->tensor_mutex);
+            std::lock_guard tensor_lock(this->tensor_mutex);
             this->grad = zeros<int>(this->buf.shape()).tensor_cast(this->buf.type()).get_buffer();
         }
 
@@ -159,7 +159,7 @@ namespace tensor_array
             this->TensorContent::calc_grad(grad);
             if (this->can_calc_grad && this->forward_back.empty())
             {
-                std::lock_guard<std::mutex> tensor_lock(this->tensor_mutex);
+                std::lock_guard tensor_lock(this->tensor_mutex);
                 std::forward_list<std::thread> thread_list;
                 for (auto& dat : this->derive_data)
                     if (this->derive_multithread)
@@ -174,7 +174,7 @@ namespace tensor_array
 
         void Tensor::TensorContent::calc_grad(const Tensor& grad)
         {
-            std::lock_guard<std::mutex> tensor_lock(this->tensor_mutex);
+            std::lock_guard tensor_lock(this->tensor_mutex);
             this->grad = add(this->grad, grad, false).get_buffer();
         }
 
@@ -468,8 +468,10 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             return this->tensor_data.use_count();
         }
 
+        std::mutex calc_grad_mutex;
         void Tensor::calc_grad()
         {
+            std::lock_guard calc_grad_lock(calc_grad_mutex);
             this->tensor_data->reset_grad();
             this->tensor_data->calc_grad(values(this->get_buffer().shape(), 1.f).tensor_cast(this->get_buffer().type()));
         }

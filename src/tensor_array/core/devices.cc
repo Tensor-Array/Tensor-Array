@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include <cuda_runtime.h>
 #include "devices.hh"
 #include <cassert>
 #include <cstring>
 #include <mutex>
-#include <cuda_runtime.h>
 
 namespace tensor_array
 {
