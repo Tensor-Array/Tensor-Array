@@ -207,7 +207,10 @@ namespace tensor_array
 				c_ptr, convert_cuda_type(c_type), shape_a.end()[-2], 1, batch_size,
 				convert_cuda_type(c_type), CUBLAS_GEMM_DEFAULT);
 			blasStat = cublasDestroy(blasHandle);
-			TensorBase value_buf(c_type, { batch_size, shape_a.end()[-2] , shape_b.end()[-1] }, c_ptr, this_cuda);
+            std::vector<unsigned int> out_dims = shape_a;
+            out_dims[out_dims.size() - 1] = shape_b.end()[-1];
+
+			TensorBase value_buf(c_type, out_dims, c_ptr, this_cuda);
 			cudaStat = cudaFree(c_ptr);
 			return Tensor(std::move(value_buf), std::move(temp));
 		}

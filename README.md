@@ -1,6 +1,9 @@
 # Tensor-Array
 
 ![C++](https://img.shields.io/badge/C%2B%2B-17-blue)
+[![Docker Image Size with architecture (latest by date/latest semver)](https://img.shields.io/docker/image-size/noobwastaken/tensor-array)
+](https://hub.docker.com/repository/docker/noobwastaken/tensor-array/general)
+
 
 A C++ Tensor library that can be used to work with machine learning or deep learning project.
 
