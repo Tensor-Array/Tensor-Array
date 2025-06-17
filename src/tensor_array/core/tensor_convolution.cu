@@ -17,6 +17,7 @@ limitations under the License.
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
 #include <cassert>
+#include <cstdio>
 #include <cuda_fp8.h>
 #include <cuda_fp16.h>
 #include <cuda_bf16.h>
@@ -178,7 +179,7 @@ kernel_derive_conv_padding<<<grid_dim, block_dim>>>(static_cast<TYPE*>(out_ptr),
 			cuda_status = cudaGetLastError();
 			if (cuda_status != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
 			}
 			TensorBase value_buf(a.get_buffer().type(), new_shape, out_ptr, this_cuda);
 			cuda_status = cudaFree(out_ptr);
@@ -262,7 +263,7 @@ kernel_conv_padding<<<grid_dim, block_dim>>>(static_cast<TYPE*>(out_ptr), static
 			cuda_status = cudaGetLastError();
 			if (cuda_status != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
 			}
 			TensorBase value_buf(a.get_buffer().type(), new_shape, out_ptr, this_cuda);
 			cuda_status = cudaFree(out_ptr);
@@ -390,7 +391,7 @@ kernel_col2im<<<grid_dim, block_dim>>>(static_cast<TYPE*>(out_ptr), static_cast<
 			cuda_status = cudaGetLastError();
 			if (cuda_status != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
 			}
 			TensorBase value_buf(a.get_buffer().type(), new_shape, out_ptr, this_cuda);
 			cuda_status = cudaFree(out_ptr);
@@ -514,7 +515,7 @@ kernel_im2col<<<grid_dim, block_dim>>>(static_cast<TYPE*>(out_ptr), static_cast<
 			cuda_status = cudaGetLastError();
 			if (cuda_status != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
 			}
 			TensorBase value_buf(a.get_buffer().type(), new_shape, out_ptr, this_cuda);
 			cuda_status = cudaFree(out_ptr);
