@@ -16,6 +16,7 @@ limitations under the License.
 
 #include <cuda_runtime.h>
 #include "devices.hh"
+#include <cstdlib>
 #include <cassert>
 #include <cstring>
 #include <mutex>
@@ -54,7 +55,7 @@ namespace tensor_array
 			}
 			else
 			{
-				void* temp_data = malloc(count);
+				void* temp_data = std::malloc(count);
 				device_memcpy(temp_data, DEVICE_CPU_0, src, src_dev, count);
 				device_memcpy(dst, dst_dev, temp_data, DEVICE_CPU_0, count);
 				std::free(temp_data);
@@ -84,7 +85,7 @@ namespace tensor_array
 			}
 			else
 			{
-				void* temp_data = malloc(count);
+				void* temp_data = std::malloc(count);
 				device_memcpy(temp_data, DEVICE_CPU_0, src, src_dev, count, stream);
 				device_memcpy(dst, dst_dev, temp_data, DEVICE_CPU_0, count, stream);
 				std::free(temp_data);
@@ -149,13 +150,13 @@ void* operator new(size_t count, tensor_array::devices::Device dev)
 	switch (dev.dev_t)
 	{
 	case tensor_array::devices::CPU:
-		m_alloc_dat = malloc(count);
+		m_alloc_dat = std::malloc(count);
 		break;
 	case tensor_array::devices::CUDA:
 	{
 		cudaError_t cuda_status = cudaGetDevice(&temp);
 		cuda_status = cudaSetDevice(dev.index);
-		cuda_status = cudaMalloc(&m_alloc_dat, count);
+		cuda_status = cudamalloc(&m_alloc_dat, count);
 		cuda_status = cudaSetDevice(temp);
 	}
 	break;
@@ -173,13 +174,13 @@ void* operator new(size_t count, tensor_array::devices::Device dev, void* stream
 	switch (dev.dev_t)
 	{
 	case tensor_array::devices::CPU:
-		m_alloc_dat = malloc(count);
+		m_alloc_dat = std::malloc(count);
 		break;
 	case tensor_array::devices::CUDA:
 	{
 		cudaError_t cuda_status = cudaGetDevice(&temp);
 		cuda_status = cudaSetDevice(dev.index);
-		cuda_status = cudaMallocAsync(&m_alloc_dat, count, static_cast<cudaStream_t>(stream));
+		cuda_status = cudamallocAsync(&m_alloc_dat, count, static_cast<cudaStream_t>(stream));
 		cuda_status = cudaSetDevice(temp);
 	}
 	break;
