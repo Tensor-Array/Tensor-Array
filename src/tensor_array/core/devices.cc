@@ -156,7 +156,7 @@ void* operator new(size_t count, tensor_array::devices::Device dev)
 	{
 		cudaError_t cuda_status = cudaGetDevice(&temp);
 		cuda_status = cudaSetDevice(dev.index);
-		cuda_status = cudamalloc(&m_alloc_dat, count);
+		cuda_status = cudaMalloc(&m_alloc_dat, count);
 		cuda_status = cudaSetDevice(temp);
 	}
 	break;
@@ -180,7 +180,7 @@ void* operator new(size_t count, tensor_array::devices::Device dev, void* stream
 	{
 		cudaError_t cuda_status = cudaGetDevice(&temp);
 		cuda_status = cudaSetDevice(dev.index);
-		cuda_status = cudamallocAsync(&m_alloc_dat, count, static_cast<cudaStream_t>(stream));
+		cuda_status = cudaMallocAsync(&m_alloc_dat, count, static_cast<cudaStream_t>(stream));
 		cuda_status = cudaSetDevice(temp);
 	}
 	break;
