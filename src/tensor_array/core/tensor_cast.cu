@@ -19,6 +19,7 @@ limitations under the License.
 #include <cuda_fp8.h>
 #include <cuda_fp16.h>
 #include <cuda_bf16.h>
+#include <cstdio>
 #ifndef TENSOR_CONTENT
 #define TENSOR_CONTENT
 #include "tensor.hh"
@@ -93,7 +94,7 @@ type_casting<<<grid_dim, block_dim>>>(out_ptr, static_cast<const TYPE*>(base_of_
 			cuda_status = cudaGetLastError();
 			if (cuda_status != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
 			}
 			std::type_index test = typeid(T);
 			if (dynamic_type_size.find(test) == dynamic_type_size.end())
