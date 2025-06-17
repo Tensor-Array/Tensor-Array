@@ -323,7 +323,7 @@ namespace tensor_array
 			cudaStat = cudaGetLastError();
 			if (cudaStat != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cudaStat));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cudaStat));
 			}
 			TensorBase value_buf(a.get_buffer().type(), { shape_a.begin()[0], shape_a.begin()[2], shape_a.begin()[1], shape_a.end()[-1]}, c_ptr, this_cuda);
 			cudaStat = cudaFree(c_ptr);
@@ -381,7 +381,7 @@ return values0<TYPE>(list_dim, value); \
 			cudaStatus = cudaGetLastError();
 			if (cudaStatus != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cudaStatus));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cudaStatus));
 			}
 			TensorBase other_buf(typeid(float), list_dim, dev_ptr, this_cuda);
 			cudaStatus = cudaFree(dev_ptr);
@@ -416,7 +416,7 @@ arr_more_than<<<grid_dim, block_dim>>>(c_ptr, static_cast<const TYPE*>(base_a.da
 			cuda_status = cudaGetLastError();
 			if (cuda_status != cudaSuccess)
 			{
-				printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
+				std::printf("CUDA error: %s\n", cudaGetErrorString(cuda_status));
 			}
 			TensorBase other_buf(typeid(bool), a.get_buffer().shape(), c_ptr, this_cuda);
 			cuda_status = cudaFree(c_ptr);
