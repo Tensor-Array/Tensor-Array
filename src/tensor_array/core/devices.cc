@@ -16,6 +16,7 @@ limitations under the License.
 
 #include <cuda_runtime.h>
 #include "devices.hh"
+#include <cstdio>
 #include <cstdlib>
 #include <cassert>
 #include <cstring>
