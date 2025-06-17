@@ -54,7 +54,7 @@ namespace tensor_array
 			}
 			else
 			{
-				void* temp_data = std::malloc(count);
+				void* temp_data = malloc(count);
 				device_memcpy(temp_data, DEVICE_CPU_0, src, src_dev, count);
 				device_memcpy(dst, dst_dev, temp_data, DEVICE_CPU_0, count);
 				std::free(temp_data);
@@ -84,7 +84,7 @@ namespace tensor_array
 			}
 			else
 			{
-				void* temp_data = std::malloc(count);
+				void* temp_data = malloc(count);
 				device_memcpy(temp_data, DEVICE_CPU_0, src, src_dev, count, stream);
 				device_memcpy(dst, dst_dev, temp_data, DEVICE_CPU_0, count, stream);
 				std::free(temp_data);
@@ -149,7 +149,7 @@ void* operator new(size_t count, tensor_array::devices::Device dev)
 	switch (dev.dev_t)
 	{
 	case tensor_array::devices::CPU:
-		m_alloc_dat = std::malloc(count);
+		m_alloc_dat = malloc(count);
 		break;
 	case tensor_array::devices::CUDA:
 	{
@@ -173,7 +173,7 @@ void* operator new(size_t count, tensor_array::devices::Device dev, void* stream
 	switch (dev.dev_t)
 	{
 	case tensor_array::devices::CPU:
-		m_alloc_dat = std::malloc(count);
+		m_alloc_dat = malloc(count);
 		break;
 	case tensor_array::devices::CUDA:
 	{
