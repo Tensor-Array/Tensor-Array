@@ -22,8 +22,6 @@ file(GLOB TensorArray_src "*.cc" "*.cu")
 add_library(tensorarray_core SHARED ${TensorArray_src})
 target_link_libraries(tensorarray_core PRIVATE CUDA::cublas)
 
-endif(CUDAToolkit_FOUND)
-
 install(
     TARGETS tensorarray_core
     EXPORT TensorArrayTargets
@@ -33,3 +31,6 @@ install(
     COMPONENT libraries)
 
 add_library(TensorArray::Core ALIAS tensorarray_core)
+
+endif(CUDAToolkit_FOUND)
+
