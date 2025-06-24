@@ -1,29 +1,25 @@
-cmake_minimum_required(VERSION 3.8.0)
+cmake_minimum_required(VERSION 3.10)
 
 file(GLOB TensorArray_inc "*.hh")
-enable_language(CUDA C CXX)
+
 install(
     FILES ${TensorArray_inc}
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor_array/core
     COMPONENT headers)
 
-find_package(CUDAToolkit)
-if(CUDAToolkit_FOUND)
+enable_language(CUDA)
 
 set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
 set(CMAKE_CUDA_SEPARABLE_COMPILATION TRUE)
 set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "--default-stream per-thread")
 
 file(GLOB TensorArray_src "*.cc" "*.cu")
-endif(CUDAToolkit_FOUND)
 
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
 add_library(tensorarray_core SHARED ${TensorArray_src})
 
-if(CUDAToolkit_FOUND)
-target_link_libraries(tensorarray_core PRIVATE CUDA::cublas)
-endif(CUDAToolkit_FOUND)
+cuda_add_cublas_to_target(tensorarray_core)
 
 install(
     TARGETS tensorarray_core
