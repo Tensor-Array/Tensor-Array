@@ -17,10 +17,18 @@ set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "--default-stream per-thread")
 
 file(GLOB TensorArray_src "*.cc" "*.cu")
 
+else()
+enable_language(C CXX)
+file(GLOB TensorArray_src "*.cc")
+endif()
+
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
 add_library(tensorarray_core SHARED ${TensorArray_src})
+
+if(CUDAToolkit_FOUND)
 target_link_libraries(tensorarray_core PRIVATE CUDA::cublas)
+endif(CUDAToolkit_FOUND)
 
 install(
     TARGETS tensorarray_core
@@ -31,6 +39,3 @@ install(
     COMPONENT libraries)
 
 add_library(TensorArray::Core ALIAS tensorarray_core)
-
-endif(CUDAToolkit_FOUND)
-
