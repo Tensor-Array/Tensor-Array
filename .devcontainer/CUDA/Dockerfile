@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda
+FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubuntu20.04
 
 RUN apt-get update && apt-get -y install cmake
 
