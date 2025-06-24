@@ -11,7 +11,6 @@ install(
     COMPONENT headers)
 
 add_library(tensorarray_layers SHARED ${TensorArray_src})
-add_library(TensorArray::Layers ALIAS tensorarray_layers)
 
 target_include_directories(tensorarray_layers PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_link_libraries(tensorarray_layers TensorArray::Core)
@@ -23,3 +22,5 @@ install(
     COMPONENT libraries
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     COMPONENT libraries)
+
+add_library(TensorArray::Layers ALIAS tensorarray_layers)

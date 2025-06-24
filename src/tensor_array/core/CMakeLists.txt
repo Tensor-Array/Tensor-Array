@@ -24,8 +24,6 @@ target_link_libraries(tensorarray_core PRIVATE CUDA::cublas)
 
 endif(CUDAToolkit_FOUND)
 
-add_library(TensorArray::Core ALIAS tensorarray_core)
-
 install(
     TARGETS tensorarray_core
     EXPORT TensorArrayTargets
@@ -33,3 +31,5 @@ install(
     COMPONENT libraries
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     COMPONENT libraries)
+
+add_library(TensorArray::Core ALIAS tensorarray_core)
