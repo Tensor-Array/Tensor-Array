@@ -19,13 +19,15 @@ file(GLOB TensorArray_src "*.cc" "*.cu")
 
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
-add_library(TensorArray::Core SHARED ${TensorArray_src})
-target_link_libraries(TensorArray::Core PRIVATE CUDA::cublas)
+add_library(tensorarray_core SHARED ${TensorArray_src})
+target_link_libraries(tensorarray_core PRIVATE CUDA::cublas)
 
 endif(CUDAToolkit_FOUND)
 
+add_library(TensorArray::Core ALIAS tensorarray_core)
+
 install(
-    TARGETS TensorArray::Core
+    TARGETS tensorarray_core
     EXPORT TensorArrayTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     COMPONENT libraries
