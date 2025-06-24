@@ -17,9 +17,10 @@ file(GLOB TensorArray_src "*.cc" "*.cu")
 
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
-cuda_add_library(tensorarray_core SHARED ${TensorArray_src})
+add_library(tensorarray_core SHARED ${TensorArray_src})
 
-cuda_add_cublas_to_target(tensorarray_core)
+FindCUDAToolkit()
+target_link_libraries(tensorarray_core PRIVATE CUDA::cublas)
 
 install(
     TARGETS tensorarray_core
