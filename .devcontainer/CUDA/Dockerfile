@@ -2,6 +2,7 @@ FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubuntu20.04
 
 RUN apt-get update
 RUN apt-get upgrade -y
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y install cmake
 
 
