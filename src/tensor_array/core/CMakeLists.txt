@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.18)
 
 file(GLOB TensorArray_inc "*.hh")
 
@@ -12,7 +12,7 @@ enable_language(CUDA)
 include(FindCUDAToolkit)
 
 # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
-set(CUDA_SEPARABLE_COMPILATION ON)
+set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
 # list(APPEND CUDA_NVCC_FLAGS "--default-stream per-thread")
 
 file(GLOB TensorArray_src "*.cc" "*.cu")
@@ -31,7 +31,7 @@ set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD 17)
 set_property(TARGET tensorarray_core PROPERTY C_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core PROPERTY C_EXTENSIONS OFF)
 
-set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 14)
+set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 17)
 set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
 
