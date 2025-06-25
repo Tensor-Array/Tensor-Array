@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install curl -y
 
-ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.27.8"
+ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.27.9"
 
 # Optionally install the cmake for vcpkg
 COPY scripts/packages-install/reinstall-cmake.sh /tmp/
