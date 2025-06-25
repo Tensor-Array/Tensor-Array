@@ -13,7 +13,7 @@ include(FindCUDA)
 
 # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
 set(CUDA_SEPARABLE_COMPILATION ON)
-list(APPEND CUDA_NVCC_FLAGS "--default-stream per-thread")
+# list(APPEND CUDA_NVCC_FLAGS "--default-stream per-thread")
 
 file(GLOB TensorArray_src "*.cc" "*.cu")
 
