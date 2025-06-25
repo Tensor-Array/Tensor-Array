@@ -1,5 +1,9 @@
 FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubuntu20.04
 
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install curl
+
 ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.27.8"
 
 # Optionally install the cmake for vcpkg
