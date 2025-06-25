@@ -13,14 +13,6 @@ add_library(tensorarray_layers SHARED ${TensorArray_src})
 target_include_directories(tensorarray_layers PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_link_libraries(tensorarray_layers TensorArray::Core)
 
-set_property(TARGET tensorarray_layers PROPERTY C_STANDARD 11)
-set_property(TARGET tensorarray_layers PROPERTY C_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_layers PROPERTY C_EXTENSIONS OFF)
-
-set_property(TARGET tensorarray_layers PROPERTY CXX_STANDARD 17)
-set_property(TARGET tensorarray_layers PROPERTY C_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_layers PROPERTY C_EXTENSIONS OFF)
-
 install(
     TARGETS tensorarray_layers
     EXPORT TensorArrayTargets
