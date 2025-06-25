@@ -1,9 +1,15 @@
 FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubuntu20.04
 
-RUN apt-get update
-RUN apt-get upgrade -y
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get -y install --no-install-recommends cmake
+ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.27.8"
+
+# Optionally install the cmake for vcpkg
+COPY ./../script/packages-install/reinstall-cmake.sh /tmp/
+
+RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
+        chmod +x /tmp/reinstall-cmake.sh && /tmp/reinstall-cmake.sh ${REINSTALL_CMAKE_VERSION_FROM_SOURCE}; \
+    fi \
+    && rm -f /tmp/reinstall-cmake.sh
+
 
 
 # [Optional] Uncomment this section to install additional vcpkg ports.
