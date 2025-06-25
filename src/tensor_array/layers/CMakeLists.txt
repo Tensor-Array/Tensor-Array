@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-enable_language(C CXX)
-
 file(GLOB TensorArray_src "*.cc")
 file(GLOB TensorArray_inc "*.hh")
 
