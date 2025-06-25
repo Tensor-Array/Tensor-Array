@@ -1,9 +1,9 @@
 FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubuntu20.04
 
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN apt update
+RUN apt upgrade -y
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get -y install cmake
+RUN apt -y install cmake
 
 
 # [Optional] Uncomment this section to install additional vcpkg ports.
