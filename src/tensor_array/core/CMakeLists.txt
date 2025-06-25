@@ -9,7 +9,7 @@ install(
 
 enable_language(CUDA)
 
-include(FindCUDA)
+include(FindCUDAToolkit)
 
 # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
 set(CUDA_SEPARABLE_COMPILATION ON)
@@ -19,9 +19,9 @@ file(GLOB TensorArray_src "*.cc" "*.cu")
 
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
-cuda_add_library(tensorarray_core ${TensorArray_src} SHARED)
+add_library(tensorarray_core SHARED ${TensorArray_src})
 
-cuda_add_cublas_to_target(tensorarray_core)
+target_link_libraries(tensorarray_core PRIVATE CUDA::cublas)
 
 set_property(TARGET tensorarray_core PROPERTY C_STANDARD 11)
 set_property(TARGET tensorarray_core PROPERTY C_STANDARD_REQUIRED ON)
