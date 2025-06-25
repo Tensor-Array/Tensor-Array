@@ -3,6 +3,7 @@
 {
 	"name": "CUDA",
 	"build": {
+		"context": "../..",
 		"dockerfile": "Dockerfile"
 	},
 

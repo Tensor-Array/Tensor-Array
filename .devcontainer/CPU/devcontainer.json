@@ -3,6 +3,7 @@
 {
 	"name": "C++",
 	"build": {
+		"context": "../..",
 		"dockerfile": "Dockerfile"
 	},
 	
