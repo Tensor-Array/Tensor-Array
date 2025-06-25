@@ -23,6 +23,18 @@ cuda_add_library(tensorarray_core ${TensorArray_src} SHARED)
 
 cuda_add_cublas_to_target(tensorarray_core)
 
+set_property(TARGET tensorarray_core PROPERTY C_STANDARD 11)
+set_property(TARGET tensorarray_core PROPERTY C_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_core PROPERTY C_EXTENSIONS OFF)
+
+set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD 17)
+set_property(TARGET tensorarray_core PROPERTY C_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_core PROPERTY C_EXTENSIONS OFF)
+
+set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 14)
+set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
+
 install(
     TARGETS tensorarray_core
     EXPORT TensorArrayTargets

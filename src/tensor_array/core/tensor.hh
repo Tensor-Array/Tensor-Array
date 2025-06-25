@@ -60,14 +60,14 @@ namespace tensor_array
                 data(create_mem_101(sizeof(T), &data)),
                 data_size(sizeof(T))
             {
-                static_assert(std::is_trivially_copyable<T>, "Requied default constructor");
+                static_assert(std::is_trivially_copyable_v<T>, "Requied default constructor");
             }
             template<typename T>
             constexpr DataBuffer(const std::initializer_list<T> &data) :
                 data(create_mem_101(sizeof(T) * data.size(), data.begin())),
                 data_size(sizeof(T) * data.size())
             {
-                static_assert(std::is_trivially_copyable<T>, "Requied default constructor");
+                static_assert(std::is_trivially_copyable_v<T>, "Requied default constructor");
             }
             DataBuffer();
             DataBuffer(std::nullptr_t);
