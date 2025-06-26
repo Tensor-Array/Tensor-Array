@@ -23,9 +23,9 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 WORKDIR /app/tensor-array
-COPY src/ /src/
-COPY CMakeLists.txt /
-COPY Config.cmake.in /
+COPY src/ /src
+COPY CMakeLists.txt .
+COPY Config.cmake.in .
 WORKDIR /app/tensor-array
 
 WORKDIR app/tensor-array/build
