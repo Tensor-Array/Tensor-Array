@@ -28,7 +28,7 @@ COPY CMakeLists.txt /
 COPY Config.cmake.in /
 WORKDIR /app/tensor-array
 
-WORKDIR /tensor-array/build
+WORKDIR app/tensor-array/build
 
 RUN cmake ..
 RUN make install
