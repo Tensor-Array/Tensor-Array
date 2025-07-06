@@ -53,8 +53,8 @@ jobs:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
       run: |
-        chmod +x ./scripts/actions/install-cuda-ubuntu.sh
-        ./scripts/actions/install-cuda-ubuntu.sh
+        chmod +x ${{github.workspace}}/scripts/actions/install-cuda-ubuntu.sh
+        ${{github.workspace}}/scripts/actions/install-cuda-ubuntu.sh
       shell: bash
 
     # Initializes the CodeQL tools for scanning.
