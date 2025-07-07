@@ -122,6 +122,5 @@ if [[ $GITHUB_ACTIONS ]]; then
     # Set paths for subsequent steps, using ${CUDA_PATH}
     echo "Adding CUDA to CUDA_PATH, PATH and LD_LIBRARY_PATH"
     echo "${CUDA_PATH}/bin" >> $GITHUB_PATH
-    echo "LD_LIBRARY_PATH=${CUDA_PATH}/lib:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
-    echo "LD_LIBRARY_PATH=${CUDA_PATH}/lib64:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
+    echo "${CUDA_PATH}/lib:${CUDA_PATH}/lib64" >> $GITHUB_ENV
 fi
