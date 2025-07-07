@@ -114,14 +114,15 @@ fi
 CUDA_PATH=/usr/local/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
 echo "CUDA_PATH=${CUDA_PATH}"
 export CUDA_PATH=${CUDA_PATH}
-export PATH="$CUDA_PATH/bin:$PATH"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_PATH/lib"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_PATH/lib64"
+export PATH="$PATH:$CUDA_PATH/bin"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
 
 if [[ $GITHUB_ACTIONS ]]; then
     # Set paths for subsequent steps, using ${CUDA_PATH}
     echo "Adding CUDA to CUDA_PATH, PATH and LD_LIBRARY_PATH"
-    echo "${CUDA_PATH}/bin" >> $GITHUB_PATH
-    echo "${CUDA_PATH}/lib:$GITHUB_ENV" >> $GITHUB_ENV
-    echo "${CUDA_PATH}/lib64:$GITHUB_ENV" >> $GITHUB_ENV
+    echo "${CUDA_PATH}" >> $GITHUB_PATH
+    echo "PATH=$PATH:$CUDA_PATH/bin" >> $GITHUB_ENV
+    echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDA_PATH}/lib" >> $GITHUB_ENV
+    echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDA_PATH}/lib64" >> $GITHUB_ENV
 fi
