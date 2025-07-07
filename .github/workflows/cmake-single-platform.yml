@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         cuda-version: [ "12.9" ]
-        os: [ "ubuntu-22.04", "debian-11", "rhel-8", "rhel-9" ]
+        os: [ "ubuntu-22.04" ]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3

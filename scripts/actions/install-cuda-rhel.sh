@@ -41,7 +41,7 @@ LINUX_MAJOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f1)
 LINUX_MINOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f2)
 LINUX_PATCH=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f3)
 
-if [[ "${LINUX_ID}" == "almalinux" ]]; then
+if [[ "${LINUX_ID}" == "almalinux" || "${LINUX_ID}" == "centos" || "${LINUX_ID}" == "oracle" ]]; then
     echo "LINUX_ID: ${LINUX_ID} change to rhel"
     LINUX_ID="rhel"
     LINUX_VERSION=${LINUX_MAJOR}
@@ -83,11 +83,7 @@ done
 echo "CUDA_PACKAGES ${CUDA_PACKAGES}"
 
 CPU_ARCH="x86_64"
-PIN_FILENAME="cuda-${LINUX_ID}${LINUX_VERSION}.pin"
-PIN_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/${PIN_FILENAME}"
-KERYRING_PACKAGE_FILENAME="cuda-keyring_1.1-1_all.deb"
-KEYRING_PACKAGE_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/${KERYRING_PACKAGE_FILENAME}"
-REPO_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/"
+REPO_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/cuda-${LINUX_ID}${LINUX_VERSION}.repo"
 
 is_root=false
 if (( $EUID == 0)); then
@@ -109,11 +105,8 @@ else
 fi
 
 echo "Adding CUDA Repository"
-wget ${PIN_URL}
-$USE_SUDO mv ${PIN_FILENAME} /etc/apt/preferences.d/cuda-repository-pin-600
-wget ${KEYRING_PACKAGE_URL} && ${USE_SUDO} dpkg -i ${KERYRING_PACKAGE_FILENAME} && rm ${KERYRING_PACKAGE_FILENAME}
 $USE_SUDO dnf config-manager --add-repo ${REPO_URL}
-$USE_SUDO dnf update
+$USE_SUDO dnf clean all
 
 $USE_SUDO dnf -y install ${CUDA_PACKAGES}
 
