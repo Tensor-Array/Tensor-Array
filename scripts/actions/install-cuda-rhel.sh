@@ -41,7 +41,7 @@ LINUX_MAJOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f1)
 LINUX_MINOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f2)
 LINUX_PATCH=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f3)
 
-if [[ -z "${LINUX_ID}" == "almalinux" ]]; then
+if [[ "${LINUX_ID}" == "almalinux" ]]; then
     echo "LINUX_ID: ${LINUX_ID} change to rhel"
     LINUX_ID="rhel"
     LINUX_VERSION=${LINUX_MAJOR}
