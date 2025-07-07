@@ -36,6 +36,17 @@ LINUX_ID="${LINUX_ID,,}"
 LINUX_VERSION=$(lsb_release -sr)
 LINUX_VERSION="${LINUX_VERSION//.}"
 
+LINUX_VERSION_MAJOR_MINOR=$(lsb_release -sr)
+LINUX_MAJOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f1)
+LINUX_MINOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f2)
+LINUX_PATCH=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f3)
+
+if [[ -z "${LINUX_ID}" == "almalinux" ]]; then
+    echo "LINUX_ID: ${LINUX_ID} change to rhel"
+    LINUX_ID="rhel"
+    LINUX_VERSION=${LINUX_MAJOR}
+fi
+
 LOCATION_TEMP=${temp}
 
 CUDA_VERSION_MAJOR_MINOR=${cuda}

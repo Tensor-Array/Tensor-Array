@@ -21,18 +21,29 @@ jobs:
       fail-fast: false
       matrix:
         cuda-version: [ "12.9" ]
-        os: [ "ubuntu-22.04", "ubuntu-20.04" ]
+        os: [ "ubuntu-22.04", "debian-11", "rhel-8", "rhel-9" ]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     
-    - name: Run CUDA bash shell
+    - name: Run CUDA bash shell Ubuntu/Debian
+      if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian')
       env:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
       run: |
         chmod +x ${{github.workspace}}/scripts/actions/install-cuda-ubuntu.sh
         ${{github.workspace}}/scripts/actions/install-cuda-ubuntu.sh
+      shell: bash
+
+    - name: Run CUDA bash shell RHEL
+      if: startsWith(matrix.os, 'rhel')
+      env:
+        temp: ${{ runner.temp }}
+        cuda: ${{ matrix.cuda-version }}
+      run: |
+        chmod +x ${{github.workspace}}/scripts/actions/install-cuda-rhel.sh
+        ${{github.workspace}}/scripts/actions/install-cuda-rhel.sh
       shell: bash
 
     - name: Configure CMake
