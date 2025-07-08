@@ -106,10 +106,10 @@ else
 fi
 
 echo "Adding CUDA Repository"
-$USE_SUDO dnf config-manager --add-repo ${REPO_URL}
-$USE_SUDO dnf clean all
+$USE_SUDO yum-config-manager --add-repo ${REPO_URL}
+$USE_SUDO yum clean all
 
-$USE_SUDO dnf -y install ${CUDA_PACKAGES}
+$USE_SUDO yum install -y ${CUDA_PACKAGES}
 
 if [[ $? -ne 0 ]]; then
     echo "CUDA Installation Error."
