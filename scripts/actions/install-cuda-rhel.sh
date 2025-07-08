@@ -1,12 +1,13 @@
 CUDA_PACKAGES_IN=(
     "cuda-compiler"
+    "cuda-nvcc"
     "cuda-cudart"
     "cuda-nvtx"
     "cuda-nvrtc"
-    "libcurand"
-    "libcublas"
-    "libcufft"
     "cuda-cccl"
+    "libcurand-devel"
+    "libcublas-devel"
+    "libcufft-devel"
 )
 
 

@@ -3,10 +3,10 @@ CUDA_PACKAGES_IN=(
     "cuda-cudart"
     "cuda-nvtx"
     "cuda-nvrtc"
+    "cuda-cccl"
     "libcurand-dev"
     "libcublas-dev"
     "libcufft-dev"
-    "cuda-cccl"
 )
 
 function version_ge() {
