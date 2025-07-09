@@ -42,9 +42,16 @@ LINUX_MAJOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f1)
 LINUX_MINOR=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f2)
 LINUX_PATCH=$(echo "${LINUX_VERSION_MAJOR_MINOR}" | cut -d. -f3)
 
+YUM_PACKAGE_MANAGER="yum"
+YUM_CONFIG_MANAGER="yum-config-manager"
+
 if [[ "${LINUX_ID}" == "almalinux" || "${LINUX_ID}" == "centos" || "${LINUX_ID}" == "oracle" ]]; then
     echo "LINUX_ID: ${LINUX_ID} change to rhel"
     LINUX_ID="rhel"
+    if [[ "${LINUX_MAJOR}" -ge "8" ]]; then
+        YUM_PACKAGE_MANAGER="dnf"
+        YUM_CONFIG_MANAGER="dnf config-manager"
+    fi
     LINUX_VERSION=${LINUX_MAJOR}
 fi
 
@@ -106,10 +113,10 @@ else
 fi
 
 echo "Adding CUDA Repository"
-$USE_SUDO yum-config-manager --add-repo ${REPO_URL}
-$USE_SUDO yum clean all
+$USE_SUDO $YUM_CONFIG_MANAGER --add-repo ${REPO_URL}
+$USE_SUDO $YUM_PACKAGE_MANAGER clean all
 
-$USE_SUDO yum install -y ${CUDA_PACKAGES}
+$USE_SUDO $YUM_PACKAGE_MANAGER install -y ${CUDA_PACKAGES}
 
 if [[ $? -ne 0 ]]; then
     echo "CUDA Installation Error."
