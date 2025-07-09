@@ -1,6 +1,6 @@
 CUDA_PACKAGES_IN=(
     "cuda-compiler"
-    "cuda-cudart"
+    "cuda-cudart-devel"
     "cuda-nvtx"
     "cuda-nvrtc"
     "cuda-cccl"
