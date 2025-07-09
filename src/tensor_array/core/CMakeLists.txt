@@ -18,6 +18,7 @@ set_property(TARGET tensorarray_core PROPERTY C_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core PROPERTY C_EXTENSIONS OFF)
 
 find_package(CUDAToolkit)
+
 if (CUDAToolkit_FOUND)
 set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
 set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
