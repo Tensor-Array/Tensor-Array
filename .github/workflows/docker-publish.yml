@@ -24,8 +24,13 @@ env:
 
 jobs:
   build:
-
+    strategy:
+      fail-fast: false
+      matrix:
+        image-os: [ "Ubuntu" ]
+    
     runs-on: ubuntu-latest
+    
     permissions:
       contents: read
       packages: write
@@ -67,7 +72,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.image-os }}"
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -75,7 +80,8 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
-          context: .
+          context: Dockerfolder
+          file: ${{ matrix.image-os }}.Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

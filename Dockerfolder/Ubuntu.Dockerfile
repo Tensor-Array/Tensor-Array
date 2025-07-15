@@ -26,11 +26,11 @@ WORKDIR /app/tensor-array
 COPY src/ src/
 COPY CMakeLists.txt .
 COPY Config.cmake.in .
-WORKDIR /app/tensor-array
 
 WORKDIR build
 
 RUN cmake ..
-RUN make install
+RUN cmake --build .
+RUN cmake --install .
 
 WORKDIR /app/tensor-array

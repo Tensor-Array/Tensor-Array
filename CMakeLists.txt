@@ -28,7 +28,7 @@ install(
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
     "Config.cmake.in"
-    "TensorArrayConfig.cmake"
+    "tensor-array/TensorArrayConfig.cmake"
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/cmake
     PATH_VARS CMAKE_INSTALL_LIBDIR CMAKE_INSTALL_INCLUDEDIR
     )
