@@ -31,7 +31,7 @@ cd ..
 We created a template struct that named `TensorArray`. That struct is a multi-dimensional array wrapper.
 
 ```C++
-#include "tensor_array/core/tensorbase.hh"
+#include <tensor-array/core/tensorbase.hh>
 
 using namespace tensor_array::value;
 
@@ -77,7 +77,7 @@ The `Tensor::get_grad()` method can get the gradient after call `Tensor::calc_gr
 
 ```C++
 #include <iostream>
-#include "tensor_array/core/tensor.hh"
+#include <tensor-array/core/tensor.hh>
 
 using namespace std;
 using namespace tensor_array::value;
