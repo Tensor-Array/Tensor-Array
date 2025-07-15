@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 3.18)
 project(TensorArray)
 
 include(GNUInstallDirs)
-set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
+# set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
-add_subdirectory("src/tensor_array/core")
-add_subdirectory("src/tensor_array/layers")
+add_subdirectory("src/tensor-array/core")
+add_subdirectory("src/tensor-array/layers")
 
 set(CPACK_PACKAGE_NAME "TensorArray")
 set(CPACK_PACKAGE_VENDOR "TensorArray-Creators")
@@ -20,7 +20,7 @@ set(CPACK_PACKAGE_INSTALL_DIRECTORY "A machine learning libraries")
 
 install(
     EXPORT TensorArrayTargets
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TensorArray
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/cmake
     NAMESPACE TensorArray::
     FILE TensorArrayTargets.cmake
     )
@@ -29,22 +29,22 @@ include(CMakePackageConfigHelpers)
 configure_package_config_file(
     "Config.cmake.in"
     "TensorArrayConfig.cmake"
-    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TensorArray
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/cmake
     PATH_VARS CMAKE_INSTALL_LIBDIR CMAKE_INSTALL_INCLUDEDIR
     )
 
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/TensorArrayConfigVersion.cmake
-    VERSION 0.1.0
+    ${CMAKE_CURRENT_BINARY_DIR}/tensor-array/TensorArrayConfigVersion.cmake
+    VERSION 0.2.0
     COMPATIBILITY SameMajorVersion
     )
 
 ### Install Config and ConfigVersion files
 install(
     FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/TensorArrayConfig.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/TensorArrayConfigVersion.cmake
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TensorArray
+    ${CMAKE_CURRENT_BINARY_DIR}/tensor-array/TensorArrayConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/tensor-array/TensorArrayConfigVersion.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/cmake
     )
 
 include(CPack)

@@ -4,7 +4,7 @@ file(GLOB TensorArray_inc "*.hh")
 
 install(
     FILES ${TensorArray_inc}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor_array/core
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/core
     COMPONENT headers)
 
 enable_language(CUDA)
@@ -48,9 +48,9 @@ endif()
 install(
     TARGETS tensorarray_core
     EXPORT TensorArrayTargets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
     COMPONENT libraries
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
     COMPONENT libraries)
 
 add_library(TensorArray::Core ALIAS tensorarray_core)

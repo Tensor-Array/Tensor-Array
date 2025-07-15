@@ -115,8 +115,8 @@ CUDA_PATH=/usr/local/cuda-${CUDA_MAJOR}.${CUDA_MINOR}
 echo "CUDA_PATH=${CUDA_PATH}"
 export CUDA_PATH=${CUDA_PATH}
 export PATH="$PATH:$CUDA_PATH/bin"
-export LD_LIBRARY_PATH="$CUDA_PATH/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_PATH/lib"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_PATH/lib64"
 
 if [[ $GITHUB_ACTIONS ]]; then
     # Set paths for subsequent steps, using ${CUDA_PATH}

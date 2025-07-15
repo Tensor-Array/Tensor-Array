@@ -16,7 +16,7 @@ limitations under the License.
 
 #include <string>
 #include <unordered_map>
-#include <tensor_array/core/tensor.hh>
+#include <tensor-array/core/tensor.hh>
 #include <utility>
 #pragma once
 

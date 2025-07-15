@@ -5,7 +5,7 @@ file(GLOB TensorArray_inc "*.hh")
 
 install(
     FILES ${TensorArray_inc}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor_array/layers
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/layers
     COMPONENT headers)
 
 add_library(tensorarray_layers SHARED ${TensorArray_src})
@@ -24,9 +24,9 @@ set_property(TARGET tensorarray_layers PROPERTY C_EXTENSIONS OFF)
 install(
     TARGETS tensorarray_layers
     EXPORT TensorArrayTargets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
     COMPONENT libraries
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
     COMPONENT libraries)
 
 add_library(TensorArray::Layers ALIAS tensorarray_layers)

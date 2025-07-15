@@ -9,7 +9,22 @@ A C++ Tensor library that can be used to work with machine learning or deep lear
 
 Build your own neural network models with this library.
 
+## Installing `Tensor-Array`
 
+You need to clone repository by using [Git](https://git-scm.com/)
+
+You need to install `Tensor-Array` with [CMake](https://cmake.org/)
+
+```shell
+git clone https://github.com/Tensor-Array/Tensor-Array.git
+cd Tensor-Array
+mkdir build
+cd build
+cmake ..
+cmake --build .
+cmake --install .
+cd ..
+```
 
 ## Why this repository named `Tensor-Array`
 
