@@ -45,7 +45,7 @@ CUDA_MINOR=$(echo "${CUDA_VERSION_MAJOR_MINOR}" | cut -d. -f2)
 CUDA_PATCH=$(echo "${CUDA_VERSION_MAJOR_MINOR}" | cut -d. -f3)
 
 CPU_ARCH=$(uname -m)
-if "${CPU_ARCH}" == "aarch64"
+if [[ "${CPU_ARCH}" == "aarch64" ]]
 then
     CPU_ARCH="sbsa"
 fi
