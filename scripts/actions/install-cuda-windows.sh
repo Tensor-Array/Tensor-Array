@@ -4,7 +4,7 @@ set -e
 set -x
 
 CUDA_PACKAGES_IN=(
-    "compiler"
+    "nvcc"
     "cudart"
     "nvtx"
     "nvrtc"
@@ -45,15 +45,6 @@ CUDA_PATCH=$(echo "${CUDA_VERSION_MAJOR_MINOR}" | cut -d. -f3)
 CUDA_PACKAGES=""
 for package in "${CUDA_PACKAGES_IN[@]}"
 do :
-    # @todo This is not perfect. Should probably provide a separate list for diff versions
-    # cuda-compiler-X-Y if CUDA >= 9.1 else cuda-nvcc-X-Y
-    if [[ "${package}" == "nvcc" ]] && version_ge "$CUDA_VERSION_MAJOR_MINOR" "9.1"
-    then
-        package="compiler"
-    elif [[ "${package}" == "compiler" ]] && version_lt "$CUDA_VERSION_MAJOR_MINOR" "9.1"
-    then
-        package="nvcc"
-    fi
     # Build the full package name and append to the string.
     CUDA_PACKAGES+=" ${package}_${CUDA_MAJOR}.${CUDA_MINOR}"
 done
