@@ -24,9 +24,11 @@ set_property(TARGET tensorarray_layers PROPERTY C_EXTENSIONS OFF)
 install(
     TARGETS tensorarray_layers
     EXPORT TensorArrayTargets
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    COMPONENT Runtime
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
-    COMPONENT libraries
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
-    COMPONENT libraries)
+    COMPONENT Runtime
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/layers
+    COMPONENT Development)
 
 add_library(TensorArray::Layers ALIAS tensorarray_layers)

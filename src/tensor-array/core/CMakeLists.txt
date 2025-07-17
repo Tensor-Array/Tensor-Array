@@ -48,9 +48,11 @@ endif()
 install(
     TARGETS tensorarray_core
     EXPORT TensorArrayTargets
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    COMPONENT Runtime
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
-    COMPONENT libraries
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
-    COMPONENT libraries)
+    COMPONENT Runtime
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/core
+    COMPONENT Development)
 
 add_library(TensorArray::Core ALIAS tensorarray_core)

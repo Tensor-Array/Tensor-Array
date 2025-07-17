@@ -1,6 +1,6 @@
 # This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
-name: CMake on a single platform
+name: CMake on multi platform
 
 on:
   push:
@@ -22,6 +22,10 @@ jobs:
       matrix:
         cuda-version: [ "12.9", "12.4" ]
         os: [ "ubuntu-22.04", "ubuntu-22.04-arm" ]
+      include:
+        - os: windows-latest
+          cuda-version: "12.4.1"
+
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
@@ -44,6 +48,14 @@ jobs:
       run: |
         chmod +x ${{github.workspace}}/scripts/actions/install-cuda-rhel.sh
         ${{github.workspace}}/scripts/actions/install-cuda-rhel.sh
+      shell: bash
+
+    - name: Run CUDA bash shell Windows
+      if: startsWith(matrix.os, 'windows')
+      env:
+        temp: ${{ runner.temp }}
+        cuda: ${{ matrix.cuda-version }}
+      run: ${{github.workspace}}/scripts/actions/install-cuda-windows.sh
       shell: bash
 
     - name: Configure CMake
