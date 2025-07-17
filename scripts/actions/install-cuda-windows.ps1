@@ -1,5 +1,6 @@
 $CUDA_PACKAGES_IN = @(
     "nvcc"
+    "visual_studio_integration"
     "cudart"
     "nvtx"
     "nvrtc"
