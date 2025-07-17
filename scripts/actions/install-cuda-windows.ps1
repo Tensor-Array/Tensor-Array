@@ -33,7 +33,7 @@ $CUDA_PATCH = if ($parts.Count -gt 2) { $parts[2] } else { "0" }
 
 $CUDA_PACKAGES = ""
 foreach ($package in $CUDA_PACKAGES_IN) {
-    $CUDA_PACKAGES += " ${package}_$CUDA_MAJOR.$CUDA_MINOR"
+    $CUDA_PACKAGES += " ${package}_${CUDA_MAJOR}.${CUDA_MINOR}"
 }
 Write-Host "CUDA_PACKAGES $CUDA_PACKAGES"
 
@@ -51,5 +51,6 @@ if (Test-Path "env:GITHUB_ACTIONS") {
     # Set paths for subsequent steps, using $env:CUDA_PATH
     Write-Host "Adding CUDA to CUDA_PATH, and PATH"
     Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH=$env:CUDA_PATH"
+    Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH_${CUDA_MAJOR}_${CUDA_MINOR}=$env:CUDA_PATH"
     Add-Content -Path $env:GITHUB_PATH -Value "$env:CUDA_PATH\bin"
 }
