@@ -51,6 +51,6 @@ if (Test-Path "env:GITHUB_ACTIONS") {
     # Set paths for subsequent steps, using $env:CUDA_PATH
     Write-Host "Adding CUDA to CUDA_PATH, and PATH"
     Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH=$env:CUDA_PATH"
-    Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH_${CUDA_MAJOR}_${CUDA_MINOR}=$env:CUDA_PATH"
+    Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH_V${CUDA_MAJOR}_${CUDA_MINOR}=$env:CUDA_PATH"
     Add-Content -Path $env:GITHUB_PATH -Value "$env:CUDA_PATH\bin"
 }
