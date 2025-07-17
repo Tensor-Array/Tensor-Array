@@ -12,7 +12,6 @@ CUDA_PACKAGES_IN=(
     "curand_dev"
     "cublas_dev"
     "cufft_dev"
-    "visual_studio_integration"
 )
 
 function version_ge() {
