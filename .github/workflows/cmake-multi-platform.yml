@@ -55,7 +55,7 @@ jobs:
       env:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
-      run: ${{github.workspace}}/scripts/actions/install-cuda-windows.sh
+      run: scripts/actions/install-cuda-windows.sh
       shell: bash
 
     - name: Configure CMake
