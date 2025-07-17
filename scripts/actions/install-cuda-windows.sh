@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 
 set -e
 set -x
@@ -28,7 +28,7 @@ do :
 done
 echo "CUDA_PACKAGES ${CUDA_PACKAGES}"
 
-CUDA_ROOT = "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${CUDA_MAJOR}.${CUDA_MINOR}"
+# CUDA_ROOT = "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${CUDA_MAJOR}.${CUDA_MINOR}"
 
 curl --netrc-optional -L -nv -o cuda_installer.exe "https://developer.download.nvidia.com/compute/cuda/${cuda}/network_installers/cuda_${cuda}_windows_network.exe"
 ./cuda_installer.exe -s ${CUDA_PACKAGES}
