@@ -56,7 +56,7 @@ jobs:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
       run: scripts/actions/install-cuda-windows.ps1
-      shell: pwsh
+      shell: powershell
 
     - name: Configure CMake
       if: runner.os != 'Windows'
