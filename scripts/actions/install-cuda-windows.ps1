@@ -56,7 +56,7 @@ $env:CUDA_PATH = $CUDA_PATH
 # If executing on github actions, emit the appropriate echo statements to update environment variables
 if (Test-Path "env:GITHUB_ACTIONS") {
     # Set paths for subsequent steps, using $env:CUDA_PATH
-    echo "Adding CUDA to CUDA_PATH, CUDA_PATH_X_Y and PATH"
-    echo "CUDA_PATH=$env:CUDA_PATH" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-    echo "$env:CUDA_PATH/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+    Write-Host "Adding CUDA to CUDA_PATH, and PATH"
+    Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH=$env:CUDA_PATH"
+    Add-Content -Path $env:GITHUB_PATH -Value "$env:CUDA_PATH\bin"
 }
