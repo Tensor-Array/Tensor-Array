@@ -33,3 +33,8 @@ echo "CUDA_PACKAGES ${CUDA_PACKAGES}"
 curl --netrc-optional -L -nv -o cuda_installer.exe "https://developer.download.nvidia.com/compute/cuda/${cuda}/network_installers/cuda_${cuda}_windows_network.exe"
 ./cuda_installer.exe -s ${CUDA_PACKAGES}
 rm -f cuda_installer.exe
+
+CUDA_PATH="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${CUDA_MAJOR}.${CUDA_MINOR}"
+echo "CUDA_PATH=${CUDA_PATH}"
+export CUDA_PATH=${CUDA_PATH}
+
