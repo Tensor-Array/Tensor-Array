@@ -22,7 +22,7 @@ jobs:
       matrix:
         os: [ "ubuntu-22.04", "ubuntu-22.04-arm", "windows-latest" ]
         cuda-version: [ "12.9.1", "12.4.1" ]
-      exclude:
+        exclude:
         - os: "windows-latest"
           cuda-version: "12.9.1" # CUDA 12.9.1 is not available for ARM64
 
