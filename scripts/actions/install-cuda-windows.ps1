@@ -33,14 +33,7 @@ $CUDA_PATCH = if ($parts.Count -gt 2) { $parts[2] } else { "0" }
 
 $CUDA_PACKAGES = ""
 foreach ($package in $CUDA_PACKAGES_IN) {
-    $pkg = $package
-    if (($pkg -eq "nvcc") -and (Version-Ge $CUDA_VERSION_MAJOR_MINOR "9.1")) {
-        $pkg = "compiler"
-    }
-    if (($pkg -eq "compiler") -and (Version-Lt $CUDA_VERSION_MAJOR_MINOR "9.1")) {
-        $pkg = "nvcc"
-    }
-    $CUDA_PACKAGES += " ${pkg}_$CUDA_MAJOR.$CUDA_MINOR"
+    $CUDA_PACKAGES += " ${package}_$CUDA_MAJOR.$CUDA_MINOR"
 }
 Write-Host "CUDA_PACKAGES $CUDA_PACKAGES"
 
