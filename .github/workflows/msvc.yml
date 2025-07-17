@@ -39,7 +39,7 @@ jobs:
       - name: Run CUDA bash shell Windows
         env:
           temp: ${{ runner.temp }}
-          cuda: ${{ matrix.cuda-version }}
+          cuda: "12.4"
         run: scripts/actions/install-cuda-windows.ps1
         shell: pwsh
 
