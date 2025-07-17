@@ -8,15 +8,6 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/layers
     COMPONENT headers)
 
-# Ensure native path separators for sources (for Windows)
-if(WIN32)
-    foreach(src_file ${TensorArray_src})
-        file(TO_CMAKE_PATH "${src_file}" cmake_src_file)
-        list(APPEND TensorArray_cmake_src "${cmake_src_file}")
-    endforeach()
-    set(TensorArray_src ${TensorArray_cmake_src})
-endif()
-
 add_library(tensorarray_layers SHARED ${TensorArray_src})
 
 target_include_directories(tensorarray_layers PRIVATE ${PROJECT_SOURCE_DIR}/src)
