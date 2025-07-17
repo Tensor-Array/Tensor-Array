@@ -23,6 +23,15 @@ else()
 file(GLOB TensorArray_src "*.cc")
 endif()
 
+# Ensure native path separators for sources (for Windows)
+if(WIN32)
+    foreach(src_file ${TensorArray_src})
+        file(TO_CMAKE_PATH "${src_file}" cmake_src_file)
+        list(APPEND TensorArray_cmake_src "${cmake_src_file}")
+    endforeach()
+    set(TensorArray_src ${TensorArray_cmake_src})
+endif()
+
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
 add_library(tensorarray_core SHARED ${TensorArray_src})
