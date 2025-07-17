@@ -90,19 +90,23 @@ KEYRING_PACKAGE_URL="https://developer.download.nvidia.com/compute/cuda/repos/${
 REPO_URL="https://developer.download.nvidia.com/compute/cuda/repos/${LINUX_ID}${LINUX_VERSION}/${CPU_ARCH}/"
 
 is_root=false
-if (( $EUID == 0)); then
+if (( $EUID == 0))
+then
    is_root=true
 fi
 # Find if sudo is available
 has_sudo=false
-if command -v sudo &> /dev/null ; then
+if command -v sudo &> /dev/null
+then
     has_sudo=true
 fi
 # Decide if we can proceed or not (root or sudo is required) and if so store whether sudo should be used or not. 
-if [ "$is_root" = false ] && [ "$has_sudo" = false ]; then 
+if [ "$is_root" = false ] && [ "$has_sudo" = false ]
+then 
     echo "Root or sudo is required. Aborting."
     exit 1
-elif [ "$is_root" = false ] ; then
+elif [ "$is_root" = false ]
+then
     USE_SUDO=sudo
 else
     USE_SUDO=
@@ -117,7 +121,8 @@ $USE_SUDO apt-get update
 
 $USE_SUDO apt-get -y install ${CUDA_PACKAGES}
 
-if [[ $? -ne 0 ]]; then
+if [[ $? -ne 0 ]]
+then
     echo "CUDA Installation Error."
     exit 1
 fi
@@ -129,10 +134,11 @@ export PATH="$PATH:$CUDA_PATH/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_PATH/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_PATH/lib64"
 
-if [[ $GITHUB_ACTIONS ]]; then
-    # Set paths for subsequent steps, using ${CUDA_PATH}
+if [[ $GITHUB_ACTIONS ]]
+then
     echo "Adding CUDA to CUDA_PATH, PATH and LD_LIBRARY_PATH"
-    echo "${CUDA_PATH}" >> $GITHUB_PATH
+    echo "${CUDA_PATH}/bin" >> $GITHUB_PATH
+    echo "CUDA_PATH=${CUDA_PATH}" >> $GITHUB_ENV
     echo "PATH=$PATH:$CUDA_PATH/bin" >> $GITHUB_ENV
     echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDA_PATH}/lib" >> $GITHUB_ENV
     echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDA_PATH}/lib64" >> $GITHUB_ENV

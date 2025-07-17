@@ -20,11 +20,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cuda-version: [ "12.9", "12.4" ]
-        os: [ "ubuntu-22.04", "ubuntu-22.04-arm" ]
-        include:
-        - os: windows-latest
-          cuda-version: "12.4.1"
+        os: [ "ubuntu-22.04", "ubuntu-22.04-arm", "windows-latest" ]
+        cuda-version: [ "12.9.1", "12.4.1" ]
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -51,7 +48,7 @@ jobs:
       shell: bash
 
     - name: Run CUDA bash shell Windows
-      if: startsWith(matrix.os, 'windows')
+      if: runner.os == 'Windows'
       env:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
