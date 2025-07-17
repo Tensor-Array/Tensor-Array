@@ -39,7 +39,7 @@ jobs:
       - name: Run CUDA bash shell Windows
         env:
           temp: ${{ runner.temp }}
-          cuda: "12.4"
+          cuda: "12.4.1"
         run: scripts/actions/install-cuda-windows.ps1
         shell: pwsh
 
