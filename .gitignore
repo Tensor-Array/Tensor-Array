@@ -3,3 +3,6 @@ lib/
 bin/
 include/
 build-temp/
+.vs/
+out/
+CMakeSettings.json

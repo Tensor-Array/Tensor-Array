@@ -20,45 +20,77 @@ namespace tensor_array
 {
     namespace wrapper
     {
+#ifdef _MSC_VER
         template<class _E>
-    class initializer_wrapper
-    {
-    public:
-        typedef _E 		value_type;
-        typedef const _E& 	reference;
-        typedef const _E& 	const_reference;
-        typedef size_t 		size_type;
-        typedef const _E* 	iterator;
-        typedef const _E* 	const_iterator;
+        class initializer_wrapper: public std::initializer_list<_E>
+		{
+        public:
+            typedef _E 		value_type;
+            typedef const _E& 	reference;
+            typedef const _E& 	const_reference;
+            typedef size_t 		size_type;
+            typedef const _E* 	iterator;
+            typedef const _E* 	const_iterator;
+        public:
+            constexpr initializer_wrapper(const_iterator __a, size_type __l)
+            : std::initializer_list<_E>(__a, __a + __l) { }
+        
+            constexpr initializer_wrapper(const_iterator __begin, const_iterator __end)
+            : std::initializer_list<_E>(__begin, __end) { }
+        
+            constexpr initializer_wrapper() noexcept: std::initializer_list<_E>() { }
+		};
+#else
+        template<class _E>
+        class initializer_wrapper
+        {
+        public:
+            typedef _E 		value_type;
+            typedef const _E& 	reference;
+            typedef const _E& 	const_reference;
+            typedef size_t 		size_type;
+            typedef const _E* 	iterator;
+            typedef const _E* 	const_iterator;
 
-    private:
+        private:
 #ifdef __GNUC__
-        iterator			_M_array;
-        size_type			_M_len;
+            iterator			_M_array;
+            size_type			_M_len;
 #endif
 
-    public:
-        constexpr initializer_wrapper(const_iterator __a, size_type __l)
-        : _M_array(__a), _M_len(__l) { }
+        public:
+            constexpr initializer_wrapper(const_iterator __a, size_type __l)
+#ifdef __GNUC__
+            : _M_array(__a), _M_len(__l) { }
+#endif
 
-        constexpr initializer_wrapper(const_iterator __begin, const_iterator __end)
-        : _M_array(__begin), _M_len(__end - __begin) { }
+            constexpr initializer_wrapper(const_iterator __begin, const_iterator __end)
+            : _M_array(__begin), _M_len(__end - __begin)
+            { }
         
-        constexpr initializer_wrapper() noexcept: _M_array(0), _M_len(0) { }
+            constexpr initializer_wrapper() noexcept: _M_array(0), _M_len(0) { }
         
-        // Number of elements.
-        constexpr size_type
-        size() const noexcept { return _M_len; }
+            // Number of elements.
+            constexpr size_type
+            size() const noexcept
+            {
+                return _M_len;
+            }
         
-        // First element.
-        constexpr const_iterator
-        begin() const noexcept { return _M_array; }
+            // First element.
+            constexpr const_iterator
+            begin() const noexcept {
+                return _M_array;
+            }
         
-        // One past the last element.
-        constexpr const_iterator
-        end() const noexcept { return begin() + size(); }
+            // One past the last element.
+            constexpr const_iterator
+            end() const noexcept {
+                return begin() + size();
+            }
 
-        constexpr operator std::initializer_list<_E>() const { return reinterpret_cast<const std::initializer_list<_E>&>(*this); }
-    };
+            constexpr operator std::initializer_list<_E>() const { return reinterpret_cast<const std::initializer_list<_E>&>(*this); }
+        };
+#endif // !_MSC_VER
     }
 }
