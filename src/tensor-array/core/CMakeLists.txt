@@ -17,23 +17,23 @@ set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
 list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
 endif()
 
+file(GLOB TensorArray_src_cc "*.cc")
+
 if (CUDAToolkit_FOUND)
-file(GLOB TensorArray_src "*.cc" "*.cu")
-else()
-file(GLOB TensorArray_src "*.cc")
+file(GLOB TensorArray_src_cu "*.cu")
 endif()
 
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
-add_library(tensorarray_core SHARED ${TensorArray_src})
+add_library(tensorarray_core SHARED ${TensorArray_src_cc} ${TensorArray_src_cu})
 
 set_property(TARGET tensorarray_core PROPERTY C_STANDARD 11)
 set_property(TARGET tensorarray_core PROPERTY C_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core PROPERTY C_EXTENSIONS OFF)
 
 set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD 17)
-set_property(TARGET tensorarray_core PROPERTY C_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_core PROPERTY C_EXTENSIONS OFF)
+set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_core PROPERTY CXX_EXTENSIONS OFF)
 
 if (CUDAToolkit_FOUND)
 set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 17)

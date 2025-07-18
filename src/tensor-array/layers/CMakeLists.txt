@@ -18,8 +18,8 @@ set_property(TARGET tensorarray_layers PROPERTY C_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_layers PROPERTY C_EXTENSIONS OFF)
 
 set_property(TARGET tensorarray_layers PROPERTY CXX_STANDARD 17)
-set_property(TARGET tensorarray_layers PROPERTY C_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_layers PROPERTY C_EXTENSIONS OFF)
+set_property(TARGET tensorarray_layers PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_layers PROPERTY CXX_EXTENSIONS OFF)
 
 install(
     TARGETS tensorarray_layers
