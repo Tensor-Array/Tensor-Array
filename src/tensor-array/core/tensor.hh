@@ -32,6 +32,8 @@ limitations under the License.
 #endif
 #else
 #define TENSOR_ARRAY_API
+#define TENSOR_ARRAY_EXPORT_API
+#define TENSOR_ARRAY_IMPORT_API
 #endif
 
 #define USING_DATA_TYPE_FLOAT (float)(double)
