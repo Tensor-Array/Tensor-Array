@@ -904,6 +904,7 @@ out_stream << static_cast<TEMP>(tensor_out);
                 std::pair<Tensor, Tensor> broadcast_t = tensor_broadcasting(a, temp_b, 0, 2);
                 return batchedmatmul(broadcast_t.first, broadcast_t.second, true, nullptr);
             }
+            throw std::exception();
         }
 
         Tensor condition(const Tensor& value_bool, const Tensor& value_true, const Tensor& value_false)
