@@ -5,6 +5,10 @@ project(TensorArray)
 include(GNUInstallDirs)
 # set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
+if(MSVC)
+    add_compile_definitions(TENSOR_ARRAY_EXPORTS)
+endif()
+
 add_subdirectory("src/tensor-array/core")
 add_subdirectory("src/tensor-array/layers")
 

@@ -16,14 +16,14 @@ limitations under the License.
 
 #pragma once
 
-#ifdef __WIN32__
-#ifdef CUDA_ML_EXPORTS
-#define CUDA_ML_API __declspec(dllexport)
+#ifdef _WIN32
+#ifdef TENSOR_ARRAY_EXPORTS
+#define TENSOR_ARRAY_API __declspec(dllexport)
 #else
-#define CUDA_ML_API __declspec(dllimport)
+#define TENSOR_ARRAY_API __declspec(dllimport)
 #endif
 #else
-#define CUDA_ML_API
+#define TENSOR_ARRAY_API
 #endif
 
 namespace tensor_array
@@ -44,7 +44,7 @@ namespace tensor_array
 
 		constexpr Device DEVICE_CPU_0{ CPU,0 };
 
-		CUDA_ML_API Device& local_device();
+		TENSOR_ARRAY_API Device& local_device();
 
 		void device_memcpy(void*, Device, const void*, Device, size_t);
 
@@ -54,7 +54,7 @@ namespace tensor_array
 
 		void device_memset(void*, Device, int, size_t, void*);
 
-		CUDA_ML_API void device_CUDA_get_info();
+		TENSOR_ARRAY_API void device_CUDA_get_info();
 	}
 }
 
@@ -66,4 +66,4 @@ void operator delete(void*, tensor_array::devices::Device);
 
 void operator delete(void*, tensor_array::devices::Device, void*);
 
-#undef CUDA_ML_API
+#undef TENSOR_ARRAY_API

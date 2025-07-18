@@ -20,14 +20,18 @@ limitations under the License.
 
 #pragma once
 
-#ifdef __WIN32__
-#ifdef CUDA_ML_EXPORTS
-#define CUDA_ML_API __declspec(dllexport)
+#ifdef _WIN32
+#ifdef TENSOR_ARRAY_EXPORTS
+#define TENSOR_ARRAY_API __declspec(dllexport)
+#define TENSOR_ARRAY_EXPORT_API __declspec(dllexport)
+#define TENSOR_ARRAY_IMPORT_API
 #else
-#define CUDA_ML_API __declspec(dllimport)
+#define TENSOR_ARRAY_API __declspec(dllimport)
+#define TENSOR_ARRAY_EXPORT_API
+#define TENSOR_ARRAY_IMPORT_API __declspec(dllimport)
 #endif
 #else
-#define CUDA_ML_API
+#define TENSOR_ARRAY_API
 #endif
 
 #define USING_DATA_TYPE_FLOAT (float)(double)
@@ -48,7 +52,8 @@ namespace tensor_array
 {
 	namespace value
 	{
-        extern CUDA_ML_API bool use_grad;
+		bool TENSOR_ARRAY_API is_use_grad();
+		void TENSOR_ARRAY_API set_use_grad(bool use_grad);
 
 #ifdef TENSOR_CONTENT
         void* create_mem_101(std::size_t s, const void* dat);
@@ -103,7 +108,7 @@ namespace tensor_array
          * \brief Dynamic derivative tensor.
          * \brief This class use to calculate the tensor.
          */
-        class CUDA_ML_API Tensor
+        class TENSOR_ARRAY_API Tensor
         {
         public:
             /**
@@ -130,7 +135,7 @@ namespace tensor_array
             /**
              * \brief This class can iterate copy child tensor by index and derivate to parent tensor,
              */
-            class CUDA_ML_API Iterator
+            class TENSOR_ARRAY_API Iterator
             {
             public:
                 using iterator_category = std::forward_iterator_tag;
@@ -144,8 +149,8 @@ namespace tensor_array
                 Iterator& operator--();
                 Iterator operator++(int);
                 Iterator operator--(int);
-                friend bool CUDA_ML_API operator==(const Iterator&, const Iterator&);
-                friend bool CUDA_ML_API operator!=(const Iterator&, const Iterator&);
+                friend bool TENSOR_ARRAY_API operator==(const Iterator&, const Iterator&);
+                friend bool TENSOR_ARRAY_API operator!=(const Iterator&, const Iterator&);
             private:
                 unsigned long long index;
                 reference_left ref;
@@ -191,9 +196,9 @@ namespace tensor_array
             Tensor transpose(unsigned char, unsigned char) const;
             std::pair<Tensor, Tensor> max(unsigned char = 0) const;
             std::pair<Tensor, Tensor> min(unsigned char = 0) const;
-            friend std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char, unsigned char);
+            friend TENSOR_ARRAY_EXPORT_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char, unsigned char);
 #ifdef TENSOR_CONTENT
-            friend CUDA_ML_API Tensor add_dim(const std::vector<Tensor>&);
+            friend TENSOR_ARRAY_API Tensor add_dim(const std::vector<Tensor>&);
 #endif
             bool has_tensor() const;
             template<typename T>
@@ -225,10 +230,10 @@ namespace tensor_array
 
             Tensor& operator/=(const Tensor&);
 
-            friend CUDA_ML_API Tensor operator>(const Tensor&, const Tensor&);
-            friend CUDA_ML_API Tensor operator<(const Tensor&, const Tensor&);
-            friend CUDA_ML_API Tensor operator&&(const Tensor&, const Tensor&);
-            friend CUDA_ML_API Tensor operator||(const Tensor&, const Tensor&);
+            friend TENSOR_ARRAY_API Tensor operator>(const Tensor&, const Tensor&);
+            friend TENSOR_ARRAY_API Tensor operator<(const Tensor&, const Tensor&);
+            friend TENSOR_ARRAY_API Tensor operator&&(const Tensor&, const Tensor&);
+            friend TENSOR_ARRAY_API Tensor operator||(const Tensor&, const Tensor&);
             Tensor operator!();
             Tensor exp() const;
             Tensor sin() const;
@@ -244,7 +249,7 @@ namespace tensor_array
 
             Tensor log() const;
 #ifdef TENSOR_CONTENT
-            friend Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int);
+            friend TENSOR_ARRAY_EXPORT_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int);
             
             friend Tensor add(const Tensor&, const Tensor&, bool);
 
@@ -267,7 +272,7 @@ namespace tensor_array
 
             Tensor tensor_cast(const std::type_info&, bool) const;
 #endif
-            friend CUDA_ML_API std::ostream& operator<<(std::ostream&, const Tensor&);
+            friend TENSOR_ARRAY_API std::ostream& operator<<(std::ostream&, const Tensor&);
 
         private:
 #ifdef TENSOR_CONTENT
@@ -297,7 +302,7 @@ namespace tensor_array
             std::shared_ptr<TensorContent> tensor_data;
         };
 
-        class CUDA_ML_API WeakTensor
+        class TENSOR_ARRAY_API WeakTensor
         {
         public:
             WeakTensor(const Tensor&);
@@ -307,13 +312,13 @@ namespace tensor_array
             std::weak_ptr<Tensor::TensorContent> tensor_data;
         };
 
-        CUDA_ML_API dimension operator+(const dimension&, const dimension&);
+        TENSOR_ARRAY_API dimension operator+(const dimension&, const dimension&);
 
-        CUDA_ML_API dimension operator-(const dimension&, const dimension&);
+        TENSOR_ARRAY_API dimension operator-(const dimension&, const dimension&);
 
-        CUDA_ML_API dimension operator*(const dimension&, const dimension&);
+        TENSOR_ARRAY_API dimension operator*(const dimension&, const dimension&);
 
-        CUDA_ML_API dimension operator/(const dimension&, const dimension&);
+        TENSOR_ARRAY_API dimension operator/(const dimension&, const dimension&);
 
         /**
          * \brief Plus 2 n-d tensors.
@@ -321,9 +326,9 @@ namespace tensor_array
          * \return
          * Tensor
          */
-        CUDA_ML_API Tensor operator+(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator+(const Tensor&, const Tensor&);
 
-        CUDA_ML_API Tensor operator-(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator-(const Tensor&, const Tensor&);
 
         /**
          * \brief Multiply 2 n-d tensors.
@@ -331,19 +336,19 @@ namespace tensor_array
          * \return
          * Tensor
          */
-        CUDA_ML_API Tensor operator*(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator*(const Tensor&, const Tensor&);
 
-        CUDA_ML_API Tensor operator/(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor operator!=(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor operator==(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor operator>=(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor operator<=(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor tensor_file_load(const char*);
-        CUDA_ML_API Tensor power(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor add(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor multiply(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor divide(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor dot(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator/(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator!=(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator==(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator>=(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor operator<=(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor tensor_file_load(const char*);
+        TENSOR_ARRAY_API Tensor power(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor add(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor multiply(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor divide(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor dot(const Tensor&, const Tensor&);
         /**
          * \brief Matrix multiplication 2 matrices.
          * \param a Matrix/Tensor that has size (batch*)m*k.
@@ -351,8 +356,8 @@ namespace tensor_array
          * \return Tensor - Matrix that has size (batch*)m*n.
          * \exception a.col != b.row 
          */
-        CUDA_ML_API Tensor matmul(const Tensor&, const Tensor&);
-        CUDA_ML_API Tensor condition(const Tensor&, const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor matmul(const Tensor&, const Tensor&);
+        TENSOR_ARRAY_API Tensor condition(const Tensor&, const Tensor&, const Tensor&);
         /**
          * \brief Convolution
          * \brief Only suport 1D, 2D, 3D convolution
@@ -363,17 +368,17 @@ namespace tensor_array
          * \return
          * Tensor (N, K, ...)
          */
-        CUDA_ML_API Tensor convolution(const Tensor&, const Tensor&, const dimension& = value::dimension(), const dimension& = value::dimension());
-        CUDA_ML_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
-        CUDA_ML_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
-#define ADD_CODE(TYPE) CUDA_ML_API Tensor values(const std::initializer_list<unsigned int>&, TYPE);
+        TENSOR_ARRAY_API Tensor convolution(const Tensor&, const Tensor&, const dimension& = value::dimension(), const dimension& = value::dimension());
+        TENSOR_ARRAY_IMPORT_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
+        TENSOR_ARRAY_IMPORT_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
+#define ADD_CODE(TYPE) TENSOR_ARRAY_API Tensor values(const std::initializer_list<unsigned int>&, TYPE);
         LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
 #ifndef TENSOR_CONTENT
-        CUDA_ML_API Tensor add_dim(const std::vector<Tensor>&);
+        TENSOR_ARRAY_API Tensor add_dim(const std::vector<Tensor>&);
 #endif
-        CUDA_ML_API const std::type_info& comparison_type(const std::type_info&, const std::type_info&);
-        CUDA_ML_API Tensor tensor_rand(const std::vector<unsigned int>&, unsigned int = std::rand());
+        TENSOR_ARRAY_API const std::type_info& comparison_type(const std::type_info&, const std::type_info&);
+        TENSOR_ARRAY_API Tensor tensor_rand(const std::vector<unsigned int>&, unsigned int = std::rand());
 
 #ifdef TENSOR_CONTENT
         class Derivation
@@ -451,4 +456,4 @@ struct std::equal_to<tensor_array::value::Tensor>
 #undef USING_DATA_TYPE_SINT
 #undef USING_DATA_TYPE_UINT
 
-#undef CUDA_ML_API
+#undef TENSOR_ARRAY_API

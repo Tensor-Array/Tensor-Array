@@ -23,7 +23,7 @@ namespace tensor_array
 	{
         using LayerInSequential = LayerHolder<TensorCalculateLayerImpl>;
 
-        class CUDA_ML_API SequentialImpl final :
+        class TENSOR_ARRAY_API SequentialImpl final :
             public TensorCalculateLayerImpl
         {
         private:
@@ -37,7 +37,7 @@ namespace tensor_array
             value::Tensor calculate(const value::Tensor&) override;
         };
 
-        class CUDA_ML_API Sequential : public LayerHolder<SequentialImpl>
+        class TENSOR_ARRAY_API Sequential : public LayerHolder<SequentialImpl>
         {
         public:
             Sequential() = default;

@@ -23,14 +23,14 @@ limitations under the License.
 #include "initializer_wrapper.hh"
 #pragma once
 
-#ifdef __WIN32__
-#ifdef CUDA_ML_EXPORTS
-#define CUDA_ML_API __declspec(dllexport)
+#ifdef _WIN32
+#ifdef TENSOR_ARRAY_EXPORTS
+#define TENSOR_ARRAY_API __declspec(dllexport)
 #else
-#define CUDA_ML_API __declspec(dllimport)
+#define TENSOR_ARRAY_API __declspec(dllimport)
 #endif
 #else
-#define CUDA_ML_API
+#define TENSOR_ARRAY_API
 #endif
 
 namespace tensor_array
@@ -40,7 +40,7 @@ namespace tensor_array
         /**
          * \brief This class look like std::any but it tensor.
          */
-        class CUDA_ML_API TensorBase
+        class TENSOR_ARRAY_API TensorBase
         {
         private:
             struct TensorStorage
@@ -213,4 +213,4 @@ namespace tensor_array
 }
 }
 
-#undef CUDA_ML_API
+#undef TENSOR_ARRAY_API

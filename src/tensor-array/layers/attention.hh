@@ -23,9 +23,9 @@ namespace tensor_array
 {
     namespace layers
     {
-        value::Tensor CUDA_ML_API scaled_dot_product_attention(const value::Tensor&, const value::Tensor&, const value::Tensor&, const value::Tensor& = value::Tensor());
+        value::Tensor TENSOR_ARRAY_API scaled_dot_product_attention(const value::Tensor&, const value::Tensor&, const value::Tensor&, const value::Tensor& = value::Tensor());
 
-        class CUDA_ML_API MultiHeadAttentionImpl final :
+        class TENSOR_ARRAY_API MultiHeadAttentionImpl final :
             public LayerImpl
         {
         private:

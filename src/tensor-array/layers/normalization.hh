@@ -21,7 +21,7 @@ namespace tensor_array
 {
 	namespace layers
 	{
-        class CUDA_ML_API NormalizationImpl final :
+        class TENSOR_ARRAY_API NormalizationImpl final :
             public TensorCalculateLayerImpl
         {
         private:

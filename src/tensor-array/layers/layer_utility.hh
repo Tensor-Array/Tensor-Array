@@ -24,7 +24,7 @@ namespace tensor_array
 	{
         typedef value::Tensor(*LayerFunction)(const value::Tensor&);
 
-        class CUDA_ML_API ActivationImpl final :
+        class TENSOR_ARRAY_API ActivationImpl final :
             public TensorCalculateLayerImpl
         {
         public:
@@ -34,7 +34,7 @@ namespace tensor_array
             const LayerFunction func;
         };
 
-        class CUDA_ML_API ReShapeImpl final :
+        class TENSOR_ARRAY_API ReShapeImpl final :
             public TensorCalculateLayerImpl
         {
         public:
@@ -44,11 +44,11 @@ namespace tensor_array
             const std::vector<unsigned int> shape;
         };
 
-        value::Tensor CUDA_ML_API NoActivation(const value::Tensor&);
-        value::Tensor CUDA_ML_API ReLU(const value::Tensor&);
-        value::Tensor CUDA_ML_API tanh(const value::Tensor&);
-        value::Tensor CUDA_ML_API Sigmoid(const value::Tensor&);
-        value::Tensor CUDA_ML_API SoftMax(const value::Tensor&, unsigned char dim);
+        value::Tensor TENSOR_ARRAY_API NoActivation(const value::Tensor&);
+        value::Tensor TENSOR_ARRAY_API ReLU(const value::Tensor&);
+        value::Tensor TENSOR_ARRAY_API tanh(const value::Tensor&);
+        value::Tensor TENSOR_ARRAY_API Sigmoid(const value::Tensor&);
+        value::Tensor TENSOR_ARRAY_API SoftMax(const value::Tensor&, unsigned char dim);
 
         using Activation = LayerHolder<ActivationImpl>;
         using ReShape = LayerHolder<ReShapeImpl>;

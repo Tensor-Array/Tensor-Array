@@ -20,21 +20,21 @@ limitations under the License.
 #include <utility>
 #pragma once
 
-#ifdef __WIN32__
-#ifdef CUDA_ML_EXPORTS
-#define CUDA_ML_API __declspec(dllexport)
+#ifdef _WIN32
+#ifdef TENSOR_ARRAY_EXPORTS
+#define TENSOR_ARRAY_API __declspec(dllexport)
 #else
-#define CUDA_ML_API __declspec(dllimport)
+#define TENSOR_ARRAY_API __declspec(dllimport)
 #endif
 #else
-#define CUDA_ML_API
+#define TENSOR_ARRAY_API
 #endif
 
 namespace tensor_array
 {
     namespace layers
     {
-        class CUDA_ML_API LayerImpl
+        class TENSOR_ARRAY_API LayerImpl
         {
         private:
             bool is_running = false;

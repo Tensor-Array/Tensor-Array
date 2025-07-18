@@ -22,7 +22,7 @@ namespace tensor_array
 {
 	namespace layers
 	{
-        class CUDA_ML_API RecurrentImpl :
+        class TENSOR_ARRAY_API RecurrentImpl :
             public TensorCalculateLayerImpl
         {
         private:
@@ -41,7 +41,7 @@ namespace tensor_array
         };
         using Recurrent = LayerHolder<RecurrentImpl>;
 
-        class CUDA_ML_API LSTM_Impl :
+        class TENSOR_ARRAY_API LSTM_Impl :
             public TensorCalculateLayerImpl
         {
         private:

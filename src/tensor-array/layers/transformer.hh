@@ -21,7 +21,7 @@ namespace tensor_array
 {
     namespace layers
     {
-        class CUDA_ML_API TransformerEncoderImpl final :
+        class TENSOR_ARRAY_API TransformerEncoderImpl final :
             public TensorCalculateLayerImpl
         {
         private:
@@ -37,7 +37,7 @@ namespace tensor_array
 
         using TransformerEncoder = LayerHolder<TransformerEncoderImpl>;
 
-        class CUDA_ML_API TransformerDecoderImpl final :
+        class TENSOR_ARRAY_API TransformerDecoderImpl final :
             public LayerImpl
         {
         private:

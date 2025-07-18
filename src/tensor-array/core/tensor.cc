@@ -47,6 +47,16 @@ namespace tensor_array
     {
         bool use_grad = true;
 
+        bool is_use_grad()
+        {
+            return use_grad;
+		}
+
+        void set_use_grad(bool use)
+        {
+            use_grad = use;
+		}
+
         class Tensor::TensorContent
         {
         private:

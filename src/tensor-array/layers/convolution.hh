@@ -22,7 +22,7 @@ namespace tensor_array
 {
     namespace layers
     {
-        class CUDA_ML_API ConvolutionLayerImpl :
+        class TENSOR_ARRAY_API ConvolutionLayerImpl :
             public TensorCalculateLayerImpl
         {
         protected:
@@ -39,7 +39,7 @@ namespace tensor_array
             value::Tensor calculate(const value::Tensor&) override final;
         };
 
-        class CUDA_ML_API Conv1D_Impl final :
+        class TENSOR_ARRAY_API Conv1D_Impl final :
             public ConvolutionLayerImpl
         {
         public:
@@ -49,7 +49,7 @@ namespace tensor_array
 
         using Conv1D = LayerHolder<Conv1D_Impl>;
 
-        class CUDA_ML_API Conv2D_Impl final :
+        class TENSOR_ARRAY_API Conv2D_Impl final :
             public ConvolutionLayerImpl
         {
         public:
@@ -59,7 +59,7 @@ namespace tensor_array
 
         using Conv2D = LayerHolder<Conv2D_Impl>;
 
-        class CUDA_ML_API Conv3D_Impl final :
+        class TENSOR_ARRAY_API Conv3D_Impl final :
             public ConvolutionLayerImpl
         {
         public:
