@@ -11,10 +11,11 @@ enable_language(CUDA)
 
 find_package(CUDAToolkit)
 
+
 if (CUDAToolkit_FOUND)
-set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
+# set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
 set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
-list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
+# list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
 endif()
 
 file(GLOB TensorArray_src_cc "*.cc")
