@@ -60,6 +60,9 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeindex": "cpp",
-        "cassert": "cpp"
+        "cassert": "cpp",
+        "stack": "cpp",
+        "token.h": "c",
+        "glob_stack.h": "c"
     }
 }

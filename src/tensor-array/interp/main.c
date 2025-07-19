@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "option.h"
+#include "open_file.h"
+#include "parser.h"
+
+
+void initialize(int argc, char *argv[])
+{
+    int i, fd;
+    while (argc <= 0)
+    {
+        char *argv_opt = "";
+        size_t poolsize = 1024; // Default pool size
+        switch (argv_opt[0])
+        {
+        case '-':
+            switch (argv_opt[1])
+            {
+                case 'h':
+                    help();
+                    return;
+                case 'v':
+                    version();
+                    return;
+                case 'f':
+                    if (argc < 2)
+                    {
+                        fprintf(stderr, "Error: No file specified after -f option\n");
+                        exit(1);
+                        return;
+                    }
+                    open_file(argv[1]);
+                    argc--;
+                    argv++;
+                    return;
+                case '-':
+                    if (strcmp(argv_opt, "--help") == 0)
+                    {
+                        help();
+                        return;
+                    }
+                    else if (strcmp(argv_opt, "--version") == 0)
+                    {
+                        version();
+                        return;
+                    }
+                    else if (strcmp(argv_opt, "--poolsize") == 0)
+                    {
+                        if (argc < 2)
+                        {
+                            fprintf(stderr, "Error: No pool size specified after --poolsize option\n");
+                            exit(1);
+                            return;
+                        }
+                        poolsize = atoi(argv[1]);
+                        if (poolsize <= 0)
+                        {
+                            fprintf(stderr, "Error: Invalid pool size specified\n");
+                            exit(1);
+                            return;
+                        }
+                        argc--;
+                        argv++;
+                    }
+                    else if (strcmp(argv_opt, "--file") == 0)
+                    {
+                        if (argc < 2)
+                        {
+                            fprintf(stderr, "Error: No file specified after --file option\n");
+                            exit(1);
+                            return;
+                        }
+                        open_file(argv[1], poolsize);
+                        argc--;
+                        argv++;
+                    }
+                    return;
+                default:
+                    open_file(argv[0], poolsize);
+                    return;
+            }
+            break;
+        default:
+            break;
+        }
+        argc--;
+        argv++;
+    }
+    
+}
+
+int main(int argc, char *argv[])
+{
+    initialize(argc-1, argv+1);
+    program();
+    return 0;
+}
+// Future implementations may include command-line argument parsing, initialization of the TensorArray library,
+// and other necessary setup for the interp functionality.
