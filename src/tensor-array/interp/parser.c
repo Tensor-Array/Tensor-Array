@@ -32,8 +32,7 @@ void emit(int size, ...)
     
     // Process the variable arguments as needed
     for (int i = 0; i < size; ++i) {
-        ++text;
-        *text = va_arg(args, VM_INSTRUCTION);
+        *text++ = va_arg(args, VM_INSTRUCTION);
     }
     
     va_end(args);
@@ -250,7 +249,7 @@ void statement()
         break;
     default:
         expression(TOKEN_ASSIGN);
-        if (tkn = ';')
+        if (tkn == ';')
             match(';');
         break;
     }
@@ -264,7 +263,7 @@ void program()
         // You would typically call emit or other functions here based on your program logic
         // Add your program logic here
         interp_malloc();
-        orig = text + 1;
+        orig = text;
         char *isrc = src;
         VM_INSTRUCTION *itext = text;
         interp_memreset();
