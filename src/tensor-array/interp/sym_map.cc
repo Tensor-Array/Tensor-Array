@@ -14,20 +14,36 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#ifdef __cplusplus
-extern "C"
+#include <map>
+#include <cstring>
+#include <tensor-array/core/tensor.hh>
+#include "sym_map.h"
+
+sym_data* sym_cur = NULL;
+
+std::map<std::string, sym_data> sym_map;
+
+void sym_data_set(char* name, sym_data dat)
 {
-#endif
-    typedef struct
-    {
-        long tkn;
-        long hash;
-        long cls;
-        void* data; // Pointer to additional data if needed
-    } glob_data_t;
-    void glob_data_set(char*, glob_data_t);
-    glob_data_t glob_stack_get(char*);
-    int glob_stack_find(char*);
-#ifdef __cplusplus
+    sym_map[name] = dat;
 }
-#endif
+
+sym_data* sym_data_get(char* name)
+{
+    return &sym_map[name];
+}
+
+int glob_data_find(char* name)
+{
+    return sym_map.find(name) != sym_map.end();
+}
+
+void* new_Tensor()
+{
+    return new tensor_array::value::Tensor;
+}
+void delete_Tensor(void* t)
+{
+    delete t;
+}
+

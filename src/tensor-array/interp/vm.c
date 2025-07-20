@@ -19,19 +19,18 @@ limitations under the License.
 #include "vmop.h"
 #include "vm.h"
 
-VM_INSTRUCTION* orig;
-void** pc;
-void* any_value;
+VM_INSTRUCTION* orig = NULL;
+VM_INSTRUCTION* pc = NULL;
 
 void eval()
 {
-    VM_INSTRUCTION op;
+    printf("vmstart\n");
+    VM_INSTRUCTION_V2 op;
     pc = orig;
     while (1)
     {
-        
-        /* code */
-        op = *pc++;
+        op = *((VM_INSTRUCTION_V2*)pc++);
+        printf("vmopassign %ld %ld %ld \n", orig, pc, op);
         switch (op)
         {
             case LEA:
@@ -39,22 +38,24 @@ void eval()
                 break;
             case IMM:
                 // Immediate value
+                any_type = *pc++;
                 any_value = *pc++;
+                op_imm();
                 break;
             case JMP:
                 // Jump to address
-                pc = *pc;
+                pc = (VM_INSTRUCTION*) *pc;
                 break;
             case CALL:
                 // Function call
                 break;
             case JZ:
                 // Jump if zero
-                pc = (any_value) ? pc + 1 : *pc;
+                pc = (any_value) ? (VM_INSTRUCTION*)*pc : pc + 1;
                 break;
             case JNZ:
-                pc = (any_value) ? *pc : pc + 1;
                 // Jump if not zero
+                pc = (any_value) ? pc + 1 : (VM_INSTRUCTION*)*pc;
                 break;
             case ENT:
                 // Enter function
@@ -91,6 +92,10 @@ void eval()
             case PUSH:
                 // Push value onto stack
                 op_push();
+                break;
+            case PTR_PUSH:
+                // Push value onto stack
+                op_ptr_push();
                 break;
             case GETELEM:
                 // Get element from array
@@ -205,5 +210,4 @@ void eval()
                 exit(1);
         }
     }
-    
 }

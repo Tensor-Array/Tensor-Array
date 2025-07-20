@@ -17,9 +17,45 @@ limitations under the License.
 #include <stack>
 #include <tensor-array/core/tensor.hh>
 #include <iostream>
+#include <cstring>
+#include "sym_map.h"
+#include "vmop.h"
 
 std::stack<tensor_array::value::Tensor> tensor_stack;
+std::stack<sym_data> ptr_stack;
 tensor_array::value::Tensor ag;
+void* aptr;
+long any_value;
+long any_type;
+
+void new_int()
+{
+    tensor_array::value::TensorArray<int> tmp2 = {any_value};
+    tensor_array::value::Tensor tmp1(tmp2);
+    ag = tmp1;
+}
+
+void new_ptr()
+{
+    aptr = reinterpret_cast<void*>(any_value);
+}
+
+void new_string()
+{
+    char* str = reinterpret_cast<char*>(any_value);
+    unsigned int s_len = std::strlen(str);
+    tensor_array::value::TensorBase tmp1(typeid(char),{s_len}, str);
+    ag = tmp1;
+    std::free(str);
+}
+
+void op_imm()
+{
+    if (any_type = 0) new_string();
+    else if (any_type = 1) new_int();
+    else if (any_type = 2) new_ptr();
+    else;
+}
 
 void op_add()
 {
@@ -214,7 +250,7 @@ void op_mcmp()
 void op_exit()
 {
     // Implementation for exiting the program
-    std::cout<< ag << std::endl;
+    // std::cout << ag << std::endl;
 }
 
 void op_push()
@@ -222,12 +258,19 @@ void op_push()
     tensor_stack.push(ag);
 }
 
+void op_ptr_push()
+{
+    std::cout << "test" << std::endl;
+    ptr_stack.push(*reinterpret_cast<sym_data*>(aptr));
+    std::cout << "test" << std::endl;
+}
+
 void op_get()
 {
-    if (!tensor_stack.empty())
+    if (!ptr_stack.empty())
     {
-        ag = tensor_stack.top();
-        tensor_stack.pop();
+        sym_data& temp = ptr_stack.top();
+        ag = *reinterpret_cast<tensor_array::value::Tensor*>(temp.data);
     }
     else
     {
@@ -237,11 +280,11 @@ void op_get()
 
 void op_set()
 {
-    if (!tensor_stack.empty())
+    if (!ptr_stack.empty())
     {
-        tensor_array::value::Tensor bg = tensor_stack.top();
-        tensor_stack.pop();
-        ag = bg; // Set the top of the stack to ag
+        sym_data& temp = ptr_stack.top();
+        delete temp.data; // Set the top of the stack to ag
+        temp.data = new tensor_array::value::Tensor(ag);
     }
     else
     {

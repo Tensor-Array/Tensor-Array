@@ -17,16 +17,24 @@ limitations under the License.
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "glob_stack.h"
+#include <string.h>
+#include "sym_map.h"
 #include "open_file.h"
 #include "token.h"
 
 long tkn = 0;
-long token_val = 0; // Variable to hold the value of the current token
+long tkn_val = 0; // Variable to hold the value of the current token
 
+char* tknname[] = {
+    "num", "sys", "glo", "loc", "id",
+    "func", "else", "enum", "if", "return", "sizeof",
+    "while", "assign", "cond", "lor", "lan",
+    "or", "xor", "and",
+    "eq", "ne", "lt", "gt", "le", "ge",
+    "add", "sub", "mul", "div", "matmul", "pos", "neg", "not", "brak"
+};
 void token_next()
 {
-    glob_data_t token_item;
     while ((tkn = *src++) != '\0')
     {
         switch (tkn)
@@ -42,12 +50,40 @@ void token_next()
         case '"':
         case '\'':
             {
-                char* last_pos = src - 1;
-                while (*src != tkn && *src != '\0')
+                char* last_pos = src;
+                while (*src != tkn && *src != '\0') src++;
+                char *st1 = malloc(src-last_pos+2);
+                memset(st1, 0, src-last_pos+2);
+                src = last_pos;
+                for (unsigned int i = 0; *src != tkn && *src != '\0'; i++)
                 {
-                    src++;
+                    tkn_val=*src++;
+                    if (tkn_val == '\\')
+                    {
+                        switch (*++src)
+                        {
+                        case '\\':
+                            tkn_val='\\';
+                            break;
+                        case 'r':
+                            tkn_val='\r';
+                            break;
+                        case 'n':
+                            tkn_val='\n';
+                            break;
+                        default:
+                            if (*src == tkn) tkn_val=tkn;
+                            else
+                            {
+                                fprintf(stderr, "invalid character string.");
+                                exit(1);
+                            }
+                            break;
+                        }
+                    }
+                    st1[i] = tkn_val;
                 }
-                token_val = last_pos; // Store the start of the string literal
+                tkn_val = st1; // Store the start of the string literal
             }
             return; // Exit after processing the string literal
         case '/':
@@ -203,22 +239,22 @@ void token_next()
         default:
             if (tkn >= '0' && tkn <= '9')
             {
+                tkn_val = tkn - '0';
                 if (tkn == '0' && (*src == 'x' || *src == 'X'))
                 {
                     src++;
                     while ((*src >= '0' && *src <= '9') || (*src >= 'a' && *src <= 'f') || (*src >= 'A' && *src <= 'F'))
                     {
-                        token_val = (token_val << 4) + (*src >= '0' && *src <= '9' ? *src - '0' : (*src >= 'a' && *src <= 'f' ? *src - 'a' + 10 : *src - 'A' + 10));
+                        tkn_val = (tkn_val << 4) + (*src >= '0' && *src <= '9' ? *src - '0' : (*src >= 'a' && *src <= 'f' ? *src - 'a' + 10 : *src - 'A' + 10));
                         src++;
                     }
                     /* code to handle hexadecimal number */
                 }
                 else
                 {
-                    src--;
                     while (*src >= '0' && *src <= '9')
                     {
-                        token_val = (token_val * 10) + (*src - '0');
+                        tkn_val = (tkn_val * 10) + (*src - '0');
                         src++;
                     }
                     /* code to handle decimal number */
@@ -235,19 +271,26 @@ void token_next()
                     hash = (hash * 0x40) + *src;
                     src++;
                 }
-                if (glob_stack_find(last_pos))
+                int char_len = src-last_pos;
+                char *name = malloc(char_len+1);
+                memcpy(name, last_pos, char_len);
+                name[char_len] = '\0';
+                if (glob_data_find(name))
                 {
                     /* code to handle existing identifier */
-                    tkn = glob_stack_get(last_pos).tkn; // Set the token type from the existing identifier
+                    tkn = sym_data_get(name)->tkn; // Set the token type from the existing identifier
+                    free(name);
                     return; // Exit after processing the existing identifier
                 }
                 /* code to handle identifiers */
-                glob_data_t item;
+                sym_data item;
                 item.hash = hash;
                 item.data = NULL; // Initialize data pointer if needed
                 
                 tkn = item.tkn = TOKEN_ID; // Set the token type
-                glob_stack_set(last_pos, item);
+                sym_data_set(name,item);
+                sym_cur = sym_data_get(name);
+                free(name);
                 return; // Exit after processing the identifier
             }
             else

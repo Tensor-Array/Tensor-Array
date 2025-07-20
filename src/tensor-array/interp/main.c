@@ -46,7 +46,7 @@ void initialize(int argc, char *argv[])
                         exit(1);
                         return;
                     }
-                    open_file(argv[1]);
+                    read_file(argv[1]);
                     argc--;
                     argv++;
                     return;
@@ -87,13 +87,13 @@ void initialize(int argc, char *argv[])
                             exit(1);
                             return;
                         }
-                        open_file(argv[1], poolsize);
+                        read_file(argv[1]);
                         argc--;
                         argv++;
                     }
                     return;
                 default:
-                    open_file(argv[0], poolsize);
+                    read_file(argv[0]);
                     return;
             }
             break;
@@ -108,6 +108,7 @@ void initialize(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
+    printf("Hello\n");
     initialize(argc-1, argv+1);
     program();
     return 0;

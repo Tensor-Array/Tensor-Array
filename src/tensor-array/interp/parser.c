@@ -20,10 +20,10 @@ limitations under the License.
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include "open_file.h"
+#include "sym_map.h"
 #include "parser.h"
 #include "token.h"
-#include "vm.h"
+#include "open_file.h"
 
 void emit(int size, ...)
 {
@@ -33,7 +33,7 @@ void emit(int size, ...)
     // Process the variable arguments as needed
     for (int i = 0; i < size; ++i) {
         ++text;
-        *text = va_arg(args, long);
+        *text = va_arg(args, VM_INSTRUCTION);
     }
     
     va_end(args);
@@ -54,32 +54,9 @@ void match(long tk)
     }
 }
 
-void program()
-{
-    while (1)
-    {
-        // This is a placeholder for the main program loop
-        // You would typically call emit or other functions here based on your program logic
-        // Add your program logic here
-        interp_malloc();
-        char *isrc = src;
-        char *itext = text;
-        interp_memreset();
-        printf(">>> ");
-        read(0, src, poolsize-1); // Read input from stdin
-        token_next();
-        statement();
-        emit(1, EXIT); // Emit a token with value 0 to indicate end of processing
-        eval();
-        puts("");
-        free(itext);
-        free(isrc);
-    }
-}
-
 void expression(int level)
 {
-    void* temp = NULL; // Temporary variable to hold intermediate values
+    sym_data* temp = NULL; // Temporary variable to hold intermediate values
     int isArrRef = 0; // Flag to check if we are dealing with an array reference
     // This function would handle parsing and evaluating expressions
     // For now, it is a placeholder
@@ -88,23 +65,34 @@ void expression(int level)
     {
     case TOKEN_NUM:
         /* code */
-        emit(1, IMM);
+        emit(3, IMM, TYPE_INT, tkn_val);
         match(TOKEN_NUM);
         break;
     case TOKEN_ID:
         /* code */
-        emit(1, GET);
+        temp = sym_cur;
         match(TOKEN_ID);
+        if (!temp->data)
+        {
+            temp->data = new_Tensor();
+        }
+        if (0);
+        else
+        {
+            emit(3, IMM, TYPE_PTR, temp);
+            emit(1, GET);
+        }
         break;
     case '"':
         {
+            emit(3, IMM, TYPE_STRING, tkn_val);
             match('"'); // Match the opening quote
         }
         break;
     case '[':
         if (temp == NULL)
         {
-            *text = PUSH; // Push the current value onto the stack
+            *text = PTR_PUSH; // Push the current value onto the stack
             match('['); // Match the opening bracket
             expression(TOKEN_ASSIGN); // Parse the expression inside the brackets
             emit(1, GETELEM); // Emit get element instruction
@@ -125,11 +113,59 @@ void expression(int level)
                 fprintf(stderr, "Error: Assignment without a variable\n");
                 exit(1);
             }
-            *text = PUSH; // Push the current value onto the stack
+            *text = PTR_PUSH; // Push the current value onto the stack
             match(TOKEN_ASSIGN);
             expression(TOKEN_ASSIGN); // Parse the right-hand side expression
             if (isArrRef) emit(1, SETELEM); // Emit set element instruction if it's an array reference
             else emit(1, SET); // Emit set instruction
+            break;
+        case TOKEN_EQ:
+            emit(1, PUSH);
+            match(TOKEN_EQ);
+            expression(TOKEN_SHL); // Parse the right-hand side expression
+            emit(1, EQ); // Emit equality instruction
+            break;
+        case TOKEN_NE:
+            emit(1, PUSH);
+            match(TOKEN_NE);
+            expression(TOKEN_SHL); // Parse the right-hand side expression
+            emit(1, NE); // Emit not equal instruction
+            break;
+        case TOKEN_LT:
+            emit(1, PUSH);
+            match(TOKEN_LT);
+            expression(TOKEN_SHL); // Parse the right-hand side expression
+            emit(1, LT); // Emit less than instruction
+            break;
+        case TOKEN_GT:
+            emit(1, PUSH);
+            match(TOKEN_GT);
+            expression(TOKEN_SHL); // Parse the right-hand side expression
+            emit(1, GT); // Emit greater than instruction
+            break;
+        case TOKEN_LE:
+            emit(1, PUSH);
+            match(TOKEN_LE);
+            expression(TOKEN_SHL); // Parse the right-hand side expression
+            emit(1, LE); // Emit less than or equal instruction
+            break;
+        case TOKEN_GE:
+            emit(1, PUSH);
+            match(TOKEN_GE);
+            expression(TOKEN_SHL); // Parse the right-hand side expression
+            emit(1, GE); // Emit greater than or equal instruction
+            break;
+        case TOKEN_SHL:
+            emit(1, PUSH);
+            match(TOKEN_SHL);
+            expression(TOKEN_ADD); // Parse the right-hand side expression
+            emit(1, SHL); // Emit shift left instruction
+            break;
+        case TOKEN_SHR:
+            emit(1, PUSH);
+            match(TOKEN_SHR);
+            expression(TOKEN_ADD); // Parse the right-hand side expression
+            emit(1, SHR); // Emit shift right instruction
             break;
         case TOKEN_ADD:
             emit(1, PUSH);
@@ -142,6 +178,24 @@ void expression(int level)
             match(TOKEN_SUB);
             expression(TOKEN_MUL); // Parse the right-hand side expression
             emit(1, SUB); // Emit subtract instruction
+            break;
+        case TOKEN_MUL:
+            emit(1, PUSH);
+            match(TOKEN_MUL);
+            expression(TOKEN_MATMUL); // Parse the right-hand side expression
+            emit(1, MUL); // Emit multiply instruction
+            break;
+        case TOKEN_DIV:
+            emit(1, PUSH);
+            match(TOKEN_DIV);
+            expression(TOKEN_MATMUL); // Parse the right-hand side expression
+            emit(1, DIV); // Emit divide instruction
+            break;
+        case TOKEN_MATMUL:
+            emit(1, PUSH);
+            match(TOKEN_MATMUL);
+            expression(TOKEN_INC); // Parse the right-hand side expression
+            emit(1, MATMUL); // Emit matrix multiply instruction
             break;
         default:
             fprintf(stderr, "Error: Unrecognized token in expression\n");
@@ -165,13 +219,14 @@ void statement()
             expression(TOKEN_ASSIGN); // Parse the condition expression
             match(')');
             emit(1, JZ); // Emit jump if zero instruction
-            long *b = ++text; // Placeholder for jump address
+            VM_INSTRUCTION *b = ++text; // Placeholder for jump address
             statement(); // Parse the statement inside the if block
             if (tkn == TOKEN_ELSE)
             {
                 match(TOKEN_ELSE);
                 emit(1, JMP); // Emit jump instruction
                 *b = text + 2; // Set the jump address to the next instruction
+                b = ++text;
                 statement(); // Parse the else block
             }
             *b = text + 1; // Set the jump address to the next instruction
@@ -179,8 +234,8 @@ void statement()
         break;
     case TOKEN_WHILE:
         {
-            long *a = NULL; // Placeholder for jump address
-            long *b = text+1; // Placeholder for jump address
+            VM_INSTRUCTION *a = NULL; // Placeholder for jump address
+            VM_INSTRUCTION *b = text+1; // Placeholder for jump address
             match(TOKEN_WHILE);
             match('(');
             expression(TOKEN_ASSIGN); // Parse the condition expression
@@ -194,6 +249,35 @@ void statement()
         }
         break;
     default:
+        expression(TOKEN_ASSIGN);
+        if (tkn = ';')
+            match(';');
         break;
+    }
+}
+
+void program()
+{
+    while (1)
+    {
+        // This is a placeholder for the main program loop
+        // You would typically call emit or other functions here based on your program logic
+        // Add your program logic here
+        interp_malloc();
+        orig = text + 1;
+        char *isrc = src;
+        VM_INSTRUCTION *itext = text;
+        interp_memreset();
+        printf(">>> ");
+        fflush(stdout);
+        read(0, src, poolsize-1); // Read input from stdin
+        token_next();
+        statement();
+        emit(1, EXIT); // Emit a token with value 0 to indicate end of processing
+        eval();
+        printf("eval \n");
+        puts("");
+        free(itext);
+        free(isrc);
     }
 }

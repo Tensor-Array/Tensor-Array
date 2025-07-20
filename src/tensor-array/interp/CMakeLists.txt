@@ -8,21 +8,21 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/interp
     COMPONENT headers)
 
-add_executable(tensorarray_interp SHARED ${TensorArray_src})
+add_executable(tensorarray_interpreter ${TensorArray_src})
 
-target_include_directories(tensorarray_interp PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(tensorarray_interp TensorArray::Core)
+target_include_directories(tensorarray_interpreter PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_link_libraries(tensorarray_interpreter TensorArray::Core)
 
-set_property(TARGET tensorarray_interp PROPERTY C_STANDARD 11)
-set_property(TARGET tensorarray_interp PROPERTY C_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_interp PROPERTY C_EXTENSIONS OFF)
+set_property(TARGET tensorarray_interpreter PROPERTY C_STANDARD 11)
+set_property(TARGET tensorarray_interpreter PROPERTY C_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_interpreter PROPERTY C_EXTENSIONS OFF)
 
-set_property(TARGET tensorarray_interp PROPERTY CXX_STANDARD 17)
-set_property(TARGET tensorarray_interp PROPERTY CXX_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_interp PROPERTY CXX_EXTENSIONS OFF)
+set_property(TARGET tensorarray_interpreter PROPERTY CXX_STANDARD 17)
+set_property(TARGET tensorarray_interpreter PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_interpreter PROPERTY CXX_EXTENSIONS OFF)
 
 install(
-    TARGETS tensorarray_interp
+    TARGETS tensorarray_interpreter
     EXPORT TensorArrayTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     COMPONENT Runtime
@@ -30,3 +30,11 @@ install(
     COMPONENT Runtime
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/interp
     COMPONENT Development)
+#[[
+add_custom_command(
+    OUTPUT test.tmp
+    DEPENDS tensorarray_interpreter
+    POST_BUILD
+    COMMAND tensorarray_interpreter)
+]]
+add_executable(TensorArray::Interpreter ALIAS tensorarray_interpreter)

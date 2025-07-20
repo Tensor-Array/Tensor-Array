@@ -16,9 +16,21 @@ limitations under the License.
 
 typedef enum
 {
-    LEA, IMM, JMP, CALL, JZ, JNZ, ENT, ADJ, LEV, RET, LI, LC, SI, SC, SET, GET, PUSH, GETELEM, SETELEM, ADDELEM,
+    LEA, IMM, JMP, CALL, JZ, JNZ, ENT, ADJ, LEV, RET, LI, LC, SI, SC, SET, GET, PUSH, PTR_PUSH, GETELEM, SETELEM, ADDELEM,
     OR, XOR, AND, EQ, NE, LT, GT, LE, GE, ADD, SUB, MUL, DIV, MATMUL, POS, NEG, NOT, SHL, SHR,
     OPEN, READ, CLOSE, PRTF, MALC, MSET, MCMP, EXIT
-} VM_INSTRUCTION;
+} VM_INSTRUCTION_V2;
 
-extern void* any_value;
+typedef long VM_INSTRUCTION;
+
+typedef enum
+{
+    TYPE_STRING,
+    TYPE_INT,
+    TYPE_PTR
+} VM_TYPE;
+
+void eval();
+
+extern long any_value;
+extern VM_INSTRUCTION* orig;

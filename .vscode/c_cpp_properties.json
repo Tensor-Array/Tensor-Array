@@ -6,7 +6,8 @@
                 "${workspaceFolder}/src"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/g++"
+            "compilerPath": "/usr/bin/g++",
+            "configurationProvider": "ms-vscode.cmake-tools"
         },
         {
             "name": "Windows",

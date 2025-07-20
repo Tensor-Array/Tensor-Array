@@ -14,7 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-extern char *src, *text;
+#include "vm.h"
+
+extern char *src;
+extern VM_INSTRUCTION *text;
 extern size_t poolsize;
 
 void interp_malloc();

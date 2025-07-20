@@ -62,7 +62,10 @@
         "typeindex": "cpp",
         "cassert": "cpp",
         "stack": "cpp",
-        "token.h": "c",
-        "glob_stack.h": "c"
+        "*.h": "c",
+        "map": "cpp",
+        "optional": "cpp",
+        "fstream": "cpp",
+        "set": "cpp"
     }
 }

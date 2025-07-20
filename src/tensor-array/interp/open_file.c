@@ -17,8 +17,10 @@ limitations under the License.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "open_file.h"
 
-char *src, *text = NULL;
+char *src = NULL;
+VM_INSTRUCTION *text = NULL;
 size_t poolsize = 1024; // Default pool size
 
 void interp_malloc()
@@ -29,7 +31,7 @@ void interp_malloc()
         fprintf(stderr, "Error: Could not allocate memory for interpreter\n");
         exit(1);
     }
-    text = malloc(poolsize);
+    text = malloc(poolsize*sizeof(VM_INSTRUCTION));
     if (text == NULL)
     {
         fprintf(stderr, "Error: Could not allocate memory for interpreter text\n");

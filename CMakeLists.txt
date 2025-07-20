@@ -11,6 +11,7 @@ endif()
 
 add_subdirectory("src/tensor-array/core")
 add_subdirectory("src/tensor-array/layers")
+add_subdirectory("src/tensor-array/interp")
 
 set(CPACK_PACKAGE_NAME "TensorArray")
 set(CPACK_PACKAGE_VENDOR "TensorArray-Creators")

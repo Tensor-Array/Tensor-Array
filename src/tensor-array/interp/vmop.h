@@ -18,6 +18,9 @@ limitations under the License.
 extern "C"
 {
 #endif
+    extern long any_value;
+    extern long any_type;
+    void op_imm();
     void op_add();
     void op_sub();
     void op_mul();
@@ -45,6 +48,7 @@ extern "C"
     void op_mcmp();
     void op_exit();
     void op_push();
+    void op_ptr_push();
     void op_get();
     void op_set();
 #ifdef __cplusplus
