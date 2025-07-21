@@ -22,8 +22,8 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-WORKDIR /app
-COPY ./ /tensor-array
+WORKDIR /main-project
+COPY ./ tensor-array/
 
 WORKDIR tensor-array/build
 
