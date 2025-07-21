@@ -53,7 +53,7 @@ void match(long tk)
 
 void expression(int level)
 {
-    sym_data* temp = NULL; // Temporary variable to hold intermediate values
+    void* temp = NULL; // Temporary variable to hold intermediate values
     int isArrRef = 0; // Flag to check if we are dealing with an array reference
     // This function would handle parsing and evaluating expressions
     // For now, it is a placeholder
