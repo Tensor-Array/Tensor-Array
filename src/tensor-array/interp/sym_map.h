@@ -32,4 +32,6 @@ extern "C"
     void* new_Tensor();
 #ifdef __cplusplus
 }
+
+extern std::map<std::string, sym_data> sym_map;
 #endif

@@ -275,11 +275,11 @@ void token_next()
                 char *name = malloc(char_len+1);
                 memcpy(name, last_pos, char_len);
                 name[char_len] = '\0';
+                tkn_val = name;
                 if (glob_data_find(name))
                 {
                     /* code to handle existing identifier */
                     tkn = sym_data_get(name)->tkn; // Set the token type from the existing identifier
-                    free(name);
                     return; // Exit after processing the existing identifier
                 }
                 /* code to handle identifiers */
@@ -290,7 +290,6 @@ void token_next()
                 tkn = item.tkn = TOKEN_ID; // Set the token type
                 sym_data_set(name,item);
                 sym_cur = sym_data_get(name);
-                free(name);
                 return; // Exit after processing the identifier
             }
             else

@@ -22,7 +22,7 @@ limitations under the License.
 #include "vmop.h"
 
 std::stack<tensor_array::value::Tensor> tensor_stack;
-std::stack<sym_data> ptr_stack;
+std::stack<std::string> ptr_stack;
 tensor_array::value::Tensor ag;
 void* aptr;
 long any_value;
@@ -260,12 +260,15 @@ void op_push()
 
 void op_ptr_push()
 {
-    ptr_stack.push(*reinterpret_cast<sym_data*>(aptr));
+    ptr_stack.push(reinterpret_cast<char*>(aptr));
+    std::free(aptr);
 }
 
 void op_get()
 {
-    sym_data& temp = *reinterpret_cast<sym_data*>(aptr);
+    char *var_name = reinterpret_cast<sym_data*>(aptr);
+    sym_data& temp = sym_map[var_name];
+    std::free(aptr);
     ag = *reinterpret_cast<tensor_array::value::Tensor*>(temp.data);
 }
 
@@ -273,7 +276,8 @@ void op_set()
 {
     if (!ptr_stack.empty())
     {
-        sym_data& temp = ptr_stack.top();
+        std::string& var_name = ptr_stack.top();
+        sym_data& temp = sym_map[var_name];
         delete temp.data; // Set the top of the stack to ag
         temp.data = new tensor_array::value::Tensor(ag);
         ptr_stack.pop();

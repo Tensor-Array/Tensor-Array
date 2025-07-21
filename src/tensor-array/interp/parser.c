@@ -18,9 +18,6 @@ limitations under the License.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "sym_map.h"
 #include "parser.h"
 #include "token.h"
 #include "open_file.h"
@@ -70,16 +67,18 @@ void expression(int level)
         break;
     case TOKEN_ID:
         /* code */
-        temp = sym_cur;
+        //temp = sym_cur;
         match(TOKEN_ID);
+        /*
         if (!temp->data)
         {
             temp->data = new_Tensor();
         }
+        */
         if (0);
         else
         {
-            emit(3, IMM, TYPE_PTR, temp);
+            emit(3, IMM, TYPE_PTR, tkn_val);
             emit(1, GET);
         }
         break;
@@ -270,7 +269,7 @@ void program()
         interp_memreset();
         printf(">>> ");
         fflush(stdout);
-        read(0, src, poolsize-1); // Read input from stdin
+        fgets(src, poolsize-1, stdin); // Read input from stdin
         token_next();
         statement();
         emit(1, EXIT); // Emit a token with value 0 to indicate end of processing
