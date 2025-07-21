@@ -33,5 +33,8 @@ extern "C"
 #ifdef __cplusplus
 }
 
+#include <map>
+#include <string>
+
 extern std::map<std::string, sym_data> sym_map;
 #endif

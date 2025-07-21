@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <map>
 #include <cstring>
 #include <tensor-array/core/tensor.hh>
 #include "sym_map.h"
