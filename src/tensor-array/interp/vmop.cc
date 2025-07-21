@@ -266,7 +266,7 @@ void op_ptr_push()
 
 void op_get()
 {
-    char *var_name = reinterpret_cast<sym_data*>(aptr);
+    char *var_name = reinterpret_cast<char*>(aptr);
     sym_data& temp = sym_map[var_name];
     std::free(aptr);
     ag = *reinterpret_cast<tensor_array::value::Tensor*>(temp.data);
