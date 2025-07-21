@@ -51,9 +51,9 @@ void new_string()
 
 void op_imm()
 {
-    if (any_type = 0) new_string();
-    else if (any_type = 1) new_int();
-    else if (any_type = 2) new_ptr();
+    if (any_type == 0) new_string();
+    else if (any_type == 1) new_int();
+    else if (any_type == 2) new_ptr();
     else;
 }
 
@@ -260,22 +260,13 @@ void op_push()
 
 void op_ptr_push()
 {
-    std::cout << "test" << std::endl;
     ptr_stack.push(*reinterpret_cast<sym_data*>(aptr));
-    std::cout << "test" << std::endl;
 }
 
 void op_get()
 {
-    if (!ptr_stack.empty())
-    {
-        sym_data& temp = ptr_stack.top();
-        ag = *reinterpret_cast<tensor_array::value::Tensor*>(temp.data);
-    }
-    else
-    {
-        throw std::runtime_error("Tensor stack is empty");
-    }
+    sym_data& temp = *reinterpret_cast<sym_data*>(aptr);
+    ag = *reinterpret_cast<tensor_array::value::Tensor*>(temp.data);
 }
 
 void op_set()
@@ -285,6 +276,7 @@ void op_set()
         sym_data& temp = ptr_stack.top();
         delete temp.data; // Set the top of the stack to ag
         temp.data = new tensor_array::value::Tensor(ag);
+        ptr_stack.pop();
     }
     else
     {
