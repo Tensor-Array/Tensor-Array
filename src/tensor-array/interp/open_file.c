@@ -17,6 +17,7 @@ limitations under the License.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "vm.h"
 #include "open_file.h"
 
 char *src = NULL;
@@ -63,6 +64,7 @@ void read_file(const char* filename)
     
     int i;
     interp_malloc();
+    interp_memreset();
     i = fread(src, poolsize, 1, fptr);
     if (i < 0)
     {
@@ -70,5 +72,9 @@ void read_file(const char* filename)
         fclose(fptr);
         exit(1);
     }
-    return 0; // Return 0 on success
+    orig = text;
+    text = text - 1;
+    src[i] = '\0';
+    fclose(fptr);
+    
 }

@@ -20,7 +20,7 @@ limitations under the License.
 
 sym_data* sym_cur = NULL;
 
-std::map<std::string, sym_data> sym_map;
+scope sym_map;
 
 void sym_data_set(char* name, sym_data dat)
 {
@@ -36,13 +36,3 @@ int glob_data_find(char* name)
 {
     return sym_map.find(name) != sym_map.end();
 }
-
-void* new_Tensor()
-{
-    return new tensor_array::value::Tensor;
-}
-void delete_Tensor(void* t)
-{
-    delete t;
-}
-

@@ -236,6 +236,16 @@ void token_next()
             src++;
             tkn = TOKEN_MATMUL; // Store the token value
             return; // Exit after processing the token
+        case '[':
+        case ']':
+        case '(':
+        case ')':
+        case '{':
+        case '}':
+        case ',':
+        case ';':
+        case ':':
+            return;
         default:
             if (tkn >= '0' && tkn <= '9')
             {
@@ -294,7 +304,7 @@ void token_next()
             }
             else
             {
-                /* code to handle other tokens */
+                printf("invalid symbol %c", tkn)
             }
             break;
         }

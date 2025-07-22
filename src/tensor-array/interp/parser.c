@@ -21,6 +21,7 @@ limitations under the License.
 #include "parser.h"
 #include "token.h"
 #include "open_file.h"
+#include "vm_type.h"
 
 void emit(int size, ...)
 {
@@ -53,7 +54,7 @@ void match(long tk)
 
 void expression(int level)
 {
-    void* temp = NULL; // Temporary variable to hold intermediate values
+    sym_data* temp = NULL; // Temporary variable to hold intermediate values
     int isArrRef = 0; // Flag to check if we are dealing with an array reference
     // This function would handle parsing and evaluating expressions
     // For now, it is a placeholder
@@ -67,15 +68,19 @@ void expression(int level)
         break;
     case TOKEN_ID:
         /* code */
-        //temp = sym_cur;
+        temp = sym_cur;
         match(TOKEN_ID);
-        /*
-        if (!temp->data)
+        if (temp->type)
         {
-            temp->data = new_Tensor();
+            if (token == '(')
+            {
+                /* code */
+                match('(');
+                match(')');
+                emit(2, CALL, temp->data)
+            }
+            
         }
-        */
-        if (0);
         else
         {
             emit(3, IMM, TYPE_PTR, tkn_val);
@@ -247,6 +252,37 @@ void statement()
             *a = text + 1; // Set the jump address to the next instruction
         }
         break;
+    case TOKEN_FUNC:
+        match(TOKEN_FUNC);
+        if (tkn != TOKEN_ID)
+        {
+            fprintf(stderr, "Error: function name\n");
+            exit(1);
+        }
+        cur->type = TYPE_FUNC;
+        cur->data = malloc(1024*8);
+        VM_INSTRUCTION *save  = text;
+        text = cur->data
+        match(TOKEN_ID);
+        match('(');
+        match(')');
+        statement();
+        if (*text != RET) emit(1, RET);
+        text = save;
+        break;
+    case: TOKEN_RETURN:
+        match(TOKEN_RETURN);
+        expression(TOKEN_ASSIGN);
+        emit(1, RET);
+        break;
+    case '{':
+        match('{');
+        while (tkn != '}')
+            statement();
+        match('}');
+        break;
+    case '\0':
+        return;
     default:
         expression(TOKEN_ASSIGN);
         if (tkn == ';')

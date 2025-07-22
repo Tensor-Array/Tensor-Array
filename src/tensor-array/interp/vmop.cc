@@ -20,13 +20,18 @@ limitations under the License.
 #include <cstring>
 #include "sym_map.h"
 #include "vmop.h"
+#include "vm_type.h"
+
+typedef long VM_INSTRUCTION;
+extern VM_INSTRUCTION* pc;
 
 std::stack<tensor_array::value::Tensor> tensor_stack;
-std::stack<std::string> ptr_stack;
+std::stack<std::string> var_stack;
+std::stack<std::pair<long, scope>> call_stack;
 tensor_array::value::Tensor ag;
 void* aptr;
 long any_value;
-long any_type;
+VM_TYPE any_type;
 
 void new_int()
 {
@@ -51,10 +56,21 @@ void new_string()
 
 void op_imm()
 {
-    if (any_type == 0) new_string();
-    else if (any_type == 1) new_int();
-    else if (any_type == 2) new_ptr();
-    else;
+    switch (any_type)
+    {
+    case TYPE_INT:
+        /* code */
+        new_int();
+        break;
+    case TYPE_STRING:
+        new_string();
+        break;
+    case TYPE_PTR:
+        new_ptr();
+        break;
+    default:
+        break;
+    }
 }
 
 void op_add()
@@ -212,6 +228,19 @@ void op_shr()
     // ag = ag >> bg;
 }
 
+void op_call()
+{
+    VM_INSTRUCTION pc1 = (VM_INSTRUCTION)*pc++;
+    call_stack.push({std::move(pc), std::move(sym_map)});
+    pc = pc1;
+}
+
+void op_ret()
+{
+    [pc, sym_map] = std::move(call_stack.top());
+    call_stack.pop();
+}
+
 void op_open()
 {
     // Implementation for opening a file or resource
@@ -260,7 +289,7 @@ void op_push()
 
 void op_ptr_push()
 {
-    ptr_stack.push(reinterpret_cast<char*>(aptr));
+    var_stack.push(reinterpret_cast<char*>(aptr));
     std::free(aptr);
 }
 
@@ -274,13 +303,13 @@ void op_get()
 
 void op_set()
 {
-    if (!ptr_stack.empty())
+    if (!var_stack.empty())
     {
-        std::string& var_name = ptr_stack.top();
+        std::string& var_name = var_stack.top();
         sym_data& temp = sym_map[var_name];
         delete temp.data; // Set the top of the stack to ag
         temp.data = new tensor_array::value::Tensor(ag);
-        ptr_stack.pop();
+        var_stack.pop();
     }
     else
     {

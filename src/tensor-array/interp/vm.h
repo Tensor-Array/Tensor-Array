@@ -23,13 +23,6 @@ typedef enum
 
 typedef long VM_INSTRUCTION;
 
-typedef enum
-{
-    TYPE_STRING,
-    TYPE_INT,
-    TYPE_PTR
-} VM_TYPE;
-
 void eval();
 
 extern long any_value;

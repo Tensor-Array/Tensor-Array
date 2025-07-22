@@ -23,18 +23,18 @@ extern "C"
         long tkn;
         long hash;
         long cls;
+        long type;
         void* data; // Pointer to additional data if needed
     } sym_data;
     void sym_data_set(char* name, sym_data dat);
     sym_data* sym_data_get(char*);
     int glob_data_find(char* name);
     extern sym_data* sym_cur;
-    void* new_Tensor();
 #ifdef __cplusplus
 }
 
 #include <map>
 #include <string>
-
-extern std::map<std::string, sym_data> sym_map;
+typedef std::map<std::string, sym_data> scope;
+extern scope sym_map;
 #endif
