@@ -10,8 +10,8 @@ create_test_sourcelist(
     ${TensorArray_tests_src})
 
 add_executable(tensorarray_tests ${TensorArray_tests})
-target_include_directories(tensorarray_interpreter PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(tensorarray_interpreter TensorArray::Core)
+target_include_directories(tensorarray_tests PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_link_libraries(tensorarray_tests TensorArray::Core)
 
 foreach(test ${TensorArray_tests_src})
     get_filename_component(TName ${test} NAME_WE)
