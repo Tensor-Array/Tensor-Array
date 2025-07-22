@@ -14,18 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <cassert>
-#include <thread>
-#include <forward_list>
-#include <ostream>
-#include <cstring>
-#include "data_type_wrapper.hh"
 #ifndef TENSOR_CONTENT
 #define TENSOR_CONTENT
 #include "tensor.hh"
 #undef TENSOR_CONTENT
 #endif // !TENSOR_CONTENT
+
+#include <thread>
+#include <forward_list>
 #include <unordered_set>
+#include <cassert>
+#include <cstring>
+#include "data_type_wrapper.hh"
 
 #define USING_DATA_TYPE_FLOAT (float)(double)
 #define USING_DATA_TYPE_SINT (int8_t)(int16_t)(int32_t)(int64_t)

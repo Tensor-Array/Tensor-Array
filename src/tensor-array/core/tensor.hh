@@ -16,6 +16,7 @@ limitations under the License.
 
 #include <algorithm>
 #include <mutex>
+#include <ostream>
 #include "tensorbase.hh"
 
 #pragma once
