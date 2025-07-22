@@ -4,6 +4,8 @@ set(
     TensorArray_tests_src
     "tensor_array_test.cc"
     "print_output.cc"
+    "tensor_operators.cc"
+    "tensor_matmul_transpose.cc"
     "gradient.cc")
 
 enable_testing()
