@@ -14,12 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <iostream>
 #include <tensor-array/core/tensorbase.hh>
 
 using namespace tensor_array::value;
 
-int tensor_array(int argc, char const *argv[])
+int tensor_array_test(int argc, char const *argv[])
 {
     TensorArray<float, 4, 4> example_tensor_array =
     {{
@@ -28,5 +27,5 @@ int tensor_array(int argc, char const *argv[])
         {{ 9, 10, 11, 12 }},
         {{ 13, 14, 15, 16 }},
     }};
-  return 0;
+    return 0;
 }
