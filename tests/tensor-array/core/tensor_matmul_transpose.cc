@@ -26,7 +26,7 @@ int tensor_matmul_transpose(int argc, char *argv[])
         {{ 4, 5, 6 }}
     }};
     TensorArray<float> example_tensor_array_scalar = {100};
-    Tensor example_tensor_1(example_tensor_array_1);
+    Tensor example_tensor_1(example_tensor_array);
     Tensor example_tensor_2 = example_tensor_1.transpose(0, 1);
     Tensor example_tensor_add = matmul(example_tensor_1, example_tensor_2);
     return 0;
