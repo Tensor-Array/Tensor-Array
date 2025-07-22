@@ -13,6 +13,8 @@ add_subdirectory("src/tensor-array/core")
 add_subdirectory("src/tensor-array/layers")
 add_subdirectory("src/tensor-array/interp")
 
+add_subdirectory("tests/tensor-array/core")
+
 set(CPACK_PACKAGE_NAME "TensorArray")
 set(CPACK_PACKAGE_VENDOR "TensorArray-Creators")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY)

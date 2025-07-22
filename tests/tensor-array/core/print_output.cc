@@ -1,0 +1,36 @@
+/*
+Copyright 2024 TensorArray-Creators
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+#include <iostream>
+#include <tensor-array/core/tensor.hh>
+
+using namespace std;
+using namespace tensor_array::value;
+
+int print_output(int argc, char const *argv[])
+{
+    /* code */
+    TensorArray<float, 4, 4> example_tensor_array =
+    {{
+        {{ 1, 2, 3, 4 }},
+        {{ 5, 6, 7, 8 }},
+        {{ 9, 10, 11, 12 }},
+        {{ 13, 14, 15, 16 }},
+    }};
+    Tensor example_tensor_1(example_tensor_array);
+    cout << example_tensor_1 << endl;
+    return 0;
+}
