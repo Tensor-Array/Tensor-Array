@@ -20,7 +20,7 @@ limitations under the License.
 using namespace std;
 using namespace tensor_array::value;
 
-int gradient(int argc, char const *argv[])
+int gradient(int argc, char *argv[])
 {
     TensorArray<float, 4, 4> example_tensor_array =
     {{
