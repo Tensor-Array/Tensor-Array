@@ -27,11 +27,11 @@ extern VM_INSTRUCTION* pc;
 
 std::stack<tensor_array::value::Tensor> tensor_stack;
 std::stack<std::string> var_stack;
-std::stack<std::pair<long, scope>> call_stack;
+std::stack<std::pair<VM_INSTRUCTION*, scope>> call_stack;
 tensor_array::value::Tensor ag;
 void* aptr;
 long any_value;
-VM_TYPE any_type;
+long any_type;
 
 void new_int()
 {
@@ -230,14 +230,15 @@ void op_shr()
 
 void op_call()
 {
-    VM_INSTRUCTION pc1 = (VM_INSTRUCTION)*pc++;
+    VM_INSTRUCTION* pc1 = (VM_INSTRUCTION*)*pc++;
     call_stack.push({std::move(pc), std::move(sym_map)});
     pc = pc1;
 }
 
 void op_ret()
 {
-    [pc, sym_map] = std::move(call_stack.top());
+    pc = call_stack.top().first;
+    sym_map = std::move(call_stack.top().second);
     call_stack.pop();
 }
 

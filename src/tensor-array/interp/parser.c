@@ -21,6 +21,7 @@ limitations under the License.
 #include "parser.h"
 #include "token.h"
 #include "open_file.h"
+#include "sym_map.h"
 #include "vm_type.h"
 
 void emit(int size, ...)
@@ -72,12 +73,12 @@ void expression(int level)
         match(TOKEN_ID);
         if (temp->type)
         {
-            if (token == '(')
+            if (tkn == '(')
             {
                 /* code */
                 match('(');
                 match(')');
-                emit(2, CALL, temp->data)
+                emit(2, CALL, temp->data);
             }
             
         }
@@ -259,10 +260,10 @@ void statement()
             fprintf(stderr, "Error: function name\n");
             exit(1);
         }
-        cur->type = TYPE_FUNC;
-        cur->data = malloc(1024*8);
+        sym_cur->type = TYPE_FUNC;
+        sym_cur->data = malloc(1024*8);
         VM_INSTRUCTION *save  = text;
-        text = cur->data
+        text = sym_cur->data;
         match(TOKEN_ID);
         match('(');
         match(')');
@@ -270,7 +271,7 @@ void statement()
         if (*text != RET) emit(1, RET);
         text = save;
         break;
-    case: TOKEN_RETURN:
+    case TOKEN_RETURN:
         match(TOKEN_RETURN);
         expression(TOKEN_ASSIGN);
         emit(1, RET);

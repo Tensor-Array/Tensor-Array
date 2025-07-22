@@ -304,7 +304,7 @@ void token_next()
             }
             else
             {
-                printf("invalid symbol %c", tkn)
+                printf("invalid symbol %c", tkn);
             }
             break;
         }
