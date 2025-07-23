@@ -15,7 +15,7 @@ You need to clone repository by using [Git](https://git-scm.com/)
 
 You need to install `Tensor-Array` with [CMake](https://cmake.org/)
 
-If you use NVIDIA GPUs and NVIDIA CUDA you can install `Tensor-Array` by using:
+If you use [NVIDIA](https://www.nvidia.com/) GPUs and [NVIDIA CUDA](https://developer.nvidia.com/cuda-toolkit) you can install `Tensor-Array` by using:
 
 ```shell
 git clone https://github.com/Tensor-Array/Tensor-Array.git
@@ -28,7 +28,7 @@ cmake --install .
 cd ..
 ```
 
-If you use AMD GPUs and AMD ROCm hip, then replace `-DUSE_CUDA=ON` to `-DUSE_ROCM_HIP=ON`.
+If you use [AMD](https://www.amd.com/) GPUs and AMD ROCm HIP, then replace `-DUSE_CUDA=ON` to `-DUSE_ROCM_HIP=ON`.
 
 ## Why this repository named `Tensor-Array`
 
