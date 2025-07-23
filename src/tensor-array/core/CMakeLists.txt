@@ -9,8 +9,17 @@ install(
 
 file(GLOB TensorArray_src_cc "*.cc")
 
-find_package(hip)
+    enable_language(CUDA)
+    find_package(CUDAToolkit)
+    
+    if (CUDAToolkit_FOUND)
+        # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
+        set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
+        # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
+    endif()
 
+find_package(hip)
+#[[
 if (hip_FOUND)
     enable_language(HIP)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
@@ -26,7 +35,7 @@ else()
         # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
     endif()
 endif()
-
+]]
 if (hip_FOUND OR CUDAToolkit_FOUND)
     file(GLOB TensorArray_src_cu "*.cu")
 endif()
@@ -60,9 +69,9 @@ elif (CUDAToolkit_FOUND)
 
     target_link_libraries(
         tensorarray_core PRIVATE
-        CUDA::cudart CUDA::cudart_static
-        CUDA::curand CUDA::curand_static
-        CUDA::cublas CUDA::cublas_static
+        CUDA::cudart_static
+        CUDA::curand_static
+        CUDA::cublas_static
         )
 endif()
 
