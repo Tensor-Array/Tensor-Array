@@ -59,7 +59,12 @@ elif (CUDAToolkit_FOUND)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
 
-    target_link_libraries(tensorarray_core PRIVATE CUDA::cudart CUDA::cudart_static CUDA::curand CUDA::cublas CUDA::cublasLt)
+    target_link_libraries(
+        tensorarray_core PRIVATE
+        CUDA::cudart CUDA::cudart_static
+        CUDA::curand CUDA::curand_static
+        CUDA::cublas CUDA::cublas_static
+        )
 endif()
 
 install(
