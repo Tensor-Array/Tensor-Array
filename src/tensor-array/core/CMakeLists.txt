@@ -7,7 +7,7 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/core
     COMPONENT headers)
 
-find_package(hip)
+# find_package(hip)
 
 if (hip_FOUND)
     enable_language(HIP)
