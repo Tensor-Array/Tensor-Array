@@ -7,19 +7,8 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/core
     COMPONENT headers)
 
-file(GLOB TensorArray_src_cc "*.cc")
-
-    enable_language(CUDA)
-    find_package(CUDAToolkit)
-    
-    if (CUDAToolkit_FOUND)
-        # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
-        set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
-        # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
-    endif()
-
 find_package(hip)
-#[[
+
 if (hip_FOUND)
     enable_language(HIP)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
@@ -35,7 +24,9 @@ else()
         # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
     endif()
 endif()
-]]
+
+file(GLOB TensorArray_src_cc "*.cc")
+
 if (hip_FOUND OR CUDAToolkit_FOUND)
     file(GLOB TensorArray_src_cu "*.cu")
 endif()
