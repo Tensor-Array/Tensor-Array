@@ -24,7 +24,6 @@ else()
         # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
         set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
         # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
-        include_directories(${CUDAToolkit_INCLUDE_DIRS})
     endif()
 endif()
 

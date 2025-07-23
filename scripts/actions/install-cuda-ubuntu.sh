@@ -139,7 +139,5 @@ then
     echo "Adding CUDA to CUDA_PATH, PATH and LD_LIBRARY_PATH"
     echo "${CUDA_PATH}/bin" >> $GITHUB_PATH
     echo "CUDA_PATH=${CUDA_PATH}" >> $GITHUB_ENV
-    echo "PATH=$PATH:$CUDA_PATH/bin" >> $GITHUB_ENV
-    echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDA_PATH}/lib" >> $GITHUB_ENV
-    echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDA_PATH}/lib64" >> $GITHUB_ENV
+    echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}" >> $GITHUB_ENV
 fi
