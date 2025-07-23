@@ -7,7 +7,7 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/core
     COMPONENT headers)
 
-if (CMAKE_HIP_COMPILER_ROCM_ROOT)
+if(USE_ROCM_HIP)
     enable_language(HIP)
     find_package(hip)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
@@ -15,14 +15,15 @@ if (CMAKE_HIP_COMPILER_ROCM_ROOT)
     # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
 endif()
 
-if(CMAKE_CUDA_COMPILER)
+if(USE_CUDA)
     enable_language(CUDA)
     find_package(CUDAToolkit)
     
+    # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
+    set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
+    # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
     if (CUDAToolkit_FOUND)
-        # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
-        set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
-        # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
+        
     endif()
 endif()
 
@@ -54,7 +55,9 @@ if(hip_FOUND)
     endforeach()
 
     target_link_libraries(tensorarray_core PRIVATE hip::host hip::device)
-elif (CUDAToolkit_FOUND)
+endif()
+
+if (CUDAToolkit_FOUND)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
