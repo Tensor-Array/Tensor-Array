@@ -29,7 +29,7 @@ endif()
 
 file(GLOB TensorArray_src_cc "*.cc")
 
-if (USE_CUDA OR USE_ROCM_HIP)
+if (CMAKE_CUDA_COMPILER OR CMAKE_HIP_COMPILER)
     file(GLOB TensorArray_src_cu "*.cu")
 endif()
 
