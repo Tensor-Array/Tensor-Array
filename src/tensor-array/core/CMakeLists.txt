@@ -11,6 +11,9 @@ include(CheckLanguage)
 
 check_language(HIP)
 if(CMAKE_HIP_COMPILER)
+    unset(CMAKE_HIP_COMPILER CACHE)
+    unset(CMAKE_HIP_HOST_COMPILER CACHE)
+    unset(CMAKE_HIP_PLATFORM CACHE)
     enable_language(HIP)
     find_package(hip REQUIRED)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
@@ -20,6 +23,8 @@ endif()
 
 check_language(CUDA)
 if(CMAKE_CUDA_COMPILER AND (NOT CMAKE_HIP_COMPILER))
+    unset(CMAKE_CUDA_COMPILER CACHE)
+    unset(CMAKE_CUDA_HOST_COMPILER CACHE)
     enable_language(CUDA)
     
     find_package(CUDAToolkit REQUIRED)
