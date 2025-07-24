@@ -7,27 +7,30 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/core
     COMPONENT headers)
 
-file(GLOB TensorArray_src_cc "*.cc")
+include(CheckLanguage)
 
-find_package(hip)
-
-if (hip_FOUND)
+check_language(HIP)
+if(CMAKE_HIP_COMPILER)
     enable_language(HIP)
+    find_package(hip REQUIRED)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
     # set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
     # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
-else()
-    find_package(CUDAToolkit)
-    
-    if (CUDAToolkit_FOUND)
-        enable_language(CUDA)
-        # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
-        set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
-        # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
-    endif()
 endif()
 
-if (hip_FOUND OR CUDAToolkit_FOUND)
+check_language(CUDA)
+if(CMAKE_CUDA_COMPILER AND (NOT CMAKE_HIP_COMPILER))
+    enable_language(CUDA)
+    
+    find_package(CUDAToolkit REQUIRED)
+    # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
+    set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
+    # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
+endif()
+
+file(GLOB TensorArray_src_cc "*.cc")
+
+if (CMAKE_CUDA_COMPILER OR CMAKE_HIP_COMPILER)
     file(GLOB TensorArray_src_cu "*.cu")
 endif()
 
@@ -43,7 +46,7 @@ set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD 17)
 set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core PROPERTY CXX_EXTENSIONS OFF)
 
-if(hip_FOUND)
+if(CMAKE_HIP_COMPILER)
     set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY HIP_EXTENSIONS OFF)
@@ -53,13 +56,12 @@ if(hip_FOUND)
     endforeach()
 
     target_link_libraries(tensorarray_core PRIVATE hip::host hip::device)
-elif (CUDAToolkit_FOUND)
+endif()
+
+if (CMAKE_CUDA_COMPILER)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
-
-    target_include_directories(tensorarray_core PRIVATE ${CUDAToolkit_INCLUDE_DIRS})
-    target_link_directories(tensorarray_core PRIVATE ${CUDAToolkit_LIBRARY_DIR})
 endif()
 
 install(
