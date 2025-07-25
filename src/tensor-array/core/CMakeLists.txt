@@ -5,14 +5,13 @@ file(GLOB TensorArray_inc "*.hh")
 install(
     FILES ${TensorArray_inc}
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/core
-    COMPONENT headers)
-
-execute_process(
-    COMMAND which hipcc
-    OUTPUT_VARIABLE WHICH_HIPCC_OUT
-    RESULT_VARIABLE WHICH_HIPCC_RET
+    COMPONENT headers
 )
-if(WHICH_HIPCC_RET EQUAL 0)
+
+include(CheckLanguage)
+
+check_language(HIP)
+if(CMAKE_HIP_COMPILER)
     enable_language(HIP)
     find_package(hip REQUIRED)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
@@ -20,16 +19,11 @@ if(WHICH_HIPCC_RET EQUAL 0)
     # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
 endif()
 
-execute_process(
-    COMMAND which nvcc
-    OUTPUT_VARIABLE WHICH_NVCC_OUT
-    RESULT_VARIABLE WHICH_NVCC_RET
-)
-
-if(WHICH_NVCC_RET EQUAL 0 AND NOT WHICH_HIPCC_RET EQUAL 0)
+check_language(CUDA)
+if(CMAKE_CUDA_COMPILER EQUAL 0 AND NOT CMAKE_HIP_COMPILER)
     enable_language(CUDA)
     
-    find_package(CUDAToolkit REQUIRED)
+    # find_package(CUDAToolkit REQUIRED)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
     set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
     # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
@@ -37,7 +31,7 @@ endif()
 
 file(GLOB TensorArray_src_cc "*.cc")
 
-if (WHICH_NVCC_RET EQUAL 0 OR WHICH_HIPCC_RET EQUAL 0)
+if (CMAKE_CUDA_COMPILER OR CMAKE_HIP_COMPILER)
     file(GLOB TensorArray_src_cu "*.cu")
 endif()
 
@@ -53,7 +47,7 @@ set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD 17)
 set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core PROPERTY CXX_EXTENSIONS OFF)
 
-if(WHICH_HIPCC_RET EQUAL 0)
+if(CMAKE_HIP_COMPILER)
     set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY HIP_EXTENSIONS OFF)
@@ -63,7 +57,9 @@ if(WHICH_HIPCC_RET EQUAL 0)
     endforeach()
 
     target_link_libraries(tensorarray_core PRIVATE hip::host hip::device)
-elif(WHICH_NVCC_RET EQUAL 0)
+endif()
+
+if(CMAKE_CUDA_COMPILER)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
