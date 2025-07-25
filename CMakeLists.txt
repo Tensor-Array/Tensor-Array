@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(TensorArray CXX)
+project(TensorArray C CXX)
 
 include(GNUInstallDirs)
 # set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})

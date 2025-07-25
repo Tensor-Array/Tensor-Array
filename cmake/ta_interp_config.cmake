@@ -1,6 +1,4 @@
 block(SCOPE_FOR POLICIES)
-    enable_language(C)
-    
     file(
         GLOB TensorArray_Interpreter_src
         "${PROJECT_SOURCE_DIR}/src/tensor-array/interp/*.c"

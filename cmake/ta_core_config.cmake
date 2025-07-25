@@ -1,13 +1,17 @@
 block(SCOPE_FOR POLICIES)
     include(CheckLanguage)
 
+    include(CheckLanguage)
+    check_language(HIP)
+    check_language(CUDA)
+
     file(GLOB TensorArray_Core_cc "${PROJECT_SOURCE_DIR}/src/tensor-array/core/*.cc")
 
-    if ((DEFINED ENV{CUDA_PATH}) OR (DEFINED ENV{ROCM_BRANCH}))
+    if (CMAKE_CUDA_COMPILER OR CMAKE_HIP_COMPILER)
         file(GLOB TensorArray_Core_cu "${PROJECT_SOURCE_DIR}/src/tensor-array/core/*.cu")
     endif()
 
-    if(DEFINED ENV{ROCM_BRANCH})
+    if(CMAKE_HIP_COMPILER)
         block(PROPAGATE tensorarray_core)
             enable_language(HIP)
             find_package(hip REQUIRED)
@@ -26,7 +30,7 @@ block(SCOPE_FOR POLICIES)
         # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
         # set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
         # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
-    elif(DEFINED ENV{CUDA_PATH})
+    elseif(CMAKE_CUDA_COMPILER)
         block(PROPAGATE tensorarray_core)
             enable_language(CUDA)
             add_library(tensorarray_core SHARED ${TensorArray_Core_cc} ${TensorArray_Core_cu})
