@@ -33,7 +33,7 @@ elseif(CMAKE_CUDA_COMPILER)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
-    set_property(TARGET tensorarray_core PROPERTY CMAKE_CUDA_SEPARABLE_COMPILATION ON)
+    set_property(TARGET tensorarray_core PROPERTY CUDA_SEPARABLE_COMPILATION ON)
     target_include_directories(tensorarray_core PRIVATE ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
         
         # find_package(CUDAToolkit REQUIRED)
