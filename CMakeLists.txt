@@ -21,7 +21,7 @@ install(
     COMPONENT headers
 )
 
-block()
+block(SCOPE_FOR POLICIES)
     include(CheckLanguage)
 
     check_language(HIP)
@@ -33,7 +33,7 @@ block()
     endif()
 
     if(CMAKE_HIP_COMPILER)
-        block(PROPAGATE tensorarray_core TensorArray_Core_cc TensorArray_Core_cu)
+        block(PROPAGATE tensorarray_core)
             enable_language(HIP)
             find_package(hip REQUIRED)
 
@@ -52,7 +52,7 @@ block()
         # set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
         # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
     elif(CMAKE_CUDA_COMPILER)
-        block(PROPAGATE tensorarray_core TensorArray_Core_cc TensorArray_Core_cu)
+        block(PROPAGATE tensorarray_core)
             enable_language(CUDA)
             
             add_library(tensorarray_core SHARED ${TensorArray_Core_cc} ${TensorArray_Core_cu})
@@ -60,6 +60,7 @@ block()
             set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
             set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
             set_property(TARGET tensorarray_core PROPERTY CMAKE_CUDA_SEPARABLE_COMPILATION ON)
+            target_include_directories(tensorarray_core PUBLIC ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
         endblock()
         
         # find_package(CUDAToolkit REQUIRED)
@@ -97,7 +98,7 @@ block()
 
 endblock()
 
-block()
+block(SCOPE_FOR POLICIES)
     file(GLOB TensorArray_Layers_src "${PROJECT_SOURCE_DIR}/src/tensor-array/layers/*.cc")
 
     add_library(tensorarray_layers SHARED ${TensorArray_Layers_src})
@@ -126,7 +127,7 @@ block()
     add_library(TensorArray::Layers ALIAS tensorarray_layers)
 endblock()
 
-block()
+block(SCOPE_FOR POLICIES)
     file(
         GLOB TensorArray_Interpreter_src
         "${PROJECT_SOURCE_DIR}/src/tensor-array/interp/*.c"
