@@ -38,7 +38,6 @@ block(SCOPE_FOR POLICIES)
             set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
             set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
             set_property(TARGET tensorarray_core PROPERTY CMAKE_CUDA_SEPARABLE_COMPILATION ON)
-            set_source_files_properties(data_type_wrapper.cc PROPERTIES LANGUAGE CUDA)
         endblock()
         
         # find_package(CUDAToolkit REQUIRED)
