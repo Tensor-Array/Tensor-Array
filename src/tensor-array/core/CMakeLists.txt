@@ -7,13 +7,12 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tensor-array/core
     COMPONENT headers)
 
-include(CheckLanguage)
-
-check_language(HIP)
-if(CMAKE_HIP_COMPILER)
-    unset(CMAKE_HIP_COMPILER CACHE)
-    unset(CMAKE_HIP_HOST_COMPILER CACHE)
-    unset(CMAKE_HIP_PLATFORM CACHE)
+execute_process(
+    COMMAND which hipcc
+    OUTPUT_VARIABLE WHICH_HIPCC_OUT
+    RESULT_VARIABLE WHICH_HIPCC_RET
+)
+if(WHICH_HIPCC_RET EQUAL 0)
     enable_language(HIP)
     find_package(hip REQUIRED)
     # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
@@ -21,10 +20,13 @@ if(CMAKE_HIP_COMPILER)
     # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
 endif()
 
-check_language(CUDA)
-if(CMAKE_CUDA_COMPILER AND (NOT CMAKE_HIP_COMPILER))
-    unset(CMAKE_CUDA_COMPILER CACHE)
-    unset(CMAKE_CUDA_HOST_COMPILER CACHE)
+execute_process(
+    COMMAND which nvcc
+    OUTPUT_VARIABLE WHICH_NVCC_OUT
+    RESULT_VARIABLE WHICH_NVCC_RET
+)
+
+if(WHICH_NVCC_RET EQUAL 0 AND NOT WHICH_HIPCC_RET EQUAL 0)
     enable_language(CUDA)
     
     find_package(CUDAToolkit REQUIRED)
@@ -35,7 +37,7 @@ endif()
 
 file(GLOB TensorArray_src_cc "*.cc")
 
-if (CMAKE_CUDA_COMPILER OR CMAKE_HIP_COMPILER)
+if (WHICH_NVCC_RET EQUAL 0 OR WHICH_HIPCC_RET EQUAL 0)
     file(GLOB TensorArray_src_cu "*.cu")
 endif()
 
@@ -51,7 +53,7 @@ set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD 17)
 set_property(TARGET tensorarray_core PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core PROPERTY CXX_EXTENSIONS OFF)
 
-if(CMAKE_HIP_COMPILER)
+if(WHICH_HIPCC_RET EQUAL 0)
     set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY HIP_EXTENSIONS OFF)
@@ -61,9 +63,7 @@ if(CMAKE_HIP_COMPILER)
     endforeach()
 
     target_link_libraries(tensorarray_core PRIVATE hip::host hip::device)
-endif()
-
-if (CMAKE_CUDA_COMPILER)
+elif(WHICH_NVCC_RET EQUAL 0)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD 17)
     set_property(TARGET tensorarray_core PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core PROPERTY CUDA_EXTENSIONS OFF)
