@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.18)
 
-cmake_policy(SET CMP0104 NEW)
-
 project(TensorArray C CXX)
 
 include(GNUInstallDirs)
