@@ -23,7 +23,7 @@ if(CMAKE_HIP_COMPILER)
         set_source_files_properties(${TensorArray_src_hip} PROPERTIES LANGUAGE HIP)
     endforeach()
 
-    target_link_libraries(tensorarray_core PRIVATE hip::host hip::device)
+    target_link_libraries(tensorarray_core PRIVATE hip::host)
         # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
         # set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
         # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
