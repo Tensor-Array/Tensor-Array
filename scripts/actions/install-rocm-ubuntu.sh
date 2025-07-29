@@ -31,7 +31,7 @@ LINUX_VERSION="${LINUX_VERSION//.}"
 
 LOCATION_TEMP=${temp}
 
-CUDA_VERSION_MAJOR_MINOR=${rocm}
+ROCM_VERSION_MAJOR_MINOR=${rocm}
 
 CPU_ARCH=$(uname -m)
 if [[ "${CPU_ARCH}" == "aarch64" ]]
@@ -44,7 +44,7 @@ ROCM_PACKAGES=""
 for package in "${ROCM_PACKAGES_IN[@]}"
 do : 
     # Build the full package name and append to the string.
-    ROCM_PACKAGES+=" ${package}-${CUDA_MAJOR}-${CUDA_MINOR}"
+    ROCM_PACKAGES+=" ${package}"
 done
 echo "ROCM_PACKAGES ${ROCM_PACKAGES}"
 
@@ -82,7 +82,7 @@ fi
 
 ROCM_GPG_KEYRING=/etc/apt/keyrings/rocm.gpg
 
-echo "Adding CUDA Repository"
+echo "Adding ROCm Repository"
 wget ${GPG_URL} -O - | \
     gpg --dearmor | $USE_SUDO tee ${ROCM_GPG_KEYRING} > /dev/null
 echo "deb [arch=amd64 signed-by=${ROCM_GPG_KEYRING}] ${REPO_URL} jammy main" \
@@ -95,7 +95,7 @@ $USE_SUDO apt-get -y install ${ROCM_PACKAGES}
 
 if [[ $? -ne 0 ]]
 then
-    echo "CUDA Installation Error."
+    echo "ROCm Installation Error."
     exit 1
 fi
 
@@ -108,7 +108,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ROCM_PATH/lib64"
 
 if [[ $GITHUB_ACTIONS ]]
 then
-    echo "Adding CUDA to CUDA_PATH, PATH and LD_LIBRARY_PATH"
+    echo "Adding ROCM to ROCM_PATH, PATH and LD_LIBRARY_PATH"
     echo "${ROCM_PATH}/bin" >> $GITHUB_PATH
     echo "ROCM_PATH=${ROCM_PATH}" >> $GITHUB_ENV
     echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}" >> $GITHUB_ENV
