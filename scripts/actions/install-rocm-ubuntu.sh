@@ -1,5 +1,5 @@
 ROCM_PACKAGES_IN=(
-    rocm-hip-runtime-devel
+    rocm-hip-runtime-dev
 )
 
 function version_ge() {
