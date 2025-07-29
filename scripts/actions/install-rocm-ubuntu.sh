@@ -75,20 +75,24 @@ else
     USE_SUDO=
 fi
 
-if [ -e /etc/apt/keyrings ]
+KEYRINGS_DIR=/etc/apt/keyrings
+
+if [ ! -e $KEYRINGS_DIR ]
 then
-    $USE_SUDO mkdir --parents --mode=0755 /etc/apt/keyrings
+    echo "Create directory: ${KEYRINGS_DIR}"
+    $USE_SUDO mkdir --parents --mode=0755 ${KEYRINGS_DIR}
 fi
 
-ROCM_GPG_KEYRING=/etc/apt/keyrings/rocm.gpg
+ROCM_GPG_KEYRING=${KEYRINGS_DIR}/rocm.gpg
 
-echo "Adding ROCm Repository"
+echo "Adding ROCm Repository:"
 wget ${GPG_URL} -O - | \
     gpg --dearmor | $USE_SUDO tee ${ROCM_GPG_KEYRING} > /dev/null
 echo "deb [arch=amd64 signed-by=${ROCM_GPG_KEYRING}] ${REPO_URL} jammy main" \
     | $USE_SUDO tee /etc/apt/sources.list.d/rocm.list
 echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
     | $USE_SUDO tee /etc/apt/preferences.d/rocm-pin-600
+echo "Adding ROCm Repository completed."
 $USE_SUDO apt-get update
 
 $USE_SUDO apt-get -y install ${ROCM_PACKAGES}
