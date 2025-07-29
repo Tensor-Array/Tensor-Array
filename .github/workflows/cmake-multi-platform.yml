@@ -27,8 +27,6 @@ jobs:
           gpu-compiler: "rocm"
         include:
         - gpu-compiler: "cuda"
-          cuda-version: "12.9"
-        - gpu-compiler: "cuda"
           cuda-version: "12.4"
         - gpu-compiler: "rocm"
           rocm-version: "6.4.2"
@@ -40,7 +38,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Run CUDA bash shell Ubuntu/Debian
+    - name: Run ${{ matrix.gpu-compiler }} bash shell Ubuntu/Debian
       if: (startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian'))
       env:
         temp: ${{ runner.temp }}
@@ -51,7 +49,7 @@ jobs:
         ${{github.workspace}}/scripts/actions/install-${{ matrix.gpu-compiler }}-ubuntu.sh
       shell: bash
 
-    - name: Run CUDA bash shell Windows
+    - name: Run ${{ matrix.gpu-compiler }} bash shell Windows
       if: runner.os == 'Windows'
       env:
         temp: ${{ runner.temp }}

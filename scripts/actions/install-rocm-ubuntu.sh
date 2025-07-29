@@ -29,6 +29,9 @@ LINUX_ID="${LINUX_ID,,}"
 LINUX_VERSION=$(lsb_release -sr)
 LINUX_VERSION="${LINUX_VERSION//.}"
 
+LINUX_CODENAME=$(lsb_release -cs)
+LINUX_CODENAME="${LINUX_CODENAME,,}"
+
 LOCATION_TEMP=${temp}
 
 ROCM_VERSION_MAJOR_MINOR=${rocm}
@@ -88,7 +91,7 @@ ROCM_GPG_KEYRING=${KEYRINGS_DIR}/rocm.gpg
 echo "Adding ROCm Repository:"
 wget ${GPG_URL} -O - | \
     gpg --dearmor | $USE_SUDO tee ${ROCM_GPG_KEYRING} > /dev/null
-echo "deb [arch=amd64 signed-by=${ROCM_GPG_KEYRING}] ${REPO_URL} jammy main" \
+echo "deb [arch=amd64 signed-by=${ROCM_GPG_KEYRING}] ${REPO_URL} ${LINUX_CODENAME} main" \
     | $USE_SUDO tee /etc/apt/sources.list.d/rocm.list
 echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
     | $USE_SUDO tee /etc/apt/preferences.d/rocm-pin-600
