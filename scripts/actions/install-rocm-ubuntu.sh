@@ -90,7 +90,7 @@ ROCM_GPG_KEYRING=${KEYRINGS_DIR}/rocm.gpg
 
 echo "Adding ROCm Repository:"
 wget ${GPG_URL} -O - | \
-    gpg --dearmor | $USE_SUDO tee ${ROCM_GPG_KEYRING} > /dev/null
+    gpg --dearmor | $USE_SUDO tee ${ROCM_GPG_KEYRING}
 echo "deb [arch=amd64 signed-by=${ROCM_GPG_KEYRING}] ${REPO_URL} ${LINUX_CODENAME} main" \
     | $USE_SUDO tee /etc/apt/sources.list.d/rocm.list
 echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
