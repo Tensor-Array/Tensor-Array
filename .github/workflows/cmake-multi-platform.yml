@@ -36,7 +36,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Run ROCm bash shell Ubuntu/Debian
-      if: (startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian')) && ${{ matrix.rocm-enabled }}
+      if: (startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian')) && matrix.rocm-enabled
       env:
         temp: ${{ runner.temp }}
         rocm: ${{ matrix.rocm-version }}
