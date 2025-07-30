@@ -21,41 +21,46 @@ jobs:
       fail-fast: false
       matrix:
         os: [ "ubuntu-22.04", "ubuntu-22.04-arm" ]
-        gpu-compiler: [ "cuda", "rocm" ]
-        exclude:
-        - os: "ubuntu-22.04-arm"
-          gpu-compiler: "rocm"
+        cuda-version: [ "12.9", "12.4", "11.8" ]
+        rocm-enabled: [ false ]
         include:
-        - gpu-compiler: "cuda"
-          cuda-version: "12.4"
-        - gpu-compiler: "rocm"
+        - os: "ubuntu-22.04"
+          cuda-version: "11.8"
+          rocm-enabled: true
           rocm-version: "6.4.2"
         - os: "windows-latest"
-          gpu-compiler: "cuda"
           cuda-version: "12.4.1"
 
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
+
+    - name: Run ROCm bash shell Ubuntu/Debian
+      if: (startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian')) && ${{ matrix.rocm-enabled }}
+      env:
+        temp: ${{ runner.temp }}
+        rocm: ${{ matrix.rocm-version }}
+      run: |
+        chmod +x ${{github.workspace}}/scripts/actions/install-rocm-ubuntu.sh
+        ${{github.workspace}}/scripts/actions/install-rocm-ubuntu.sh
+      shell: bash
     
-    - name: Run ${{ matrix.gpu-compiler }} bash shell Ubuntu/Debian
-      if: (startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian'))
+    - name: Run CUDA bash shell Ubuntu/Debian
+      if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian')
       env:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
-        rocm: ${{ matrix.rocm-version }}
       run: |
-        chmod +x ${{github.workspace}}/scripts/actions/install-${{ matrix.gpu-compiler }}-ubuntu.sh
-        ${{github.workspace}}/scripts/actions/install-${{ matrix.gpu-compiler }}-ubuntu.sh
+        chmod +x ${{github.workspace}}/scripts/actions/install-cuda-ubuntu.sh
+        ${{github.workspace}}/scripts/actions/install-cuda-ubuntu.sh
       shell: bash
 
-    - name: Run ${{ matrix.gpu-compiler }} bash shell Windows
+    - name: Run CUDA bash shell Windows
       if: runner.os == 'Windows'
       env:
         temp: ${{ runner.temp }}
         cuda: ${{ matrix.cuda-version }}
-        rocm: ${{ matrix.rocm-version }}
-      run: scripts/actions/install-${{ matrix.gpu-compiler }}-windows.ps1
+      run: scripts/actions/install-cuda-windows.ps1
       shell: pwsh
 
     - name: Configure CMake

@@ -1,33 +1,13 @@
 include(CheckLanguage)
-
-include(CheckLanguage)
-check_language(HIP)
 check_language(CUDA)
 
 file(GLOB TensorArray_Core_cc "${PROJECT_SOURCE_DIR}/src/tensor-array/core/*.cc")
 
-if (CMAKE_CUDA_COMPILER OR CMAKE_HIP_COMPILER)
+if (CMAKE_CUDA_COMPILER)
     file(GLOB TensorArray_Core_cu "${PROJECT_SOURCE_DIR}/src/tensor-array/core/*.cu")
 endif()
 
-if(CMAKE_HIP_COMPILER)
-    enable_language(HIP)
-    find_package(hip REQUIRED)
-
-    add_library(tensorarray_core SHARED ${TensorArray_Core_cc} ${TensorArray_Core_cu})
-    set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD 17)
-    set_property(TARGET tensorarray_core PROPERTY HIP_STANDARD_REQUIRED ON)
-    set_property(TARGET tensorarray_core PROPERTY HIP_EXTENSIONS OFF)
-
-    foreach(TensorArray_src_hip ${TensorArray_src_cu})
-        set_source_files_properties(${TensorArray_src_hip} PROPERTIES LANGUAGE HIP)
-    endforeach()
-
-    target_link_libraries(tensorarray_core PRIVATE hip::host)
-        # set(CMAKE_CUDA_ARCHITECTURES 52 75 89)
-        # set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
-        # list(APPEND CMAKE_CUDA_FLAGS "--default-stream per-thread")
-elseif(CMAKE_CUDA_COMPILER)
+if(CMAKE_CUDA_COMPILER)
     enable_language(CUDA)
     find_package(CUDAToolkit REQUIRED)
     add_library(tensorarray_core SHARED ${TensorArray_Core_cc} ${TensorArray_Core_cu})
