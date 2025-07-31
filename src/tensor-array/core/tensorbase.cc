@@ -23,10 +23,10 @@ limitations under the License.
 #include <cstdio>
 #include <cstring>
 
-#define USING_DATA_TYPE_FLOAT (float)(double)
-#define USING_DATA_TYPE_SINT (int8_t)(int16_t)(int32_t)(int64_t)
-#define USING_DATA_TYPE_UINT (uint8_t)(uint16_t)(uint32_t)(uint64_t)
-#define USING_DATA_TYPE USING_DATA_TYPE_SINT USING_DATA_TYPE_UINT USING_DATA_TYPE_FLOAT
+#define USING_DATA_TYPE_FLOAT() (float)(double)
+#define USING_DATA_TYPE_SINT() (int8_t)(int16_t)(int32_t)(int64_t)
+#define USING_DATA_TYPE_UINT() (uint8_t)(uint16_t)(uint32_t)(uint64_t)
+#define USING_DATA_TYPE USING_DATA_TYPE_SINT() USING_DATA_TYPE_UINT() USING_DATA_TYPE_FLOAT()
 
 #define LOOP(seq) END(A seq)
 #define BODY(x) ADD_CODE(x)

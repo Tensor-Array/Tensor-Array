@@ -35,24 +35,24 @@ limitations under the License.
 #define END(...) END_(__VA_ARGS__)
 #define END_(...) __VA_ARGS__##_END
 
-#define USING_DATA_TYPE_NVIDIA_FLOAT_8 (__nv_fp8_e4m3)(__nv_fp8_e5m2)
-#define USING_DATA_TYPE_NVIDIA_FLOAT (__half)(__nv_bfloat16)
-#define USING_DATA_TYPE_FLOAT (float)(double)
-#define USING_DATA_TYPE_SINT (int16_t)(int32_t)(int64_t)
-#define USING_DATA_TYPE_UINT (uint16_t)(uint32_t)(uint64_t)
+#define USING_DATA_TYPE_NVIDIA_FLOAT_8() (__nv_fp8_e4m3)(__nv_fp8_e5m2)
+#define USING_DATA_TYPE_NVIDIA_FLOAT() (__half)(__nv_bfloat16)
+#define USING_DATA_TYPE_FLOAT() (float)(double)
+#define USING_DATA_TYPE_SINT() (int16_t)(int32_t)(int64_t)
+#define USING_DATA_TYPE_UINT() (uint16_t)(uint32_t)(uint64_t)
 
-#define USING_DATA_TYPE_CAST_FROM \
+#define USING_DATA_TYPE_CAST_FROM() \
 (__nv_fp8_e4m3) \
-USING_DATA_TYPE_SINT \
-USING_DATA_TYPE_UINT \
-USING_DATA_TYPE_FLOAT \
-USING_DATA_TYPE_NVIDIA_FLOAT
+USING_DATA_TYPE_SINT() \
+USING_DATA_TYPE_UINT() \
+USING_DATA_TYPE_FLOAT() \
+USING_DATA_TYPE_NVIDIA_FLOAT()
 
-#define USING_DATA_TYPE_CAST_TO \
+#define USING_DATA_TYPE_CAST_TO() \
 (bool) \
 (int8_t) \
 (uint8_t) \
-USING_DATA_TYPE_CAST_FROM
+USING_DATA_TYPE_CAST_FROM()
 
 namespace tensor_array
 {
@@ -88,7 +88,7 @@ namespace tensor_array
 #define ADD_CODE(TYPE) \
 if(this->get_buffer().type() == typeid(TYPE)) \
 type_casting<<<grid_dim, block_dim>>>(out_ptr, static_cast<const TYPE*>(base_of_this.data()), total_size);
-			LOOP(USING_DATA_TYPE_CAST_FROM);
+			LOOP(USING_DATA_TYPE_CAST_FROM());
 #undef ADD_CODE
 			cuda_status = cudaDeviceSynchronize();
 			cuda_status = cudaGetLastError();
@@ -111,7 +111,7 @@ type_casting<<<grid_dim, block_dim>>>(out_ptr, static_cast<const TYPE*>(base_of_
 #define ADD_CODE(TYPE) \
 if(dtype == typeid(TYPE)) \
 return this->cast<TYPE>(is_derive);
-			LOOP(USING_DATA_TYPE_CAST_TO);
+			LOOP(USING_DATA_TYPE_CAST_TO());
 #undef ADD_CODE
 			throw std::exception();
 		}

@@ -28,29 +28,29 @@ limitations under the License.
 #endif
 
 #if __CUDA_ARCH__ >= 800
-#define USE_BF16 (__nv_bfloat16)
+#define USE_BF16() (__nv_bfloat16)
 #else
-#define USE_BF16
+#define USE_BF16()
 #endif
 
 #if __CUDA_ARCH__ >= 700
-#define USE_FP16 (__half)
+#define USE_FP16() (__half)
 #else
-#define USE_FP16
+#define USE_FP16()
 #endif
 
 #if __CUDA_ARCH__ >= 600
-#define USE_FP64 (double)
+#define USE_FP64() (double)
 #else
-#define USE_FP64
+#define USE_FP64()
 #endif
 
-#define USING_DATA_TYPE_NVIDIA_FLOAT_8 (__nv_fp8_e5m2)(__nv_fp8_e4m3)
-#define USING_DATA_TYPE_NVIDIA_FLOAT USE_FP16 USE_BF16
-#define USING_DATA_TYPE_FLOAT (float)USE_FP64
-#define USING_DATA_TYPE_SINT (int32_t)
-#define USING_DATA_TYPE_UINT (uint32_t)(unsigned long long int)
-#define USING_DATA_TYPE USING_DATA_TYPE_SINT USING_DATA_TYPE_UINT USING_DATA_TYPE_FLOAT USING_DATA_TYPE_NVIDIA_FLOAT
+#define USING_DATA_TYPE_NVIDIA_FLOAT_8() (__nv_fp8_e5m2)(__nv_fp8_e4m3)
+#define USING_DATA_TYPE_NVIDIA_FLOAT() USE_FP16() USE_BF16()
+#define USING_DATA_TYPE_FLOAT() (float) USE_FP64()
+#define USING_DATA_TYPE_SINT() (int32_t)
+#define USING_DATA_TYPE_UINT() (uint32_t)(unsigned long long int)
+#define USING_DATA_TYPE USING_DATA_TYPE_SINT() USING_DATA_TYPE_UINT() USING_DATA_TYPE_FLOAT() USING_DATA_TYPE_NVIDIA_FLOAT()
 
 #define LOOP(seq) END(A seq)
 #define BODY(x) ADD_CODE(x)

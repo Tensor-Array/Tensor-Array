@@ -32,12 +32,12 @@ limitations under the License.
 
 typedef __nv_bfloat16 bfloat16;
 
-#define USING_DATA_TYPE_NVIDIA_FLOAT_8 (__nv_fp8_e5m2)(__nv_fp8_e4m3)
-#define USING_DATA_TYPE_NVIDIA_FLOAT (half)(bfloat16)
-#define USING_DATA_TYPE_FLOAT (float)(double)
-#define USING_DATA_TYPE_SINT (int8_t)(int16_t)(int32_t)(int64_t)
-#define USING_DATA_TYPE_UINT (uint8_t)(uint16_t)(uint32_t)(uint64_t)
-#define USING_DATA_TYPE USING_DATA_TYPE_SINT USING_DATA_TYPE_UINT USING_DATA_TYPE_FLOAT USING_DATA_TYPE_NVIDIA_FLOAT
+#define USING_DATA_TYPE_NVIDIA_FLOAT_8() (__nv_fp8_e5m2)(__nv_fp8_e4m3)
+#define USING_DATA_TYPE_NVIDIA_FLOAT() (half)(bfloat16)
+#define USING_DATA_TYPE_FLOAT() (float)(double)
+#define USING_DATA_TYPE_SINT() (int8_t)(int16_t)(int32_t)(int64_t)
+#define USING_DATA_TYPE_UINT() (uint8_t)(uint16_t)(uint32_t)(uint64_t)
+#define USING_DATA_TYPE USING_DATA_TYPE_SINT() USING_DATA_TYPE_UINT() USING_DATA_TYPE_FLOAT() USING_DATA_TYPE_NVIDIA_FLOAT()
 
 namespace tensor_array
 {
