@@ -28,6 +28,7 @@ limitations under the License.
 #ifndef TENSOR_CONTENT
 #define TENSOR_CONTENT
 #include "tensor.hh"
+#include "tensor_math_op.hh"
 #undef TENSOR_CONTENT
 #endif // !TENSOR_CONTENT
 

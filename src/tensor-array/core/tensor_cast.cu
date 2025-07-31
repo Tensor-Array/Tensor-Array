@@ -41,18 +41,33 @@ limitations under the License.
 #define USING_DATA_TYPE_SINT() (int16_t)(int32_t)(int64_t)
 #define USING_DATA_TYPE_UINT() (uint16_t)(uint32_t)(uint64_t)
 
+#if CUDART_VERSION >= 12020
 #define USING_DATA_TYPE_CAST_FROM() \
-(__nv_fp8_e4m3) \
 USING_DATA_TYPE_SINT() \
 USING_DATA_TYPE_UINT() \
 USING_DATA_TYPE_FLOAT() \
 USING_DATA_TYPE_NVIDIA_FLOAT()
+#else
+#define USING_DATA_TYPE_CAST_FROM() \
+USING_DATA_TYPE_SINT() \
+USING_DATA_TYPE_UINT() \
+USING_DATA_TYPE_FLOAT()
+#endif
 
+#if CUDART_VERSION >= 12020
+#define USING_DATA_TYPE_CAST_TO() \
+(bool) \
+(int8_t) \
+(uint8_t) \
+USING_DATA_TYPE_NVIDIA_FLOAT_8() \
+USING_DATA_TYPE_CAST_FROM()
+#else
 #define USING_DATA_TYPE_CAST_TO() \
 (bool) \
 (int8_t) \
 (uint8_t) \
 USING_DATA_TYPE_CAST_FROM()
+#endif
 
 namespace tensor_array
 {
