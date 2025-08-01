@@ -18,7 +18,7 @@ limitations under the License.
 
 using namespace tensor_array::value;
 
-int tests_tensor_array_core_tensor_array_test(int argc, char *argv[])
+int tensor_array_test(int argc, char *argv[])
 {
     TensorArray<float, 4, 4> example_tensor_array =
     {{

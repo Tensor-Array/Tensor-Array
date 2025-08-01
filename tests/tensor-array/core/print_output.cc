@@ -20,7 +20,7 @@ limitations under the License.
 using namespace std;
 using namespace tensor_array::value;
 
-int tests_tensor_array_core_print_output(int argc, char *argv[])
+int print_output(int argc, char *argv[])
 {
     /* code */
     TensorArray<float, 4, 4> example_tensor_array =
