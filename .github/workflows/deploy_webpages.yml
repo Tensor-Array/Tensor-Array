@@ -39,7 +39,6 @@ jobs:
       uses: actions/configure-pages@v5
     
     - name: Run CUDA bash shell Ubuntu/Debian
-      if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian')
       env:
         temp: ${{ runner.temp }}
         cuda: "12.9"
