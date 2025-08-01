@@ -24,6 +24,7 @@ install(
 include(cmake/ta_core_config.cmake)
 include(cmake/ta_layers_config.cmake)
 include(cmake/ta_interp_config.cmake)
+include(cmake/ta_add_doxygen.cmake)
 
 # add_subdirectory("src/tensor-array/core")
 # add_subdirectory("src/tensor-array/layers")
