@@ -31,7 +31,7 @@ include(cmake/ta_interp_config.cmake)
 
 include(CTest)
 if(BUILD_TESTING)
-    add_subdirectory("tests/tensor-array/core")
+include(cmake/ta_core_tests.cmake)
 endif()
 
 include(cmake/ta_add_doxygen.cmake)

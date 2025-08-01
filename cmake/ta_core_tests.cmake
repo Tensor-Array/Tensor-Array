@@ -1,19 +1,18 @@
-cmake_minimum_required(VERSION 3.18)
 
 set(
     TensorArray_tests_src
-    "tensor_array_test.cc"
-    "print_output.cc"
-    # "tensor_operators.cc"
-    # "tensor_matmul_transpose.cc"
-    # "gradient.cc"
+    "tests/tensor-array/core/tensor_array_test.cc"
+    "tests/tensor-array/core/print_output.cc"
+    # "tests/tensor-array/core/tensor_operators.cc"
+    # "tests/tensor-array/core/tensor_matmul_transpose.cc"
+    # "tests/tensor-array/core/gradient.cc"
     )
 
 enable_testing()
 
 create_test_sourcelist(
     TensorArray_tests
-    "test_driver.cc"
+    "tests/tensor-array/core/test_driver.cc"
     ${TensorArray_tests_src})
 
 add_executable(tensorarray_core_tests ${TensorArray_tests})
