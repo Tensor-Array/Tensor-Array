@@ -225,13 +225,13 @@ namespace tensor_array
 
             Tensor operator-() const;
 
-            Tensor& operator+=(const Tensor&);
+            Tensor operator+=(const Tensor&);
 
-            Tensor& operator-=(const Tensor&);
+            Tensor operator-=(const Tensor&);
 
-            Tensor& operator*=(const Tensor&);
+            Tensor operator*=(const Tensor&);
 
-            Tensor& operator/=(const Tensor&);
+            Tensor operator/=(const Tensor&);
 
             friend TENSOR_ARRAY_API Tensor operator>(const Tensor&, const Tensor&);
             friend TENSOR_ARRAY_API Tensor operator<(const Tensor&, const Tensor&);
