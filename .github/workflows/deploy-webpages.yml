@@ -72,7 +72,7 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         # Path of the directory containing the static assets.
-        path: "build/src/" # default is _site/
+        path: "build/docs/" # default is _site/
         
   deploy:
     environment:
