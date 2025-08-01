@@ -24,7 +24,6 @@ install(
 include(cmake/ta_core_config.cmake)
 include(cmake/ta_layers_config.cmake)
 include(cmake/ta_interp_config.cmake)
-include(cmake/ta_add_doxygen.cmake)
 
 # add_subdirectory("src/tensor-array/core")
 # add_subdirectory("src/tensor-array/layers")
@@ -34,6 +33,8 @@ include(CTest)
 if(BUILD_TESTING)
     add_subdirectory("tests/tensor-array/core")
 endif()
+
+include(cmake/ta_add_doxygen.cmake)
 
 set(CPACK_PACKAGE_NAME "TensorArray")
 set(CPACK_PACKAGE_VENDOR "TensorArray-Creators")
