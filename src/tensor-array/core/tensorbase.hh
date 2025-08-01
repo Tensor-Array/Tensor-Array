@@ -23,16 +23,6 @@ limitations under the License.
 #include "initializer_wrapper.hh"
 #pragma once
 
-#ifdef _WIN32
-#ifdef TENSOR_ARRAY_EXPORTS
-#define TENSOR_ARRAY_API __declspec(dllexport)
-#else
-#define TENSOR_ARRAY_API __declspec(dllimport)
-#endif
-#else
-#define TENSOR_ARRAY_API
-#endif
-
 namespace tensor_array
 {
 	namespace value
@@ -212,5 +202,3 @@ namespace tensor_array
         std::size_t get_sizeof_type(const std::type_info&);
 }
 }
-
-#undef TENSOR_ARRAY_API

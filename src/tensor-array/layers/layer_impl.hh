@@ -20,16 +20,6 @@ limitations under the License.
 #include <utility>
 #pragma once
 
-#ifdef _WIN32
-#ifdef TENSOR_ARRAY_EXPORTS
-#define TENSOR_ARRAY_API __declspec(dllexport)
-#else
-#define TENSOR_ARRAY_API __declspec(dllimport)
-#endif
-#else
-#define TENSOR_ARRAY_API
-#endif
-
 namespace tensor_array
 {
     namespace layers

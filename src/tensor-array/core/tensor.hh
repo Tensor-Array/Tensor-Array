@@ -21,22 +21,6 @@ limitations under the License.
 
 #pragma once
 
-#ifdef _WIN32
-#ifdef TENSOR_ARRAY_EXPORTS
-#define TENSOR_ARRAY_API __declspec(dllexport)
-#define TENSOR_ARRAY_EXPORT_API __declspec(dllexport)
-#define TENSOR_ARRAY_IMPORT_API
-#else
-#define TENSOR_ARRAY_API __declspec(dllimport)
-#define TENSOR_ARRAY_EXPORT_API
-#define TENSOR_ARRAY_IMPORT_API __declspec(dllimport)
-#endif
-#else
-#define TENSOR_ARRAY_API
-#define TENSOR_ARRAY_EXPORT_API
-#define TENSOR_ARRAY_IMPORT_API
-#endif
-
 #define USING_DATA_TYPE_FLOAT() (float)(double)
 #define USING_DATA_TYPE_SINT() (int8_t)(int16_t)(int32_t)(int64_t)
 #define USING_DATA_TYPE_UINT() (uint8_t)(uint16_t)(uint32_t)(uint64_t)
@@ -458,5 +442,3 @@ struct std::equal_to<tensor_array::value::Tensor>
 #undef USING_DATA_TYPE_FLOAT
 #undef USING_DATA_TYPE_SINT
 #undef USING_DATA_TYPE_UINT
-
-#undef TENSOR_ARRAY_API
