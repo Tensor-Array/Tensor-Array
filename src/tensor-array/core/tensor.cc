@@ -709,22 +709,22 @@ temp_check_data_type = TEMP(temp.first) < TEMP(temp_tensor);
             return multiply(*this, values(this->get_buffer().shape(), -1.f));
         }
 
-        Tensor Tensor::operator+=(const Tensor& other)
+        Tensor& Tensor::operator+=(const Tensor& other)
         {
             return this->operator=((*this) + other);
         }
 
-        Tensor Tensor::operator-=(const Tensor& other)
+        Tensor& Tensor::operator-=(const Tensor& other)
         {
             return this->operator=((*this) - other);
         }
 
-        Tensor Tensor::operator*=(const Tensor& other)
+        Tensor& Tensor::operator*=(const Tensor& other)
         {
             return this->operator=((*this) * other);
         }
 
-        Tensor Tensor::operator/=(const Tensor& other)
+        Tensor& Tensor::operator/=(const Tensor& other)
         {
             return this->operator=((*this) / other);
         }
