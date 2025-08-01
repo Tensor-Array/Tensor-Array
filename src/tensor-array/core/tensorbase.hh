@@ -85,7 +85,7 @@ namespace tensor_array
                     return std::make_unique<TensorArrayStorage<T, sz0, sz...>>(this->arr_data);
                 }
 
-                inline static std::initializer_list<unsigned int> dim_sizes() const override
+                inline std::initializer_list<unsigned int> dim_sizes() const override
                 {
                     return wrapper::initializer_wrapper<unsigned int>(dim_size_array.data(), dim_size_array.data() + sizeof...(sz) + 1ULL);
                 }
