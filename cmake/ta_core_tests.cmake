@@ -20,6 +20,6 @@ target_include_directories(tensorarray_core_tests PRIVATE ${PROJECT_SOURCE_DIR}/
 target_link_libraries(tensorarray_core_tests TensorArray::Core)
 
 foreach(test ${TensorArray_tests_src})
-    get_filename_component(TName ${test} NAME_WE)
-    add_test(NAME ${TName} COMMAND tensorarray_core_tests "tests_tensor_array_core_${TName}")
+    get_filename_component(TName "tests_tensor_array_core_${test}" NAME_WE)
+    add_test(NAME ${TName} COMMAND tensorarray_core_tests ${TName})
 endforeach()
