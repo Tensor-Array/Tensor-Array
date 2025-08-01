@@ -5,7 +5,6 @@ if(Doxygen_FOUND)
     set(DOXYGEN_FILE_PATTERNS *.c *.cc *.h *.hh *.cu *.md)
     set(DOXYGEN_EXTENSION_MAPPING "*.cu=c++")
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${PROJECT_SOURCE_DIR}/README.md")
-    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/docs)
 
     doxygen_add_docs(tensorarray_docs ${PROJECT_SOURCE_DIR}/src ALL)
 endif()
