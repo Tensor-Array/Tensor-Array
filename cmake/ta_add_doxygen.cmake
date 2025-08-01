@@ -6,5 +6,5 @@ if(Doxygen_FOUND)
     set(DOXYGEN_EXTENSION_MAPPING "*.cu=c++")
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${PROJECT_SOURCE_DIR}/README.md")
 
-    doxyen_add_docs(tensorarray_docs ${PROJECT_SOURCE_DIR}/src ALL)
+    doxygen_add_docs(tensorarray_docs ${PROJECT_SOURCE_DIR}/src ALL)
 endif()
