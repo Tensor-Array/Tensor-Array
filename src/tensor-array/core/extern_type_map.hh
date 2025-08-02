@@ -37,6 +37,9 @@ namespace tensor_array
 {
     namespace value
     {
-        extern std::unordered_map<std::type_index, std::size_t> TENSOR_ARRAY_API dynamic_type_size;
+        /**
+         * Map of data types.
+         */
+        extern TENSOR_ARRAY_API std::unordered_map<std::type_index, std::size_t> dynamic_type_size;
     }
 }

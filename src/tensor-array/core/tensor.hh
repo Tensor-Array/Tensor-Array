@@ -39,8 +39,7 @@ namespace tensor_array
 {
 	namespace value
 	{
-		bool TENSOR_ARRAY_API is_use_grad();
-		void TENSOR_ARRAY_API set_use_grad(bool use_grad);
+		extern TENSOR_ARRAY_API bool use_grad;
 
 #ifdef TENSOR_CONTENT
         void* create_mem_101(std::size_t s, const void* dat);

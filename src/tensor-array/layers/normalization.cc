@@ -40,7 +40,7 @@ namespace tensor_array
         value::Tensor NormalizationImpl::calculate(const value::Tensor& input)
         {
             value::Tensor normal;
-            if (tensor_array::value::is_use_grad())
+            if (tensor_array::value::use_grad)
             {
                 value::Tensor temp_mean = input.mean(this->dims_mean);
                 value::Tensor temp_variance = input.variance(this->dims_mean);
