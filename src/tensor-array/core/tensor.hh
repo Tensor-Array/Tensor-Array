@@ -94,7 +94,7 @@ namespace tensor_array
 
         TENSOR_ARRAY_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
 
-        TENSOR_ARRAY_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char 0, unsigned char = 0);
+        TENSOR_ARRAY_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
 
         /**
          * \brief Dynamic derivative tensor.
