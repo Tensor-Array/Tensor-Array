@@ -22,7 +22,7 @@ limitations under the License.
 #include "vmop.h"
 #include "vm_type.h"
 
-typedef long VM_INSTRUCTION;
+typedef void* VM_INSTRUCTION;
 extern VM_INSTRUCTION* pc;
 
 std::stack<tensor_array::value::Tensor> tensor_stack;
