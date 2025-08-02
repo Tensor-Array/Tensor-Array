@@ -256,9 +256,9 @@ namespace tensor_array
 
             friend TENSOR_ARRAY_API Tensor add_dim(const std::vector<Tensor>&);
 
-            friend TENSOR_ARRAY_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
+            friend TENSOR_ARRAY_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int/* = std::rand() */);
 
-            friend TENSOR_ARRAY_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
+            friend TENSOR_ARRAY_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char /*= 0*/, unsigned char /*= 0*/);
 
             friend TENSOR_ARRAY_API std::ostream& operator<<(std::ostream&, const Tensor&);
 
