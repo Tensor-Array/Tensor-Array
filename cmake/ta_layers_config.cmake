@@ -13,6 +13,10 @@ set_property(TARGET tensorarray_layers PROPERTY CXX_STANDARD 17)
 set_property(TARGET tensorarray_layers PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_layers PROPERTY CXX_EXTENSIONS OFF)
 
+if(MSVC)
+    target_compile_definitions(tensorarray_layers PRIVATE TENSOR_ARRAY_LAYERS_EXPORTS)
+endif()
+
 install(
     TARGETS tensorarray_layers
     EXPORT TensorArrayTargets

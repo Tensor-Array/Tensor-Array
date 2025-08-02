@@ -18,7 +18,7 @@ limitations under the License.
 #include <typeindex>
 
 #ifdef _WIN32
-#ifdef TENSOR_ARRAY_EXPORTS
+#ifdef TENSOR_ARRAY_CORE_EXPORTS
 #define TENSOR_ARRAY_API __declspec(dllexport)
 #define TENSOR_ARRAY_EXPORT_API __declspec(dllexport)
 #define TENSOR_ARRAY_IMPORT_API

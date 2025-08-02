@@ -5,10 +5,6 @@ project(TensorArray C CXX)
 include(GNUInstallDirs)
 # set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
-if(MSVC)
-    add_compile_definitions(TENSOR_ARRAY_EXPORTS)
-endif()
-
 file(
     GLOB_RECURSE TensorArray_inc
     "${PROJECT_SOURCE_DIR}/src/*.h"

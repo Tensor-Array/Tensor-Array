@@ -18,6 +18,24 @@ limitations under the License.
 #include <unordered_map>
 #include <tensor-array/core/tensor.hh>
 #include <utility>
+
+#ifdef _WIN32
+#ifdef TENSOR_ARRAY_LAYERS_EXPORTS
+#define TENSOR_ARRAY_API __declspec(dllexport)
+#define TENSOR_ARRAY_EXPORT_API __declspec(dllexport)
+#define TENSOR_ARRAY_IMPORT_API
+#else
+#define TENSOR_ARRAY_API __declspec(dllimport)
+#define TENSOR_ARRAY_EXPORT_API
+#define TENSOR_ARRAY_IMPORT_API __declspec(dllimport)
+#endif
+#else
+#define TENSOR_ARRAY_API
+#define TENSOR_ARRAY_EXPORT_API
+#define TENSOR_ARRAY_IMPORT_API
+#endif
+
+
 #pragma once
 
 namespace tensor_array
