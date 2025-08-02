@@ -174,17 +174,10 @@ namespace tensor_array
             Tensor reshape(const std::vector<unsigned int>&) const;
             Tensor tensor_cast(const std::type_info&) const;
             Tensor conv_padding(const dimension&) const;
-#ifdef TENSOR_CONTENT
-            friend Tensor derive_transpose(const Tensor&, const Tensor&, bool, const DataBuffer&);
-
-            friend Tensor derive_reshape_cast(const Tensor&, const Tensor&, bool, const DataBuffer&);
-#endif
             Tensor transpose(unsigned char, unsigned char) const;
             std::pair<Tensor, Tensor> max(unsigned char = 0) const;
             std::pair<Tensor, Tensor> min(unsigned char = 0) const;
-            friend TENSOR_ARRAY_EXPORT_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char, unsigned char);
 #ifdef TENSOR_CONTENT
-            friend TENSOR_ARRAY_API Tensor add_dim(const std::vector<Tensor>&);
 #endif
             bool has_tensor() const;
             template<typename T>
@@ -235,7 +228,9 @@ namespace tensor_array
 
             Tensor log() const;
 #ifdef TENSOR_CONTENT
-            friend TENSOR_ARRAY_EXPORT_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int);
+            friend Tensor derive_transpose(const Tensor&, const Tensor&, bool, const DataBuffer&);
+
+            friend Tensor derive_reshape_cast(const Tensor&, const Tensor&, bool, const DataBuffer&);
             
             friend Tensor add(const Tensor&, const Tensor&, bool);
 
@@ -258,6 +253,13 @@ namespace tensor_array
 
             Tensor tensor_cast(const std::type_info&, bool) const;
 #endif
+
+            friend TENSOR_ARRAY_API Tensor add_dim(const std::vector<Tensor>&);
+
+            friend TENSOR_ARRAY_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
+
+            friend TENSOR_ARRAY_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
+
             friend TENSOR_ARRAY_API std::ostream& operator<<(std::ostream&, const Tensor&);
 
         private:
@@ -355,14 +357,9 @@ namespace tensor_array
          * Tensor (N, K, ...)
          */
         TENSOR_ARRAY_API Tensor convolution(const Tensor&, const Tensor&, const dimension& = value::dimension(), const dimension& = value::dimension());
-        TENSOR_ARRAY_IMPORT_API std::pair<Tensor, Tensor> tensor_broadcasting(const Tensor&, const Tensor&, unsigned char = 0, unsigned char = 0);
-        TENSOR_ARRAY_IMPORT_API Tensor tensor_rand(const std::initializer_list<unsigned int>&, unsigned int = std::rand());
 #define ADD_CODE(TYPE) TENSOR_ARRAY_API Tensor values(const std::initializer_list<unsigned int>&, TYPE);
         LOOP(USING_DATA_TYPE);
 #undef ADD_CODE
-#ifndef TENSOR_CONTENT
-        TENSOR_ARRAY_API Tensor add_dim(const std::vector<Tensor>&);
-#endif
         TENSOR_ARRAY_API const std::type_info& comparison_type(const std::type_info&, const std::type_info&);
         TENSOR_ARRAY_API Tensor tensor_rand(const std::vector<unsigned int>&, unsigned int = std::rand());
 
