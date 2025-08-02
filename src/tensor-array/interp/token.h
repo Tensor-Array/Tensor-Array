@@ -25,6 +25,6 @@ typedef enum
 } TOKEN_TYPE;
 
 void token_next();
-extern long tkn;
-extern long tkn_val;
+extern int tkn;
+extern int tkn_val;
 extern char *tknname[];

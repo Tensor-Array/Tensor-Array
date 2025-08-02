@@ -22,7 +22,7 @@ limitations under the License.
 #include "vmop.h"
 #include "vm_type.h"
 
-typedef void* VM_INSTRUCTION;
+typedef size_t VM_INSTRUCTION;
 extern VM_INSTRUCTION* pc;
 
 std::stack<tensor_array::value::Tensor> tensor_stack;
@@ -30,8 +30,8 @@ std::stack<std::string> var_stack;
 std::stack<std::pair<VM_INSTRUCTION*, scope>> call_stack;
 tensor_array::value::Tensor ag;
 void* aptr;
-long any_value;
-long any_type;
+size_t any_value;
+size_t any_type;
 
 void new_int()
 {

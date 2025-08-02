@@ -20,10 +20,10 @@ extern "C"
 #endif
     typedef struct
     {
-        long tkn;
-        long hash;
-        long cls;
-        long type;
+        int tkn;
+        int hash;
+        int cls;
+        int type;
         void* data; // Pointer to additional data if needed
     } sym_data;
     void sym_data_set(char* name, sym_data dat);

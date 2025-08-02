@@ -21,9 +21,9 @@ typedef enum
     OPEN, READ, CLOSE, PRTF, MALC, MSET, MCMP, EXIT
 } VM_INSTRUCTION_V2;
 
-typedef long VM_INSTRUCTION;
+typedef size_t VM_INSTRUCTION;
 
 void eval();
 
-extern long any_value;
+extern size_t any_value;
 extern VM_INSTRUCTION* orig;

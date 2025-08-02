@@ -18,8 +18,8 @@ limitations under the License.
 extern "C"
 {
 #endif
-    extern long any_value;
-    extern long any_type;
+    extern size_t any_value;
+    extern size_t any_type;
     void op_imm();
     void op_add();
     void op_sub();

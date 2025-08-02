@@ -24,13 +24,13 @@ limitations under the License.
 #include "sym_map.h"
 #include "vm_type.h"
 
-void emit(int size, ...)
+void emit(unsigned size, ...)
 {
     va_list args;
     va_start(args, size);
     
     // Process the variable arguments as needed
-    for (int i = 0; i < size; ++i) {
+    for (unsigned i = 0; i < size; ++i) {
         ++text;
         *text = va_arg(args, VM_INSTRUCTION);
     }
@@ -38,7 +38,7 @@ void emit(int size, ...)
     va_end(args);
 }
 
-void match(long tk)
+void match(int tk)
 {
     if (tkn == tk) {
         token_next(); // Move to the next token

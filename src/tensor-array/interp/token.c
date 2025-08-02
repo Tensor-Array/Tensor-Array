@@ -22,8 +22,8 @@ limitations under the License.
 #include "open_file.h"
 #include "token.h"
 
-long tkn = 0;
-long tkn_val = 0; // Variable to hold the value of the current token
+int tkn = 0;
+int tkn_val = 0; // Variable to hold the value of the current token
 
 char* tknname[] = {
     "num", "sys", "glo", "loc", "id",
