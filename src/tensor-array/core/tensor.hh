@@ -35,6 +35,16 @@ limitations under the License.
 #define END(...) END_(__VA_ARGS__)
 #define END_(...) __VA_ARGS__##_END
 
+#ifdef _WIN32
+#ifdef TENSOR_ARRAY_CORE_EXPORTS
+#define TENSOR_ARRAY_API __declspec(dllexport)
+#else
+#define TENSOR_ARRAY_API __declspec(dllimport)
+#endif
+#else
+#define TENSOR_ARRAY_API
+#endif
+
 namespace tensor_array
 {
 	namespace value
@@ -444,3 +454,5 @@ struct std::equal_to<tensor_array::value::Tensor>
 #undef USING_DATA_TYPE_FLOAT
 #undef USING_DATA_TYPE_SINT
 #undef USING_DATA_TYPE_UINT
+
+#undef TENSOR_ARRAY_API

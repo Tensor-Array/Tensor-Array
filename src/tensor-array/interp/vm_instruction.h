@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-typedef enum
+#ifdef __cplusplus
+extern "C"
 {
-    LEA, IMM, JMP, CALL, JZ, JNZ, ENT, ADJ, LEV, RET, LI, LC, SI, SC, SET, GET, PUSH, PTR_PUSH, GETELEM, SETELEM, ADDELEM,
-    OR, XOR, AND, EQ, NE, LT, GT, LE, GE, ADD, SUB, MUL, DIV, MATMUL, POS, NEG, NOT, SHL, SHR,
-    OPEN, READ, CLOSE, PRTF, MALC, MSET, MCMP, EXIT
-} VM_INSTRUCTION_V2;
-
-void eval();
-
-extern size_t any_value;
+#endif
+    typedef size_t VM_INSTRUCTION;
+    extern VM_INSTRUCTION* orig;
+    extern VM_INSTRUCTION* pc;
+#ifdef __cplusplus
+}
+#endif

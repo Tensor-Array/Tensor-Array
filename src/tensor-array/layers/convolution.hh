@@ -18,6 +18,16 @@ limitations under the License.
 #include "layer_utility.hh"
 #pragma once
 
+#ifdef _WIN32
+#ifdef TENSOR_ARRAY_LAYERS_EXPORTS
+#define TENSOR_ARRAY_API __declspec(dllexport)
+#else
+#define TENSOR_ARRAY_API __declspec(dllimport)
+#endif
+#else
+#define TENSOR_ARRAY_API
+#endif
+
 namespace tensor_array
 {
     namespace layers
@@ -71,3 +81,4 @@ namespace tensor_array
     }
 }
 
+#undef TENSOR_ARRAY_API

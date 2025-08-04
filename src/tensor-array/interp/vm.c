@@ -16,6 +16,7 @@ limitations under the License.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "vm_instruction.h"
 #include "vmop.h"
 #include "vm.h"
 

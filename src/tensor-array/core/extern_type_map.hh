@@ -20,17 +20,11 @@ limitations under the License.
 #ifdef _WIN32
 #ifdef TENSOR_ARRAY_CORE_EXPORTS
 #define TENSOR_ARRAY_API __declspec(dllexport)
-#define TENSOR_ARRAY_EXPORT_API __declspec(dllexport)
-#define TENSOR_ARRAY_IMPORT_API
 #else
 #define TENSOR_ARRAY_API __declspec(dllimport)
-#define TENSOR_ARRAY_EXPORT_API
-#define TENSOR_ARRAY_IMPORT_API __declspec(dllimport)
 #endif
 #else
 #define TENSOR_ARRAY_API
-#define TENSOR_ARRAY_EXPORT_API
-#define TENSOR_ARRAY_IMPORT_API
 #endif
 
 namespace tensor_array
@@ -43,3 +37,5 @@ namespace tensor_array
         extern TENSOR_ARRAY_API std::unordered_map<std::type_index, std::size_t> dynamic_type_size;
     }
 }
+
+#undef TENSOR_ARRAY_API

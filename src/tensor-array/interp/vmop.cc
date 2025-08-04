@@ -19,11 +19,9 @@ limitations under the License.
 #include <iostream>
 #include <cstring>
 #include "sym_map.h"
+#include "vm_instruction.h"
 #include "vmop.h"
 #include "vm_type.h"
-
-typedef size_t VM_INSTRUCTION;
-extern VM_INSTRUCTION* pc;
 
 std::stack<tensor_array::value::Tensor> tensor_stack;
 std::stack<std::string> var_stack;

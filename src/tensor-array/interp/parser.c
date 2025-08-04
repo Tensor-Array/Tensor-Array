@@ -21,6 +21,7 @@ limitations under the License.
 #include "parser.h"
 #include "token.h"
 #include "open_file.h"
+#include "vm_instruction.h"
 #include "sym_map.h"
 #include "vm_type.h"
 
