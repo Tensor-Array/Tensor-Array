@@ -64,7 +64,7 @@ namespace tensor_array
             class TensorArrayStorage<T, sz0, sz...> final : public TensorStorage
             {
             private:
-                static constexpr const std::array<unsigned int, sizeof...(sz) + 1ULL> dim_size_array{ sz0, sz... };
+                static constexpr const unsigned int dim_size_array[sizeof...(sz) + 1ULL] = { sz0, sz... };
                 const TensorArray<T, sz0, sz...> arr_data;
             public:
                 constexpr TensorArrayStorage(const TensorArray<T, sz0, sz...>& arr_data) :
@@ -87,7 +87,7 @@ namespace tensor_array
 
                 inline std::initializer_list<unsigned int> dim_sizes() const override
                 {
-                    return wrapper::initializer_wrapper<unsigned int>(dim_size_array.data(), dim_size_array.data() + sizeof...(sz) + 1ULL);
+                    return wrapper::initializer_wrapper<unsigned int>(dim_size_array, dim_size_array + sizeof...(sz) + 1ULL);
                 }
 
                 inline const void* data() const override
