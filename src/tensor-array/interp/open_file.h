@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include "vm_instruction.h"
 #include "vm.h"
 
 extern char *src;
