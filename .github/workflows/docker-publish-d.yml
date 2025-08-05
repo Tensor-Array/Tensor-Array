@@ -9,6 +9,9 @@ jobs:
   push_to_registry:
     name: Push Docker image
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        image-tag: [ "CUDA-12.9.1-Ubuntu-2004", "CUDA-12.9.1-devel-ubi8" ]
     permissions:
       packages: write
       contents: read
@@ -28,7 +31,8 @@ jobs:
       id: meta
       uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804
       with:
-        image: noobwastaken/tensor-array
+        image: ${{ secrets.DOCKER_USERNAME }}/tensor-array
+        tags: ${{ matrix.image-tag }}
 
     - name: Build and push Docker images
       id: push
@@ -43,6 +47,6 @@ jobs:
     - name: Attest Build Provenance
       uses: actions/attest-build-provenance@v2
       with:
-        subject-name: index.docker.io/noobwastaken/tensor-array
+        subject-name: index.docker.io/${{ secrets.DOCKER_USERNAME }}/tensor-array
         subject-digest: ${{ steps.push.outputs.digest }}
         push-to-registry: true

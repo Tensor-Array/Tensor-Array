@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubuntu22.04
+FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubuntu20.04
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -30,5 +30,6 @@ WORKDIR tensor-array/build
 RUN cmake ..
 RUN cmake --build .
 RUN cmake --install .
+RUN ctest
 
-WORKDIR /app/tensor-array
+WORKDIR ..

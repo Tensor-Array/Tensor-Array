@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image-os: [ "Ubuntu" ]
+        image-tag: [ "CUDA-12.9.1-Ubuntu-20.04", "CUDA-12.9.1-devel-ubi8" ]
     
     runs-on: ubuntu-22.04
     
@@ -73,7 +73,8 @@ jobs:
         uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: ${{ matrix.image-os }}
+          tags: |
+            type=raw,value=${{ matrix.image-tag }}
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -81,7 +82,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
-          file: Dockerfolder/${{ matrix.image-os }}.Dockerfile
+          file: Dockerfolder/${{ matrix.image-tag }}.Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
