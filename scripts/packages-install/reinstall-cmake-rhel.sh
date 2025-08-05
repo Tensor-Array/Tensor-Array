@@ -27,7 +27,8 @@ trap cleanup EXIT
 
 
 echo "Installing CMake..."
-dnf -y autoremove cmake
+dnf -y remove cmake
+dnf -y autoremove
 mkdir -p /opt/cmake
 
 architecture=$(dpkg --print-architecture)
