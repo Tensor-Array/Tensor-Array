@@ -32,16 +32,7 @@ dnf -y autoremove
 mkdir -p /opt/cmake
 
 architecture=$(arch)
-case "${architecture}" in
-    arm64)
-        ARCH=aarch64 ;;
-    amd64)
-        ARCH=x86_64 ;;
-    *)
-        echo "Unsupported architecture ${architecture}."
-        exit 1
-        ;;
-esac
+ARCH=${architecture}
 
 CMAKE_BINARY_NAME="cmake-${CMAKE_VERSION}-linux-${ARCH}.sh"
 CMAKE_CHECKSUM_NAME="cmake-${CMAKE_VERSION}-SHA-256.txt"
