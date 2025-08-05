@@ -10,7 +10,7 @@ ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.27.9"
 COPY scripts/packages-install/reinstall-cmake-ubuntu.sh /tmp/
 
 RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
-        chmod +x /tmp/reinstall-cmake.sh && /tmp/reinstall-cmake-ubuntu.sh ${REINSTALL_CMAKE_VERSION_FROM_SOURCE}; \
+        chmod +x /tmp/reinstall-cmake-ubuntu.sh && /tmp/reinstall-cmake-ubuntu.sh ${REINSTALL_CMAKE_VERSION_FROM_SOURCE}; \
     fi \
     && rm -f /tmp/reinstall-cmake-ubuntu.sh
 
