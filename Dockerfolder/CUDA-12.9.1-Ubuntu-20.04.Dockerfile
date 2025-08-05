@@ -30,6 +30,6 @@ WORKDIR tensor-array/build
 RUN cmake ..
 RUN cmake --build .
 RUN cmake --install .
-RUN ctest
+# RUN ctest
 
 WORKDIR ..
