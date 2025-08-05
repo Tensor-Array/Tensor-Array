@@ -64,7 +64,7 @@ namespace tensor_array
             class TensorArrayStorage<T, sz0, sz...> final : public TensorStorage
             {
             private:
-                static constexpr const unsigned int dim_size_array[sizeof...(sz) + 1ULL] = { sz0, sz... };
+                static constexpr inline const unsigned int dim_size_array[sizeof...(sz) + 1ULL] = { sz0, sz... };
                 const TensorArray<T, sz0, sz...> arr_data;
             public:
                 constexpr TensorArrayStorage(const TensorArray<T, sz0, sz...>& arr_data) :
