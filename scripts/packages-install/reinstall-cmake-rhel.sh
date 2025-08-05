@@ -31,7 +31,7 @@ dnf -y remove cmake
 dnf -y autoremove
 mkdir -p /opt/cmake
 
-architecture=$(dpkg --print-architecture)
+architecture=$(arch)
 case "${architecture}" in
     arm64)
         ARCH=aarch64 ;;
