@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        image-tag: [ "CUDA-12.9.1-Ubuntu-2004", "CUDA-12.9.1-devel-ubi8" ]
+        image-tag: [ "CUDA-12.9.1-Ubuntu-2004", "CUDA-12.9.1-ubi8" ]
     permissions:
       packages: write
       contents: read

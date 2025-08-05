@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image-tag: [ "CUDA-12.9.1-Ubuntu-20.04", "CUDA-12.9.1-devel-ubi8" ]
+        image-tag: [ "CUDA-12.9.1-Ubuntu-20.04", "CUDA-12.9.1-ubi8" ]
     
     runs-on: ubuntu-22.04
     
