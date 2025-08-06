@@ -5,18 +5,6 @@ project(TensorArray C CXX)
 include(GNUInstallDirs)
 # set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
-file(
-    GLOB_RECURSE TensorArray_inc
-    "${PROJECT_SOURCE_DIR}/src/*.h"
-    "${PROJECT_SOURCE_DIR}/src/*.hh"
-)
-
-install(
-    FILES ${TensorArray_inc}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    COMPONENT headers
-)
-
 include(cmake/ta_core_config.cmake)
 include(cmake/ta_layers_config.cmake)
 include(cmake/ta_interp_config.cmake)

@@ -1,10 +1,24 @@
+set(TensorArray_Core_Dir tensor-array/core)
+
+file(
+    GLOB TensorArray_Core_inc
+    "${PROJECT_SOURCE_DIR}/src/${TensorArray_Core_Dir}/*.h"
+    "${PROJECT_SOURCE_DIR}/src/${TensorArray_Core_Dir}/*.hh"
+)
+
+install(
+    FILES ${TensorArray_Core_inc}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${TensorArray_Core_Dir}"
+    COMPONENT headers
+)
+
 include(CheckLanguage)
 check_language(CUDA)
 
-file(GLOB TensorArray_Core_cc "${PROJECT_SOURCE_DIR}/src/tensor-array/core/*.cc")
+file(GLOB TensorArray_Core_cc "${PROJECT_SOURCE_DIR}/src/${TensorArray_Core_Dir}/*.cc")
 
 if (CMAKE_CUDA_COMPILER)
-    file(GLOB TensorArray_Core_cu "${PROJECT_SOURCE_DIR}/src/tensor-array/core/*.cu")
+    file(GLOB TensorArray_Core_cu "${PROJECT_SOURCE_DIR}/src/${TensorArray_Core_Dir}/*.cu")
 endif()
 
 if(CMAKE_CUDA_COMPILER)
@@ -43,11 +57,11 @@ set_property(TARGET tensorarray_core PROPERTY CXX_EXTENSIONS OFF)
 install(
     TARGETS tensorarray_core
     EXPORT TensorArrayTargets
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
     COMPONENT Runtime
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
     COMPONENT Runtime
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/tensor-array/core
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/${TensorArray_Core_Dir}"
     COMPONENT Development
 )
 
