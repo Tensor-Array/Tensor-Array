@@ -20,7 +20,7 @@ file(
 add_executable(tensorarray_interpreter ${TensorArray_Interpreter_src})
 
 target_include_directories(tensorarray_interpreter PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(tensorarray_interpreter TensorArray::Core)
+target_link_libraries(tensorarray_interpreter TensorArray::core)
 
 set_property(TARGET tensorarray_interpreter PROPERTY C_STANDARD 11)
 set_property(TARGET tensorarray_interpreter PROPERTY C_STANDARD_REQUIRED ON)
@@ -47,4 +47,4 @@ install(
         POST_BUILD
         COMMAND tensorarray_interpreter)
     ]]
-add_executable(TensorArray::Interpreter ALIAS tensorarray_interpreter)
+add_executable(TensorArray::interpreter ALIAS tensorarray_interpreter)

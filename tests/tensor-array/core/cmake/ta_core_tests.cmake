@@ -17,7 +17,7 @@ create_test_sourcelist(
 
 add_executable(tensorarray_core_tests ${TensorArray_tests})
 target_include_directories(tensorarray_core_tests PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(tensorarray_core_tests TensorArray::Core)
+target_link_libraries(tensorarray_core_tests TensorArray::core)
 
 foreach(test ${TensorArray_tests_src})
     get_filename_component(TName ${test} NAME_WE)
