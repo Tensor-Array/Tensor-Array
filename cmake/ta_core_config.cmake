@@ -65,10 +65,6 @@ if(CUDAToolkit_FOUND)
         tensorarray_core
         PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas>
         )
-    target_link_libraries(
-        tensorarray_core_static
-        PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas_static>
-        )
 endif()
 
 install(
