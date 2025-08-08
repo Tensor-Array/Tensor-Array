@@ -38,7 +38,6 @@ add_library(tensorarray_layers SHARED $<TARGET_OBJECTS:tensorarray_layers_object
 add_library(tensorarray_layers_static STATIC $<TARGET_OBJECTS:tensorarray_layers_object>)
 
 target_link_libraries(tensorarray_layers PUBLIC TensorArray::core)
-target_link_libraries(tensorarray_layers_static PUBLIC TensorArray::core_static)
 
 install(
     TARGETS tensorarray_layers
