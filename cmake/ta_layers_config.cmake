@@ -14,35 +14,26 @@ install(
 
 file(GLOB TensorArray_Layers_src "${PROJECT_SOURCE_DIR}/src/${TensorArray_Layers_Dir}/*.cc")
 
-add_library(tensorarray_layers SHARED ${TensorArray_Layers_src})
-add_library(tensorarray_layers_static STATIC ${TensorArray_Layers_src})
+add_library(tensorarray_layers_object OBJECT ${TensorArray_Layers_src})
 
-target_include_directories(tensorarray_layers PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_include_directories(tensorarray_layers_static PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(tensorarray_layers_object PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_link_libraries(tensorarray_layers_object TensorArray::core_object)
 
-target_link_libraries(tensorarray_layers TensorArray::core)
-target_link_libraries(tensorarray_layers_static TensorArray::core_static)
+set_property(TARGET tensorarray_layers_object PROPERTY C_STANDARD 11)
+set_property(TARGET tensorarray_layers_object PROPERTY C_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_layers_object PROPERTY C_EXTENSIONS OFF)
 
-set_property(TARGET tensorarray_layers PROPERTY C_STANDARD 11)
-set_property(TARGET tensorarray_layers PROPERTY C_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_layers PROPERTY C_EXTENSIONS OFF)
-
-set_property(TARGET tensorarray_layers PROPERTY CXX_STANDARD 17)
-set_property(TARGET tensorarray_layers PROPERTY CXX_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_layers PROPERTY CXX_EXTENSIONS OFF)
-
-
-set_property(TARGET tensorarray_layers_static PROPERTY C_STANDARD 11)
-set_property(TARGET tensorarray_layers_static PROPERTY C_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_layers_static PROPERTY C_EXTENSIONS OFF)
-
-set_property(TARGET tensorarray_layers_static PROPERTY CXX_STANDARD 17)
-set_property(TARGET tensorarray_layers_static PROPERTY CXX_STANDARD_REQUIRED ON)
-set_property(TARGET tensorarray_layers_static PROPERTY CXX_EXTENSIONS OFF)
+set_property(TARGET tensorarray_layers_object PROPERTY CXX_STANDARD 17)
+set_property(TARGET tensorarray_layers_object PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_layers_object PROPERTY CXX_EXTENSIONS OFF)
 
 if(MSVC)
-    target_compile_definitions(tensorarray_layers PRIVATE TENSOR_ARRAY_LAYERS_EXPORTS)
+    target_compile_definitions(tensorarray_layers_object PRIVATE TENSOR_ARRAY_LAYERS_EXPORTS)
 endif()
+
+# shared and static libraries built from the same object files
+add_library(tensorarray_layers SHARED $<TARGET_OBJECTS:tensorarray_layers_object>)
+add_library(tensorarray_layers_static STATIC $<TARGET_OBJECTS:tensorarray_layers_object>)
 
 install(
     TARGETS tensorarray_layers
@@ -68,3 +59,4 @@ install(
 
 add_library(TensorArray::layers ALIAS tensorarray_layers)
 add_library(TensorArray::layers_static ALIAS tensorarray_layers_static)
+add_library(TensorArray::layers_object ALIAS tensorarray_layers_object)
