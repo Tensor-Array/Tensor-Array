@@ -28,6 +28,7 @@ if(CMAKE_CUDA_COMPILER)
     set_property(TARGET tensorarray_core_object PROPERTY CUDA_STANDARD 17)
     set_property(TARGET tensorarray_core_object PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core_object PROPERTY CUDA_EXTENSIONS OFF)
+    set_property(TARGET tensorarray_core_object PROPERTY CUDA_SEPARABLE_COMPILATION ON)
     target_include_directories(tensorarray_core_object PRIVATE $<$<COMPILE_LANGUAGE:C,CXX>:${CUDAToolkit_INCLUDE_DIRS}>)
     if(MSVC)
         target_compile_definitions(tensorarray_core_object PRIVATE TENSOR_ARRAY_CORE_EXPORTS)
@@ -59,9 +60,16 @@ add_library(tensorarray_core SHARED $<TARGET_OBJECTS:tensorarray_core_object>)
 add_library(tensorarray_core_static STATIC $<TARGET_OBJECTS:tensorarray_core_object>)
 
 if(CUDAToolkit_FOUND)
-    set_property(TARGET tensorarray_core PROPERTY CUDA_SEPARABLE_COMPILATION ON)
-    target_link_libraries(tensorarray_core PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas>)
-    target_link_libraries(tensorarray_core_static PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas>)
+    target_link_libraries(
+        tensorarray_core
+        PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cudart>
+        PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas>
+        )
+    target_link_libraries(
+        tensorarray_core_static
+        PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cudart_static>
+        PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas_static>
+        )
 endif()
 
 install(
