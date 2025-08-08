@@ -47,7 +47,7 @@ install(
     COMPONENT Runtime
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
     COMPONENT Runtime
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/${TensorArray_Layers_Dir}"
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
     COMPONENT Development
 )
 
@@ -58,7 +58,7 @@ install(
     COMPONENT Runtime
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
     COMPONENT Runtime
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/${TensorArray_Layers_Dir}"
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
     COMPONENT Development
 )
 

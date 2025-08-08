@@ -37,7 +37,7 @@ install(
     COMPONENT Runtime
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
     COMPONENT Runtime
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/${TensorArray_Interpreter_Dir}"
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
     COMPONENT Development
 )
     #[[
