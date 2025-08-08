@@ -17,7 +17,6 @@ file(GLOB TensorArray_Layers_src "${PROJECT_SOURCE_DIR}/src/${TensorArray_Layers
 add_library(tensorarray_layers_object OBJECT ${TensorArray_Layers_src})
 
 target_include_directories(tensorarray_layers_object PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(tensorarray_layers_object PUBLIC TensorArray::core_object)
 
 set_property(TARGET tensorarray_layers_object PROPERTY C_STANDARD 11)
 set_property(TARGET tensorarray_layers_object PROPERTY C_STANDARD_REQUIRED ON)
@@ -37,6 +36,9 @@ endif()
 # shared and static libraries built from the same object files
 add_library(tensorarray_layers SHARED $<TARGET_OBJECTS:tensorarray_layers_object>)
 add_library(tensorarray_layers_static STATIC $<TARGET_OBJECTS:tensorarray_layers_object>)
+
+target_link_libraries(tensorarray_layers PUBLIC TensorArray::core)
+target_link_libraries(tensorarray_layers_static PUBLIC TensorArray::core_static)
 
 install(
     TARGETS tensorarray_layers

@@ -20,7 +20,7 @@ file(
 add_executable(tensorarray_interpreter ${TensorArray_Interpreter_src})
 
 target_include_directories(tensorarray_interpreter PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(tensorarray_interpreter LINK_PUBLIC TensorArray::core)
+target_link_libraries(tensorarray_interpreter PUBLIC TensorArray::core)
 
 set_property(TARGET tensorarray_interpreter PROPERTY C_STANDARD 11)
 set_property(TARGET tensorarray_interpreter PROPERTY C_STANDARD_REQUIRED ON)
