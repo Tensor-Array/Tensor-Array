@@ -27,6 +27,9 @@ set_property(TARGET tensorarray_layers_object PROPERTY CXX_STANDARD 17)
 set_property(TARGET tensorarray_layers_object PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_layers_object PROPERTY CXX_EXTENSIONS OFF)
 
+# shared libraries need PIC
+set_property(TARGET tensorarray_layers_object PROPERTY POSITION_INDEPENDENT_CODE 1)
+
 if(MSVC)
     target_compile_definitions(tensorarray_layers_object PRIVATE TENSOR_ARRAY_LAYERS_EXPORTS)
 endif()

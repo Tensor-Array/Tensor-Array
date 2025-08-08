@@ -43,7 +43,6 @@ else()
     add_library(tensorarray_core_object OBJECT ${TensorArray_Core_cc})
 endif()
 
-
 # file(MAKE_DIRECTORY "include/tensor_array/core")
 
 set_property(TARGET tensorarray_core_object PROPERTY C_STANDARD 11)
@@ -53,6 +52,9 @@ set_property(TARGET tensorarray_core_object PROPERTY C_EXTENSIONS OFF)
 set_property(TARGET tensorarray_core_object PROPERTY CXX_STANDARD 17)
 set_property(TARGET tensorarray_core_object PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET tensorarray_core_object PROPERTY CXX_EXTENSIONS OFF)
+
+# shared libraries need PIC
+set_property(TARGET tensorarray_core_object PROPERTY POSITION_INDEPENDENT_CODE 1)
 
 # shared and static libraries built from the same object files
 add_library(tensorarray_core SHARED $<TARGET_OBJECTS:tensorarray_core_object>)
