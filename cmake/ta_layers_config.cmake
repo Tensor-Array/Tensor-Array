@@ -17,7 +17,7 @@ file(GLOB TensorArray_Layers_src "${PROJECT_SOURCE_DIR}/src/${TensorArray_Layers
 add_library(tensorarray_layers_object OBJECT ${TensorArray_Layers_src})
 
 target_include_directories(tensorarray_layers_object PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(tensorarray_layers_object TensorArray::core_object)
+target_link_libraries(tensorarray_layers_object PUBLIC TensorArray::core_object)
 
 set_property(TARGET tensorarray_layers_object PROPERTY C_STANDARD 11)
 set_property(TARGET tensorarray_layers_object PROPERTY C_STANDARD_REQUIRED ON)
