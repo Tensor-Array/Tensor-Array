@@ -53,16 +53,13 @@ namespace tensor_array
             typedef const _E* 	const_iterator;
 
         private:
-#ifdef __GNUC__
             iterator			_M_array;
             size_type			_M_len;
-#endif
 
         public:
             constexpr initializer_wrapper(const_iterator __a, size_type __l)
-#ifdef __GNUC__
-            : _M_array(__a), _M_len(__l) { }
-#endif
+            : _M_array(__a), _M_len(__l)
+			{ }
 
             constexpr initializer_wrapper(const_iterator __begin, const_iterator __end)
             : _M_array(__begin), _M_len(__end - __begin)
