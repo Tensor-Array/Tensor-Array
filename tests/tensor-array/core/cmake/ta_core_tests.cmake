@@ -19,6 +19,14 @@ add_executable(tensorarray_core_tests ${TensorArray_tests})
 target_include_directories(tensorarray_core_tests PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_link_libraries(tensorarray_core_tests PUBLIC TensorArray::core)
 
+set_property(TARGET tensorarray_core_tests PROPERTY C_STANDARD 11)
+set_property(TARGET tensorarray_core_tests PROPERTY C_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_core_tests PROPERTY C_EXTENSIONS OFF)
+
+set_property(TARGET tensorarray_core_tests PROPERTY CXX_STANDARD 17)
+set_property(TARGET tensorarray_core_tests PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET tensorarray_core_tests PROPERTY CXX_EXTENSIONS OFF)
+
 foreach(test ${TensorArray_tests_src})
     get_filename_component(TName ${test} NAME_WE)
     add_test(NAME ${TName} COMMAND tensorarray_core_tests ${TName})
