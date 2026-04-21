@@ -64,8 +64,8 @@ if(CUDAToolkit_FOUND)
     target_link_libraries(
         tensorarray_core
         PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas>
-        PRIVATE CUDA::cudart
         )
+    set_property(TARGET tensorarray_core PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS ON)
 endif()
 
 install(
