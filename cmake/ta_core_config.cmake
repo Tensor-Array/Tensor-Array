@@ -32,7 +32,7 @@ if(CMAKE_CUDA_COMPILER)
     target_include_directories(tensorarray_core_object PRIVATE $<$<COMPILE_LANGUAGE:C,CXX>:${CUDAToolkit_INCLUDE_DIRS}>)
     if(MSVC)
         target_compile_definitions(tensorarray_core_object PRIVATE TENSOR_ARRAY_CORE_EXPORTS)
-        target_link_libraries(tensorarray_core_object PRIVATE CUDA::cudadevrt)
+        target_link_libraries(tensorarray_core_object PRIVATE CUDA::cudart)
     endif()
         
         # find_package(CUDAToolkit REQUIRED)
