@@ -61,10 +61,10 @@ add_library(tensorarray_core_static STATIC $<TARGET_OBJECTS:tensorarray_core_obj
 
 if(CUDAToolkit_FOUND)
     set_property(TARGET tensorarray_core PROPERTY CUDA_SEPARABLE_COMPILATION ON)
-    set_property(TARGET tensorarray_core PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS ON)
     target_link_libraries(
         tensorarray_core
         PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas>
+        PRIVATE CUDA::cudadevrt
         )
 endif()
 
