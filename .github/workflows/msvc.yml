@@ -65,7 +65,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ steps.run-analysis.outputs.sarif }}
-          category: 'msvc-code-analysis'
 
       # Upload SARIF file as an Artifact to download and view
       # - name: Upload SARIF as an Artifact
