@@ -24,7 +24,11 @@ endif()
 if(CMAKE_CUDA_COMPILER)
     enable_language(CUDA)
     find_package(CUDAToolkit REQUIRED)
-    add_library(tensorarray_core_object OBJECT ${TensorArray_Core_cc} ${TensorArray_Core_cu})
+    if(MSVC)
+        add_library(tensorarray_core_object SHARED ${TensorArray_Core_cc} ${TensorArray_Core_cu})
+    else()
+        add_library(tensorarray_core_object OBJECT ${TensorArray_Core_cc} ${TensorArray_Core_cu})
+    endif()
     set_property(TARGET tensorarray_core_object PROPERTY CUDA_STANDARD 17)
     set_property(TARGET tensorarray_core_object PROPERTY CUDA_STANDARD_REQUIRED ON)
     set_property(TARGET tensorarray_core_object PROPERTY CUDA_EXTENSIONS OFF)
@@ -56,12 +60,26 @@ set_property(TARGET tensorarray_core_object PROPERTY CXX_EXTENSIONS OFF)
 set_property(TARGET tensorarray_core_object PROPERTY POSITION_INDEPENDENT_CODE 1)
 
 # shared and static libraries built from the same object files
+if(MSVC)
+install(
+    TARGETS tensorarray_core_object
+    EXPORT TensorArrayTargets
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    COMPONENT Runtime
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
+    COMPONENT Runtime
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/tensor-array"
+    COMPONENT Development
+)
+
+add_library(TensorArray::core ALIAS tensorarray_core_object)
+
+else()
 add_library(tensorarray_core SHARED $<TARGET_OBJECTS:tensorarray_core_object>)
 add_library(tensorarray_core_static STATIC $<TARGET_OBJECTS:tensorarray_core_object>)
 
 if(CUDAToolkit_FOUND)
     set_property(TARGET tensorarray_core PROPERTY CUDA_SEPARABLE_COMPILATION ON)
-    set_property(TARGET tensorarray_core PROPERTY LINKER_LANGUAGE CUDA)
     target_link_libraries(
         tensorarray_core
         PRIVATE $<$<LINK_LANGUAGE:C,CXX>:CUDA::cublas>
@@ -93,3 +111,5 @@ install(
 add_library(TensorArray::core ALIAS tensorarray_core)
 add_library(TensorArray::core_static ALIAS tensorarray_core_static)
 add_library(TensorArray::core_object ALIAS tensorarray_core_object)
+
+endif()
